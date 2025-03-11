@@ -14,7 +14,6 @@ Session(app)
 @app.route('/')
 @app.route('/chatbot')
 def chatbot():
-    # Just render the chatbot page. The actual message logic is in /chatbot_ajax
     if 'messages' not in session:
         session['messages'] = []
     messages = session['messages']
