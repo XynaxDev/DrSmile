@@ -62,7 +62,7 @@ Contributions to **DrSmile** are welcome. To contribute:
    
 ## Contact
 
-For questions or suggestions, please contact the project maintainer through the GitHub repository or you can mail me [here](workforxynax.gmail.com) for any query, Happy coding👋
+For questions or suggestions, please contact the project maintainer through the GitHub repository or you can mail me [here](workforxynax@gmail.com) for any query, Happy coding👋
 
 
 
