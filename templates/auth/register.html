@@ -1,0 +1,38 @@
+{% extends 'layout/navbar.html' %}
+{% block title %}Register - Chatbot UI{% endblock %}
+
+{% block content %}
+<div class="container my-4" style="max-width: 900px;">
+    <div style="background: #1e1e1e; border-radius: 8px; padding: 1rem;">
+        <div class="row justify-content-center">
+            <div class="col-md-5">
+                <div class="card shadow bg-dark text-white">
+                    <div class="card-header bg-secondary text-white text-center">
+                        <h5>Create Account</h5>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Full Name</label>
+                                <input type="text" class="form-control" id="name" name="name"
+                                    placeholder="Enter your full name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email address</label>
+                                <input type="email" class="form-control" id="email" name="email"
+                                    placeholder="Enter email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" name="password"
+                                    placeholder="Create password" required>
+                            </div>
+                            <button type="submit" class="btn btn-secondary w-100">Register</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

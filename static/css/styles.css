@@ -1,0 +1,287 @@
+/***********************************************************
+  Global Settings
+************************************************************/
+html {
+    position: relative;
+    overflow-y: scroll;
+    min-height: 100%;
+}
+
+body {
+    background-color: #1e1e1e;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 70px;
+    /* if needed for a sticky footer (now removed) */
+    color: #e0e0e0;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/***********************************************************
+  Navbar
+************************************************************/
+
+.navbar .navbar-nav .nav-link {
+    font-size: 1.2rem !important;
+}
+
+.navbar-dark.bg-dark {
+    background-color: #1e1e1e !important;
+}
+
+.new-chat-link {
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+    color: inherit;
+    text-decoration: none;
+}
+
+.new-chat-link i {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.new-chat-link:hover {
+    background-color: #333333;
+    color: #fff;
+    text-decoration: none;
+}
+
+.navbar-nav .nav-link {
+    /* 0.5rem vertically, 1rem horizontally */
+    padding: 0.5rem 0.7rem !important;
+    border-radius: .5rem;
+    transition: background-color 0.2s, color 0.2s;
+    color: #9c9c9c;
+    text-decoration: none;
+}
+
+
+/* On hover, show the same dark gray background, white text */
+.navbar-nav .nav-link:hover {
+    background-color: #35363a;
+    color: #fff;
+    border-radius: .5rem;
+    text-decoration: none;
+}
+
+.bold-box {
+    font-size: 1.4rem !important;
+    color: #9c9c9c !important;
+    /* White icon color */
+    /* Use multiple drop-shadow offsets to create a black outline */
+    /* filter: drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff) drop-shadow(0 -1px 0 #fff); */
+}
+
+/***********************************************************
+  Chat Input & Messages
+************************************************************/
+/* Keep the input small (40px), with some top padding so placeholder looks centered */
+.chat-input {
+    height: 55px;
+    padding: 15px 1rem 0 1rem;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    border-radius: 30px;
+    border: none;
+    background-color: #333333 !important;
+    color: #ffffff !important;
+    outline: none;
+    box-shadow: none;
+    resize: none;
+}
+
+.chat-input::placeholder {
+    color: #999 !important;
+}
+
+.chat-input:focus {
+    box-shadow: none;
+}
+
+/* Original lines: unchanged, just appended transform to the transition 
+   and added line-height plus :focus rules */
+
+.input-group {
+    display: flex;
+    align-items: stretch;
+    /* ensures the button & textarea share the container's height */
+}
+
+/* For the .btn, allow auto height and center text */
+.btn.btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    border-top-right-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+    /* so it can grow with the textarea */
+
+    /* ADDED for a smooth transform & color transition */
+    transition: transform 0.2s ease, background-color 0.4s, color 0.4s;
+}
+
+/* .btn.btn-primary:hover {
+    background-color: #fff !important;
+    outline: none;
+    border: none;
+    color: #000 !important;
+} */
+
+/* Clicking (mouse) or pressing Enter (keyboard) => shrink scale */
+.btn.btn-primary:active,
+.btn.btn-primary:focus:active {
+    transform: scale(0.9);
+}
+
+/***********************************************************
+  Alert Bubbles
+************************************************************/
+/* Original lines + appended/modified lines for better indentation & rounding */
+
+.alert {
+    border: none;
+    border-radius: 1.2rem;
+    /* bigger curve for GPT-like rounding */
+    line-height: 1.5;
+    /* more readable text lines */
+    padding: 0.75rem 1rem;
+    /* extra internal padding */
+    font-size: 0.875rem;
+    /* appended: smaller GPT-like font */
+}
+
+.alert.alert-secondary {
+    background-color: #333;
+    color: #fff;
+}
+
+.alert.alert-info {
+    background-color: #3c3c3c;
+    color: #fff;
+}
+
+.chat-bubble {
+    max-width: 50%;
+    word-wrap: break-word;
+    /* ensures text wraps inside bubble */
+}
+
+/* user messages on the right, but text inside is justified */
+.user-message {
+    margin-left: auto;
+    /* bubble on the right */
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    /* gap between messages */
+    text-align: unset;
+    /* remove right alignment from the container */
+}
+
+.user-message .alert {
+    text-align: left;
+    /* fully justify user text inside bubble */
+}
+
+/* bot messages on the left, also fully justified text */
+.bot-message {
+    margin-right: auto;
+    /* bubble on the left */
+    margin-bottom: 1rem;
+    /* gap between messages */
+    text-align: unset;
+    max-width: 80%;
+    /* remove left alignment from the container */
+}
+
+.bot-message .alert {
+    text-align: left;
+    /* fully justify bot text inside bubble */
+}
+
+.bot-message .alert small {
+    color: #959595;
+}
+
+/* appended: place user bubble's time on the right, with smaller text color */
+.user-message .alert small {
+    /* float: right; */
+    color: #959595;
+    /* margin-top: 5rem; */
+    /* commented out because it's huge */
+    margin-top: 1rem;
+    /* new line: a modest top margin */
+    /* margin-left: 0.5rem; */
+}
+
+.tooltip.bs-tooltip-auto .tooltip-inner {
+    border: 0.1px solid #434343 !important;
+    border-radius: 9px !important;
+    padding: 0.50rem 1rem;
+    font-weight: bold;
+}
+
+/* input area scroll bar*/
+/* Make scrollbar about 12px wide so there's room for a small border. */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* Dark track */
+::-webkit-scrollbar-track {
+    background-color: #212121;
+}
+
+/* Thumb with a small border, using background-clip */
+::-webkit-scrollbar-thumb {
+    background-color: #4e4e4e;
+    /* border-radius: 5px;
+    border: 3px solid #1e1e1e;
+    background-clip: content-box; */
+}
+
+/* Corner piece (if needed) */
+/* ::-webkit-scrollbar-corner {
+    background-color: #2f2f2f;
+} */
+
+/* Media query*/
+
+/* APPENDED: Responsive media queries for GPT-like sizing */
+@media (max-width: 992px) {
+
+    /* For mid-size screens (tablets, small laptops) */
+    #conversationContainer {
+        max-width: 90% !important;
+        /* shrink from 870px to 90% width */
+        margin: 0 auto;
+        /* center horizontally */
+    }
+
+    /* The container inside chatInputBar */
+    #chatInputBar .container {
+        max-width: 90% !important;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 576px) {
+
+    /* For phones or very narrow screens */
+    #conversationContainer {
+        max-width: 90% !important;
+        margin: 0 auto;
+    }
+
+    #chatInputBar .container {
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    .brand-center {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+}

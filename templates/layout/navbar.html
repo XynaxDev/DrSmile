@@ -1,0 +1,61 @@
+{% extends 'layout/base.html' %}
+
+{% block navbar %}
+<!-- Sticky Navbar at top -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="z-index: 999;">
+    <div class="container">
+        <!-- Icon to start a new chat (unchanged) -->
+        <a href="{{ url_for('new_chat') }}" class="new-chat-link me-1" data-bs-toggle="tooltip"
+            data-bs-placement="bottom" title="New Chat">
+            <i class="bi bi-box-arrow-in-down-left bold-box"></i>
+        </a>
+
+        <!-- Brand (will be centered on phone via media query below) -->
+        <a class="navbar-brand brand-center" style="font-weight: 750; color: #9a9a9a;" href="{{ url_for('chatbot') }}">
+            DrSmile
+        </a>
+
+        <!-- Navbar Toggler (for small screens) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible Nav -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('chatbot') }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Go to Chat">
+                        Chat
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('dashboard') }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="View Dashboard">
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('profile') }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Your Profile">
+                        Profile
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('login') }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Login to DrSmile">
+                        Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('register') }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Register a new account">
+                        Register
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
