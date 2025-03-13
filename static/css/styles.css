@@ -172,17 +172,13 @@ body {
 /* user messages on the right, but text inside is justified */
 .user-message {
     margin-left: auto;
-    /* bubble on the right */
     margin-top: 2rem;
     margin-bottom: 1rem;
-    /* gap between messages */
     text-align: unset;
-    /* remove right alignment from the container */
 }
 
 .user-message .alert {
     text-align: left;
-    /* fully justify user text inside bubble */
 }
 
 /* bot messages on the left, also fully justified text */
