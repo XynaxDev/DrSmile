@@ -184,17 +184,13 @@ body {
 /* bot messages on the left, also fully justified text */
 .bot-message {
     margin-right: auto;
-    /* bubble on the left */
     margin-bottom: 1rem;
-    /* gap between messages */
     text-align: unset;
     max-width: 80%;
-    /* remove left alignment from the container */
 }
 
 .bot-message .alert {
     text-align: left;
-    /* fully justify bot text inside bubble */
 }
 
 .bot-message .alert small {
@@ -206,7 +202,6 @@ body {
     /* float: right; */
     color: #959595;
     /* margin-top: 5rem; */
-    /* commented out because it's huge */
     margin-top: 1rem;
     /* new line: a modest top margin */
     /* margin-left: 0.5rem; */
