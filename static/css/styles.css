@@ -199,7 +199,6 @@ body {
 }
 
 /* input area scroll bar*/
-/* Make scrollbar about 12px wide so there's room for a small border. */
 ::-webkit-scrollbar {
     width: 12px;
 }
@@ -217,7 +216,6 @@ body {
     background-clip: content-box; */
 }
 
-/* Corner piece (if needed) */
 /* ::-webkit-scrollbar-corner {
     background-color: #2f2f2f;
 } */
