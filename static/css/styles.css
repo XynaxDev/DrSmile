@@ -224,18 +224,14 @@ body {
 
 /* Media query*/
 
-/* APPENDED: Responsive media queries for GPT-like sizing */
 @media (max-width: 992px) {
 
     /* For mid-size screens (tablets, small laptops) */
     #conversationContainer {
         max-width: 90% !important;
-        /* shrink from 870px to 90% width */
         margin: 0 auto;
-        /* center horizontally */
     }
 
-    /* The container inside chatInputBar */
     #chatInputBar .container {
         max-width: 90% !important;
         margin: 0 auto;
