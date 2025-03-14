@@ -113,9 +113,7 @@ body {
     height: auto;
     border-top-right-radius: 1rem !important;
     border-bottom-right-radius: 1rem !important;
-    /* so it can grow with the textarea */
 
-    /* ADDED for a smooth transform & color transition */
     transition: transform 0.2s ease, background-color 0.4s, color 0.4s;
 }
 
@@ -126,7 +124,6 @@ body {
     color: #000 !important;
 } */
 
-/* Clicking (mouse) or pressing Enter (keyboard) => shrink scale */
 .btn.btn-primary:active,
 .btn.btn-primary:focus:active {
     transform: scale(0.9);
@@ -140,13 +137,9 @@ body {
 .alert {
     border: none;
     border-radius: 1.2rem;
-    /* bigger curve for GPT-like rounding */
     line-height: 1.5;
-    /* more readable text lines */
     padding: 0.75rem 1rem;
-    /* extra internal padding */
     font-size: 0.875rem;
-    /* appended: smaller GPT-like font */
 }
 
 .alert.alert-secondary {
