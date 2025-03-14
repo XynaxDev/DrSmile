@@ -69,7 +69,6 @@ body {
 .bold-box {
     font-size: 1.4rem !important;
     color: #9c9c9c !important;
-    /* White icon color */
     /* Use multiple drop-shadow offsets to create a black outline */
     /* filter: drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff) drop-shadow(0 -1px 0 #fff); */
 }
@@ -99,9 +98,6 @@ body {
 .chat-input:focus {
     box-shadow: none;
 }
-
-/* Original lines: unchanged, just appended transform to the transition 
-   and added line-height plus :focus rules */
 
 .input-group {
     display: flex;
