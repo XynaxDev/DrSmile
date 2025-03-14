@@ -132,7 +132,6 @@ body {
 /***********************************************************
   Alert Bubbles
 ************************************************************/
-/* Original lines + appended/modified lines for better indentation & rounding */
 
 .alert {
     border: none;
@@ -158,7 +157,6 @@ body {
     /* ensures text wraps inside bubble */
 }
 
-/* user messages on the right, but text inside is justified */
 .user-message {
     margin-left: auto;
     margin-top: 2rem;
@@ -170,7 +168,6 @@ body {
     text-align: left;
 }
 
-/* bot messages on the left, also fully justified text */
 .bot-message {
     margin-right: auto;
     margin-bottom: 1rem;
@@ -190,9 +187,7 @@ body {
 .user-message .alert small {
     /* float: right; */
     color: #959595;
-    /* margin-top: 5rem; */
     margin-top: 1rem;
-    /* new line: a modest top margin */
     /* margin-left: 0.5rem; */
 }
 
