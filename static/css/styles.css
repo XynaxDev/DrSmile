@@ -97,10 +97,8 @@ body {
 .input-group {
     display: flex;
     align-items: stretch;
-    /* ensures the button & textarea share the container's height */
 }
 
-/* For the .btn, allow auto height and center text */
 .btn.btn-primary {
     display: flex;
     align-items: center;
