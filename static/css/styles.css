@@ -11,7 +11,6 @@ body {
     background-color: #1e1e1e;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-bottom: 70px;
-    /* if needed for a sticky footer (now removed) */
     color: #e0e0e0;
     transition: background-color 0.3s, color 0.3s;
 }
