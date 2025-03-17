@@ -66,14 +66,12 @@ body {
 .bold-box {
     font-size: 1.4rem !important;
     color: #9c9c9c !important;
-    /* Use multiple drop-shadow offsets to create a black outline */
     /* filter: drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff) drop-shadow(0 -1px 0 #fff); */
 }
 
 /***********************************************************
   Chat Input & Messages
 ************************************************************/
-/* Keep the input small (40px), with some top padding so placeholder looks centered */
 .chat-input {
     height: 55px;
     padding: 15px 1rem 0 1rem;
