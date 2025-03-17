@@ -48,7 +48,6 @@ body {
 }
 
 .navbar-nav .nav-link {
-    /* 0.5rem vertically, 1rem horizontally */
     padding: 0.5rem 0.7rem !important;
     border-radius: .5rem;
     transition: background-color 0.2s, color 0.2s;
@@ -57,7 +56,6 @@ body {
 }
 
 
-/* On hover, show the same dark gray background, white text */
 .navbar-nav .nav-link:hover {
     background-color: #35363a;
     color: #fff;
