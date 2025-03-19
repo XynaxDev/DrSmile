@@ -12,18 +12,18 @@
                     <a href="{{ url_for('profile') }}" class="list-group-item list-group-item-action">Profile</a>
                     <a href="{{ url_for('chatbot') }}" class="list-group-item list-group-item-action">Chat</a>
                     <a href="#" class="list-group-item list-group-item-action">Settings</a>
-                    <a href="#" class="list-group-item list-group-item-action">Logout</a>
+                    <a href="{{ url_for('logout') }}" class="list-group-item list-group-item-action">Logout</a>
                 </div>
             </div>
             <div class="col-md-9">
                 <div class="card shadow bg-dark text-white">
                     <div class="card-header bg-secondary">
-                        <h5>Welcome, {{ user_name or 'User' }}!</h5>
+                        <h5>Welcome, {{ username or 'User' }}!</h5>
                     </div>
                     <div class="card-body">
                         <p>This is your personal dashboard. Here you can view your chat history, update your profile,
                             and manage your account settings.</p>
-                        <a href="{{ url_for('chatbot') }}" class="btn btn-primary">Start Chatting</a>
+                        <a href="{{ url_for('chatbot') }}" class="btn btn-outline-light">Start Chatting</a>
                     </div>
                 </div>
             </div>
