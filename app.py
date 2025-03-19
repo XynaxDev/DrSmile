@@ -6,8 +6,7 @@ from flask_session import Session
 load_dotenv()
 app = Flask(__name__)
 
-
-# ADDED: configure Flask-Session to store sessions server-side
+# Configure Flask-Session to store sessions server-side
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
@@ -64,7 +63,17 @@ def new_chat():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        return redirect(url_for('dashboard'))
+        # Retrieve credentials from the form
+        email = request.form.get('email')
+        password = request.form.get('password')
+        # Example credentials for testing
+        if email == 'test@example.com' and password == 'password':
+            session['logged_in'] = True
+            session['username'] = email  # Store email as username
+            return redirect(url_for('dashboard'))
+        else:
+            error = "Invalid credentials. Please try again."
+            return render_template('auth/login.html', error=error)
     return render_template('auth/login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -75,11 +84,25 @@ def register():
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template('dashboard.html', user_name="John Doe")
+    username = session.get('username')
+    if not username:
+        return redirect(url_for('login'))
+    return render_template('dashboard.html', username=username)
 
 @app.route('/profile')
 def profile():
-    return render_template('profile.html', user_name="John Doe", email="johndoe@example.com")
+    username = session.get('username')
+    if not username:
+        return redirect(url_for('login'))
+    # In this example, we'll use the username as the email for simplicity.
+    email = username  
+    return render_template('profile.html', user_name=username, email=email)
+
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    session.pop('username', None)  # Clear additional session data if needed
+    return redirect(url_for('chatbot'))
 
 if __name__ == '__main__':
     app.run(debug=True)
