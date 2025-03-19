@@ -192,13 +192,14 @@ body {
 }
 
 /* input area scroll bar*/
-::-webkit-scrollbar {
-    width: 10px;
-}
+/* ::-webkit-scrollbar { */
+    /* width: 10px; */
+    /* background-color: transparent; */
+/* } */
 
 /* Dark track */
 ::-webkit-scrollbar-track {
-    background-color: #212121;
+    background-color: transparent;
 }
 
 /* Thumb with a small border, using background-clip */
