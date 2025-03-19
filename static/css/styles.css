@@ -193,7 +193,7 @@ body {
 
 /* input area scroll bar*/
 ::-webkit-scrollbar {
-    width: 12px;
+    width: 10px;
 }
 
 /* Dark track */
@@ -204,9 +204,9 @@ body {
 /* Thumb with a small border, using background-clip */
 ::-webkit-scrollbar-thumb {
     background-color: #4e4e4e;
-    /* border-radius: 5px;
-    border: 3px solid #1e1e1e;
-    background-clip: content-box; */
+    border-radius: 5px;
+    /* border: 3px solid #1e1e1e; */
+    /* background-clip: content-box; */
 }
 
 /* ::-webkit-scrollbar-corner {
