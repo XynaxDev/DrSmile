@@ -11,6 +11,11 @@
                         <h5>User Login</h5>
                     </div>
                     <div class="card-body">
+                        {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                        {% endif %}
                         <form method="POST">
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email address</label>
