@@ -21,24 +21,20 @@
         <!-- Collapsible Nav -->
         <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
             <ul class="navbar-nav align-items-center">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('chatbot') }}" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom" title="Go to Chat">
-                        Chat
-                    </a>
-                </li>
+                {% if session.get('logged_in') %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('dashboard') }}" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom" title="View Dashboard">
+                        data-bs-placement="bottom" title="Dashboard">
                         Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('profile') }}" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom" title="Your Profile">
-                        Profile
+                    <a class="nav-link" href="{{ url_for('logout') }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Logout">
+                        Logout
                     </a>
                 </li>
+                {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url_for('login') }}" data-bs-toggle="tooltip"
                         data-bs-placement="bottom" title="Login to DrSmile">
@@ -51,6 +47,7 @@
                         Register
                     </a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>
