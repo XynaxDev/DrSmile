@@ -19,10 +19,6 @@ body {
   Navbar
 ************************************************************/
 
-.navbar .navbar-nav .nav-link {
-    font-size: 1.2rem !important;
-}
-
 .navbar-dark.bg-dark {
     background-color: #1e1e1e !important;
 }
@@ -47,26 +43,37 @@ body {
     text-decoration: none;
 }
 
-.navbar-nav .nav-link {
-    padding: 0.5rem 0.7rem !important;
-    border-radius: .5rem;
+.navbar-nav .nav-item{
+    padding: 0.3rem 0.2rem !important;
+}
+
+.navbar-nav .lgin{
+    background-color: #fff;
+    color: black !important;
+}
+.navbar-nav .lgin:hover{
+    background-color: #fff !important;
+    color: black !important;
+}
+
+.navbar-nav .nav-link{
+    padding: 0.4rem 0.8rem !important;
+    border-radius: 1.2rem;
+    font-size: 0.9rem !important;
+    border: 1px solid #404040;
     transition: background-color 0.2s, color 0.2s;
-    color: #9c9c9c;
-    text-decoration: none;
+    font-weight: 500;
+    color: #ffffff;
 }
 
 
 .navbar-nav .nav-link:hover {
-    background-color: #35363a;
-    color: #fff;
-    border-radius: .5rem;
-    text-decoration: none;
+    background-color: #99999919;
 }
 
 .bold-box {
     font-size: 1.4rem !important;
     color: #9c9c9c !important;
-    /* filter: drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff) drop-shadow(0 -1px 0 #fff); */
 }
 
 /***********************************************************
@@ -106,7 +113,6 @@ body {
     height: auto;
     border-top-right-radius: 1rem !important;
     border-bottom-right-radius: 1rem !important;
-
     transition: transform 0.2s ease, background-color 0.4s, color 0.4s;
 }
 
