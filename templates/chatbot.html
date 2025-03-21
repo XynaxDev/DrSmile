@@ -3,7 +3,7 @@
 
 {% block content %}
 <!-- Conversation container -->
-<div class="container my-4" style="max-width: 870px;" id="conversationContainer">
+<div class="container my-9" style="max-width: 870px;" id="conversationContainer">
     <div id="conversation">
         {% if messages %}
         {% for message in messages %}
@@ -18,7 +18,7 @@
                 <img src="{{ url_for('static', filename='images/bot_avatar.png') }}" alt="Bot Logo"
                     class="rounded-circle me-2" style="width: 40px; height: 40px;">
                 <div class="alert alert-info d-inline-block chat-bubble mb-0 border-0">
-                    <strong>Bot:</strong> {{ message.text|escape }}<br>
+                    <strong></strong> {{ message.text|escape }}<br>
                     <small>{{ message.time }}</small>
                 </div>
             </div>
@@ -26,7 +26,7 @@
         </div>
         {% endfor %}
         {% else %}
-        <p class="text-center" style="font-size: 1.2rem; margin-top: 50px; color: #636363;">
+        <p class="text-center" style="font-size: 1.2rem; padding-top: 50px; color: #636363;">
             <i>Your conversation will appear here...</i>
         </p>
         {% endif %}
