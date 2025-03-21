@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const sendBtn = document.getElementById('sendBtn');
     const chatInputBar = document.getElementById('chatInputBar');
 
-    // SHIFT+ENTER => newline, ENTER => send
     userInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
@@ -79,7 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
                   </div>
                 </div>`;
             } else {
-                // For bot messages, you can also escape if needed
                 html += `
                 <div class="chat-message bot-message d-flex align-items-start mb-3">
                   <img src="static/images/bot_avatar.png"
