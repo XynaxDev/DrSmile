@@ -250,6 +250,13 @@ body.sidebar-open {
 /***********************************************************
   Tooltip
 ************************************************************/
+/* Keep your existing tooltip styles with an arrow */
+.tooltip.bs-tooltip-bottom .tooltip-arrow {
+    /* default arrow is visible */
+    display: block !important;
+}
+
+/* Your custom .tooltip-inner styles */
 .tooltip.bs-tooltip-auto .tooltip-inner {
     border: 0.1px solid #434343 !important;
     border-radius: 9px !important;
@@ -257,6 +264,8 @@ body.sidebar-open {
     font-weight: bold;
     font-size: 0.8rem;
 }
+
+
 
 /***********************************************************
   Scrollbar Styles
@@ -295,9 +304,11 @@ body.sidebar-open {
         max-width: 100% !important;
         margin: 0 auto !important;
     }
-    .navbar{
+
+    .navbar {
         padding-top: 10px;
     }
+
     .brand-center {
         margin-left: auto !important;
         margin-right: auto !important;
