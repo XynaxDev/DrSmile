@@ -10,6 +10,17 @@ app = Flask(__name__)
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
+# Global flag to track whether we've cleared messages
+cleared_once = False
+
+@app.before_request
+def clear_messages_on_restart():
+    global cleared_once
+    # If we haven't cleared yet, do so now
+    if not cleared_once:
+        session.pop('messages', None)
+        cleared_once = True
+
 @app.route('/')
 @app.route('/chatbot')
 def chatbot():
@@ -95,7 +106,7 @@ def profile():
     if not username:
         return redirect(url_for('login'))
     # In this example, we'll use the username as the email for simplicity.
-    email = username  
+    email = username
     return render_template('profile.html', user_name=username, email=email)
 
 @app.route('/logout')
