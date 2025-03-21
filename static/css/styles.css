@@ -1,10 +1,9 @@
 /***********************************************************
   Custom Mobile Sidebar (Slides in from the left)
 ************************************************************/
-/* Let the browser manage the scrollbar naturally */
 html {
     position: relative;
-    overflow-y: auto;
+    overflow-y: scroll;
     min-height: 100%;
 }
 
@@ -13,27 +12,15 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-bottom: 70px;
     color: #e0e0e0;
-    padding-top: 70px; 
+    padding-top: 70px;
     transition: background-color 0.3s, color 0.3s;
     overflow-x: hidden;
 }
 
-/* Fix the navbar to the top */
-.navbar {
-    position: fixed !important;
-    top: 0;
-    width: 100%;
-}
-
-/* 
-  .mobile-sidebar: Off-screen by default. 
-  Slide it in with the .open class.
-*/
 .mobile-sidebar {
     position: fixed;
     top: 0;
     left: -260px;
-    /* Hide it off the left side */
     width: 260px;
     height: 100%;
     background-color: #1e1e1e;
@@ -43,7 +30,6 @@ body {
     padding: 1rem;
 }
 
-/* Slide the sidebar in from the left */
 .mobile-sidebar.open {
     left: 0;
 }
@@ -66,15 +52,10 @@ body {
     z-index: 4999;
 }
 
-/* Show the overlay when .show is toggled */
 .sidebar-overlay.show {
     display: block;
 }
 
-/* 
-  Prevent background scroll if desired 
-  (toggle .sidebar-open on <body>)
-*/
 body.sidebar-open {
     overflow: hidden;
 }
@@ -82,6 +63,13 @@ body.sidebar-open {
 /***********************************************************
   Navbar
 ************************************************************/
+.navbar {
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+    padding-top: 0px;
+}
+
 .navbar-dark.bg-dark {
     background-color: #1e1e1e !important;
 }
@@ -142,6 +130,20 @@ body.sidebar-open {
 /***********************************************************
   Chat Input & Messages
 ************************************************************/
+/* The conversation area at ~870px, as before */
+#conversationContainer {
+    max-width: 870px;
+    /* your old width */
+    margin: 0 auto;
+}
+
+/* The chat input bar slightly larger (900px) than conversation area */
+#chatInputBar .container {
+    max-width: 900px !important;
+    /* your old width */
+    margin: 0 auto !important;
+}
+
 .chat-input {
     height: 55px;
     padding: 15px 1rem 0 1rem;
@@ -187,6 +189,7 @@ body.sidebar-open {
 /***********************************************************
   Alert Bubbles
 ************************************************************/
+/* Revert to your original bubble colors */
 .alert {
     border: none;
     border-radius: 1.2rem;
@@ -197,16 +200,19 @@ body.sidebar-open {
 
 .alert.alert-secondary {
     background-color: #333;
+    /* user bubble background */
     color: #fff;
 }
 
 .alert.alert-info {
     background-color: #3c3c3c;
+    /* bot bubble background */
     color: #fff;
 }
 
+/* Keep chat-bubble at max 80% to avoid overflow on small screens */
 .chat-bubble {
-    max-width: 50%;
+    max-width: 80%;
     word-wrap: break-word;
 }
 
@@ -241,14 +247,20 @@ body.sidebar-open {
     margin-top: 1rem;
 }
 
+/***********************************************************
+  Tooltip
+************************************************************/
 .tooltip.bs-tooltip-auto .tooltip-inner {
     border: 0.1px solid #434343 !important;
     border-radius: 9px !important;
     padding: 0.50rem 1rem;
     font-weight: bold;
+    font-size: 0.8rem;
 }
 
-/* Scrollbar Styles */
+/***********************************************************
+  Scrollbar Styles
+************************************************************/
 ::-webkit-scrollbar-track {
     background-color: transparent;
 }
@@ -258,6 +270,9 @@ body.sidebar-open {
     border-radius: 5px;
 }
 
+/***********************************************************
+  Responsive Fixes
+************************************************************/
 @media (max-width: 992px) {
     #conversationContainer {
         max-width: 90% !important;
@@ -266,7 +281,7 @@ body.sidebar-open {
 
     #chatInputBar .container {
         max-width: 90% !important;
-        margin: 0 auto;
+        margin: 0 auto !important;
     }
 }
 
@@ -280,7 +295,9 @@ body.sidebar-open {
         max-width: 100% !important;
         margin: 0 auto !important;
     }
-
+    .navbar{
+        padding-top: 10px;
+    }
     .brand-center {
         margin-left: auto !important;
         margin-right: auto !important;
