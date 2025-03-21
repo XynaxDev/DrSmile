@@ -1,7 +1,7 @@
 {% extends 'layout/base.html' %}
 
 {% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="z-index: 999;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
         <a href="{{ url_for('new_chat') }}" class="new-chat-link me-1" data-bs-toggle="tooltip"
             data-bs-placement="bottom" title="New Chat">
@@ -12,14 +12,13 @@
             DrSmile
         </a>
 
-        <!-- Navbar Toggler (for small screens) -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Mobile Toggle Button (no offcanvas) -->
+        <button class="navbar-toggler d-lg-none" type="button" onclick="toggleSidebar()" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <!-- Collapsible Nav -->
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <!-- Large Screen Nav Menu -->
+        <div class="collapse navbar-collapse navbar-large d-none d-lg-flex justify-content-end" id="navbarNav">
             <ul class="navbar-nav align-items-center">
                 {% if session.get('logged_in') %}
                 <li class="nav-item">
@@ -52,4 +51,46 @@
         </div>
     </div>
 </nav>
+
+<!-- Custom Mobile Sidebar (no Bootstrap offcanvas) -->
+<div id="mobileSidebar" class="mobile-sidebar">
+    <div class="sidebar-header">
+        <h5 class="sidebar-title">Menu</h5>
+        <button type="button" class="btn-close text-reset" onclick="toggleSidebar()" aria-label="Close"></button>
+    </div>
+    <div class="sidebar-body">
+        <ul class="navbar-nav">
+            {% if session.get('logged_in') %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('dashboard') }}" data-bs-toggle="tooltip"
+                    data-bs-placement="bottom" title="Dashboard">
+                    Dashboard
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Logout">
+                    Logout
+                </a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link lgin" href="{{ url_for('login') }}" data-bs-toggle="tooltip"
+                    data-bs-placement="bottom" title="Login to DrSmile">
+                    Login
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('register') }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                    title="Register a new account">
+                    Register
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<!-- Dark overlay to dim the background when sidebar is open -->
+<div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
 {% endblock %}
