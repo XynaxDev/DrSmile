@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function renderMessages(messages) {
         if (!messages || messages.length === 0) {
             return `
-                  <p class="text-center" style="font-size: 1.2rem; margin-top: 50px; color: #4e4e4e;">
+                  <p class="text-center" style="font-size: 1.2rem; padding-top: 50px; color: #4e4e4e;">
                     <i>Your conversation will appear here...</i>
                   </p>`;
         }
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function () {
                        class="rounded-circle me-2"
                        style="width: 40px; height: 40px;">
                   <div class="alert alert-info d-inline-block chat-bubble mb-0 border-0">
-                    <strong>Bot: </strong> ${safeText}<br>
+                    ${safeText}<br>
                     <small>${msg.time}</small>
                   </div>
                 </div>`;
