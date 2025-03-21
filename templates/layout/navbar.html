@@ -2,23 +2,30 @@
 
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container">
-        <a href="{{ url_for('new_chat') }}" class="new-chat-link me-1" data-bs-toggle="tooltip"
-            data-bs-placement="bottom" title="New Chat">
-            <i class="bi bi-box-arrow-in-down-left bold-box"></i>
-        </a>
+    <!-- Use container-fluid + px-3 for slight horizontal padding -->
+    <div class="container-fluid px-3">
+        <!-- Row 1: Brand & Toggler always visible -->
+        <div class="d-flex w-100 align-items-center justify-content-between">
+            <!-- Left side: New Chat + Brand -->
+            <div class="d-flex align-items-center">
+                <a href="{{ url_for('new_chat') }}" class="new-chat-link me-2" data-bs-toggle="tooltip"
+                    data-bs-placement="bottom" title="New Chat">
+                    <i class="bi bi-box-arrow-in-down-left bold-box"></i>
+                </a>
+                <a class="navbar-brand mb-0" style="font-weight: 750; color: #9a9a9a;" href="{{ url_for('chatbot') }}">
+                    DrSmile
+                </a>
+            </div>
 
-        <a class="navbar-brand brand-center" style="font-weight: 750; color: #9a9a9a;" href="{{ url_for('chatbot') }}">
-            DrSmile
-        </a>
+            <!-- Right side: Toggler on mobile -->
+            <button class="navbar-toggler d-lg-none me-2" type="button" onclick="toggleSidebar()"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
 
-        <!-- Mobile Toggle Button (no offcanvas) -->
-        <button class="navbar-toggler d-lg-none" type="button" onclick="toggleSidebar()" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <!-- Large Screen Nav Menu -->
-        <div class="collapse navbar-collapse navbar-large d-none d-lg-flex justify-content-end" id="navbarNav">
+        <!-- Row 2: Nav links (visible on large screens) -->
+        <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end mt-2" id="navbarNav">
             <ul class="navbar-nav align-items-center">
                 {% if session.get('logged_in') %}
                 <li class="nav-item">
@@ -91,6 +98,6 @@
     </div>
 </div>
 
-<!-- Dark overlay to dim the background when sidebar is open -->
+<!-- Dark overlay -->
 <div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
 {% endblock %}
