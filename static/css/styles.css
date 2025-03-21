@@ -1,9 +1,10 @@
 /***********************************************************
-  Global Settings
+  Custom Mobile Sidebar (Slides in from the left)
 ************************************************************/
+/* Let the browser manage the scrollbar naturally */
 html {
     position: relative;
-    overflow-y: scroll;
+    overflow-y: auto;
     min-height: 100%;
 }
 
@@ -12,13 +13,75 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-bottom: 70px;
     color: #e0e0e0;
+    padding-top: 70px; 
     transition: background-color 0.3s, color 0.3s;
+    overflow-x: hidden;
+}
+
+/* Fix the navbar to the top */
+.navbar {
+    position: fixed !important;
+    top: 0;
+    width: 100%;
+}
+
+/* 
+  .mobile-sidebar: Off-screen by default. 
+  Slide it in with the .open class.
+*/
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    /* Hide it off the left side */
+    width: 260px;
+    height: 100%;
+    background-color: #1e1e1e;
+    transition: left 0.3s ease;
+    z-index: 5000 !important;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+/* Slide the sidebar in from the left */
+.mobile-sidebar.open {
+    left: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 4999;
+}
+
+/* Show the overlay when .show is toggled */
+.sidebar-overlay.show {
+    display: block;
+}
+
+/* 
+  Prevent background scroll if desired 
+  (toggle .sidebar-open on <body>)
+*/
+body.sidebar-open {
+    overflow: hidden;
 }
 
 /***********************************************************
   Navbar
 ************************************************************/
-
 .navbar-dark.bg-dark {
     background-color: #1e1e1e !important;
 }
@@ -43,20 +106,21 @@ body {
     text-decoration: none;
 }
 
-.navbar-nav .nav-item{
+.navbar-nav .nav-item {
     padding: 0.3rem 0.2rem !important;
 }
 
-.navbar-nav .lgin{
+.navbar-nav .lgin {
     background-color: #fff;
     color: black !important;
 }
-.navbar-nav .lgin:hover{
+
+.navbar-nav .lgin:hover {
     background-color: #fff !important;
     color: black !important;
 }
 
-.navbar-nav .nav-link{
+.navbar-nav .nav-link {
     padding: 0.4rem 0.8rem !important;
     border-radius: 1.2rem;
     font-size: 0.9rem !important;
@@ -65,7 +129,6 @@ body {
     font-weight: 500;
     color: #ffffff;
 }
-
 
 .navbar-nav .nav-link:hover {
     background-color: #99999919;
@@ -116,13 +179,6 @@ body {
     transition: transform 0.2s ease, background-color 0.4s, color 0.4s;
 }
 
-/* .btn.btn-primary:hover {
-    background-color: #fff !important;
-    outline: none;
-    border: none;
-    color: #000 !important;
-} */
-
 .btn.btn-primary:active,
 .btn.btn-primary:focus:active {
     transform: scale(0.9);
@@ -131,7 +187,6 @@ body {
 /***********************************************************
   Alert Bubbles
 ************************************************************/
-
 .alert {
     border: none;
     border-radius: 1.2rem;
@@ -153,7 +208,6 @@ body {
 .chat-bubble {
     max-width: 50%;
     word-wrap: break-word;
-    /* ensures text wraps inside bubble */
 }
 
 .user-message {
@@ -182,12 +236,9 @@ body {
     color: #959595;
 }
 
-/* appended: place user bubble's time on the right, with smaller text color */
 .user-message .alert small {
-    /* float: right; */
     color: #959595;
     margin-top: 1rem;
-    /* margin-left: 0.5rem; */
 }
 
 .tooltip.bs-tooltip-auto .tooltip-inner {
@@ -197,33 +248,17 @@ body {
     font-weight: bold;
 }
 
-/* input area scroll bar*/
-/* ::-webkit-scrollbar { */
-    /* width: 10px; */
-    /* background-color: transparent; */
-/* } */
-
-/* Dark track */
+/* Scrollbar Styles */
 ::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-/* Thumb with a small border, using background-clip */
 ::-webkit-scrollbar-thumb {
     background-color: #4e4e4e;
     border-radius: 5px;
-    /* border: 3px solid #1e1e1e; */
-    /* background-clip: content-box; */
 }
 
-/* ::-webkit-scrollbar-corner {
-    background-color: #2f2f2f;
-} */
-
-
 @media (max-width: 992px) {
-
-    /* For mid-size screens (tablets, small laptops) */
     #conversationContainer {
         max-width: 90% !important;
         margin: 0 auto;
@@ -236,8 +271,6 @@ body {
 }
 
 @media (max-width: 576px) {
-
-    /* For phones or very narrow screens */
     #conversationContainer {
         max-width: 90% !important;
         margin: 0 auto;
