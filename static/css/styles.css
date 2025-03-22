@@ -17,9 +17,10 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-p{
+p {
     margin: 0 !important;
 }
+
 /* ID remains 'mobileSidebar' but classes changed to 'drs-sidebar' */
 /***********************************************************
   Custom Mobile Sidebar (Slides in from the left)
@@ -119,6 +120,10 @@ p{
     padding-top: 0px;
 }
 
+.custom-spacing {
+    padding: 0.4rem 0.8rem;
+}
+
 .navbar-dark.bg-dark {
     background-color: #1e1e1e !important;
 }
@@ -127,8 +132,8 @@ p{
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.375rem;
-    padding: 0.4rem;
+    border-radius: 0.6rem;
+    padding: 0.575rem;
     transition: background-color 0.2s ease;
     text-decoration: none;
 }
@@ -366,8 +371,8 @@ p{
         margin: 0 auto !important;
     }
 
-    .navbar {
-        padding-top: 0.2rem;
+    .custom-spacing {
+        padding-top: 0.5rem;
     }
 }
 
@@ -383,9 +388,9 @@ p{
         padding: 0;
     }
 
-    .navbar {
-        padding-top: 0.2rem;
-        padding-bottom: 0.2rem;
-        border-bottom: 1px solid #2f2f2f;
+    .custom-spacing {
+        padding-top: 0.5rem;
+        /* padding-bottom: 0.2rem;*/
+        border-bottom: 1px solid #2f2f2f88;
     }
 }
