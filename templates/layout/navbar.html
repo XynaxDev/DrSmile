@@ -2,29 +2,28 @@
 
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <!-- Use container-fluid + px-3 for slight horizontal padding -->
-    <div class="container-fluid px-3">
-        <!-- Row 1: Brand & Toggler always visible -->
+    <div class="container-fluid px-2.5 py-2">
+        <!-- Top row: brand + toggler -->
         <div class="d-flex w-100 align-items-center justify-content-between">
-            <!-- Left side: New Chat + Brand -->
             <div class="d-flex align-items-center">
-                <a href="{{ url_for('new_chat') }}" class="new-chat-link me-2" data-bs-toggle="tooltip"
+                <a href="{{ url_for('new_chat') }}" class="drs-new-chat me-2" data-bs-toggle="tooltip"
                     data-bs-placement="bottom" title="New Chat">
-                    <i class="bi bi-box-arrow-in-down-left bold-box"></i>
+                    <img src="{{ url_for('static', filename='images/new-chat.png') }}" alt="New Chat"
+                        class="new-chat-icon" />
                 </a>
                 <a class="navbar-brand mb-0" style="font-weight: 750; color: #9a9a9a;" href="{{ url_for('chatbot') }}">
                     DrSmile
                 </a>
             </div>
 
-            <!-- Right side: Toggler on mobile -->
-            <button class="navbar-toggler d-lg-none me-2" type="button" onclick="toggleSidebar()"
+            <!-- Toggler on mobile -->
+            <button class="navbar-toggler d-lg-none" type="button" onclick="toggleSidebar()"
                 aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                <span class="custom-toggler-icon"></span>
             </button>
         </div>
 
-        <!-- Row 2: Nav links (visible on large screens) -->
+        <!-- Large-screen nav links (unchanged) -->
         <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end mt-2" id="navbarNav">
             <ul class="navbar-nav align-items-center">
                 {% if session.get('logged_in') %}
@@ -35,8 +34,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('logout') }}" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                        title="Logout">
+                    <a class="nav-link" href="{{ url_for('logout') }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Logout">
                         Logout
                     </a>
                 </li>
@@ -59,33 +58,36 @@
     </div>
 </nav>
 
-<!-- Custom Mobile Sidebar (no Bootstrap offcanvas) -->
-<div id="mobileSidebar" class="mobile-sidebar">
-    <div class="sidebar-header">
-        <h5 class="sidebar-title">Menu</h5>
-        <button type="button" class="btn-close text-reset" onclick="toggleSidebar()" aria-label="Close"></button>
+<!-- Mobile Sidebar -->
+<div id="mobileSidebar" class="drs-sidebar">
+    <div class="drs-sidebar-header">
+        <h5 class="drs-sidebar-title">DrSmile</h5>
+        <button type="button" class="btn-close text-reset custom-close" onclick="toggleSidebar()" aria-label="Close">
+        </button>
     </div>
-    <div class="sidebar-body">
-        <ul class="navbar-nav">
+    <div class="drs-sidebar-body">
+        <ul class="drs-sidebar-nav">
             {% if session.get('logged_in') %}
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('dashboard') }}">
+            <!-- Show Dashboard + Logout if logged in -->
+            <li class="drs-sidebar-item">
+                <a class="drs-sidebar-link" href="{{ url_for('dashboard') }}">
                     Dashboard
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('logout') }}">
+            <li class="drs-sidebar-item">
+                <a class="drs-sidebar-link" href="{{ url_for('logout') }}">
                     Logout
                 </a>
             </li>
             {% else %}
-            <li class="nav-item">
-                <a class="nav-link lgin" href="{{ url_for('login') }}">
+            <!-- Show Login + Register if not logged in -->
+            <li class="drs-sidebar-item">
+                <a class="drs-sidebar-link lgin" href="{{ url_for('login') }}">
                     Login
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('register') }}">
+            <li class="drs-sidebar-item">
+                <a class="drs-sidebar-link" href="{{ url_for('register') }}">
                     Register
                 </a>
             </li>
@@ -95,5 +97,5 @@
 </div>
 
 <!-- Dark overlay -->
-<div id="sidebarOverlay" class="sidebar-overlay" onclick="toggleSidebar()"></div>
+<div id="sidebarOverlay" class="drs-sidebar-overlay" onclick="toggleSidebar()"></div>
 {% endblock %}
