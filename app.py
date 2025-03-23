@@ -6,17 +6,16 @@ from flask_session import Session
 load_dotenv()
 app = Flask(__name__)
 
-# Configure Flask-Session to store sessions server-side
+# to store sessions server-side
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
-# Global flag to track whether we've cleared messages
+# to track whether we've cleared messages
 cleared_once = False
 
 @app.before_request
 def clear_messages_on_restart():
     global cleared_once
-    # If we haven't cleared yet, do so now
     if not cleared_once:
         session.pop('messages', None)
         cleared_once = True
@@ -74,13 +73,12 @@ def new_chat():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
-        # Retrieve credentials from the form
         email = request.form.get('email')
         password = request.form.get('password')
-        # Example credentials for testing
+
         if email == 'test@example.com' and password == 'password':
             session['logged_in'] = True
-            session['username'] = email  # Store email as username
+            session['username'] = email 
             return redirect(url_for('dashboard'))
         else:
             error = "Invalid credentials. Please try again."
@@ -105,14 +103,13 @@ def profile():
     username = session.get('username')
     if not username:
         return redirect(url_for('login'))
-    # In this example, we'll use the username as the email for simplicity.
     email = username
     return render_template('profile.html', user_name=username, email=email)
 
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
-    session.pop('username', None)  # Clear additional session data if needed
+    session.pop('username', None) 
     return redirect(url_for('chatbot'))
 
 if __name__ == '__main__':
