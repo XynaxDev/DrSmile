@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         let html = '';
         messages.forEach(msg => {
-            // 1) Escape < and > for user messages to prevent rendering HTML tags
             const safeText = msg.sender === 'user'
                 ? msg.text.replaceAll('<', '&lt;').replaceAll('>', '&gt;')
                 : msg.text;
