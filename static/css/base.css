@@ -1,6 +1,5 @@
-/***********************************************************
-  Custom Mobile Sidebar (Slides in from the left)
-************************************************************/
+/* Global Styles */
+
 html {
     position: relative;
     overflow-y: scroll;
@@ -21,10 +20,8 @@ p {
     margin: 0 !important;
 }
 
-/* ID remains 'mobileSidebar' but classes changed to 'drs-sidebar' */
-/***********************************************************
-  Custom Mobile Sidebar (Slides in from the left)
-************************************************************/
+/* Custom Mobile Sidebar Styles */
+
 .drs-sidebar {
     position: fixed;
     top: 0;
@@ -77,7 +74,6 @@ p {
     margin-top: 0.5rem;
 }
 
-/* The main nav container: no bullets, vertical layout */
 .drs-sidebar-body .drs-sidebar-nav {
     display: flex;
     flex-direction: column;
@@ -87,12 +83,10 @@ p {
     list-style: none;
 }
 
-/* Each item has spacing between them */
 .drs-sidebar-body .drs-sidebar-nav .drs-sidebar-item {
     margin-bottom: 0.6rem;
 }
 
-/* Make the link block-level with symmetrical top/bottom padding */
 .drs-sidebar-link {
     display: block;
     text-decoration: none;
@@ -103,16 +97,12 @@ p {
     /* line-height: 1.4; */
 }
 
-/* Hover effect */
 .drs-sidebar-link:hover {
     background-color: #2f2f2f;
 }
 
+/* Navbar Styles */
 
-
-/***********************************************************
-  Navbar
-************************************************************/
 .navbar {
     position: fixed !important;
     top: 0;
@@ -143,7 +133,6 @@ p {
     text-decoration: none;
 }
 
-/* The chat icon itself: small and contained */
 .new-chat-icon {
     width: 1.5rem;
     height: 1.5rem;
@@ -217,122 +206,8 @@ p {
     box-shadow: none !important;
 }
 
-/***********************************************************
-  Chat Input & Messages
-************************************************************/
-#conversationContainer {
-    max-width: 870px;
-    margin: 0 auto;
-}
+/* Tooltip Styles */
 
-#chatInputBar .container {
-    max-width: 900px !important;
-    margin: 0 auto !important;
-}
-
-.chat-input {
-    height: 55px;
-    padding: 15px 1rem 0 1rem;
-    box-sizing: border-box;
-    overflow-y: hidden;
-    border-radius: 30px;
-    border: none;
-    background-color: #333333 !important;
-    color: #ffffff !important;
-    outline: none;
-    box-shadow: none;
-    resize: none;
-}
-
-.chat-input::placeholder {
-    color: #999 !important;
-}
-
-.chat-input:focus {
-    box-shadow: none;
-}
-
-.input-group {
-    display: flex;
-    align-items: stretch;
-}
-
-.btn.btn-primary {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: auto;
-    border-top-right-radius: 1rem !important;
-    border-bottom-right-radius: 1rem !important;
-    transition: transform 0.2s ease, background-color 0.4s, color 0.4s;
-}
-
-.btn.btn-primary:active,
-.btn.btn-primary:focus:active {
-    transform: scale(0.9);
-}
-
-/***********************************************************
-  Alert Bubbles
-************************************************************/
-.alert {
-    border: none;
-    border-radius: 1.2rem;
-    line-height: 1.5;
-    padding: 0.75rem 1rem;
-    font-size: 0.875rem;
-}
-
-.alert.alert-secondary {
-    background-color: #333;
-    color: #fff;
-}
-
-.alert.alert-info {
-    background-color: #3c3c3c;
-    color: #fff;
-}
-
-.chat-bubble {
-    max-width: 80%;
-    word-wrap: break-word;
-}
-
-.user-message {
-    margin-left: auto;
-    margin-top: 2rem;
-    max-width: 80%;
-    margin-bottom: 1rem;
-    text-align: unset;
-}
-
-.user-message .alert {
-    text-align: left;
-}
-
-.bot-message {
-    margin-right: auto;
-    margin-bottom: 1rem;
-    text-align: unset;
-    max-width: 80%;
-}
-
-.bot-message .alert {
-    text-align: left;
-}
-
-.bot-message .alert small {
-    color: #959595;
-}
-
-.user-message .alert small {
-    color: #959595;
-    margin-top: 1rem;
-}
-
-/***********************************************************
-  Tooltip
-************************************************************/
 .tooltip.bs-tooltip-bottom .tooltip-arrow {
     display: block !important;
 }
@@ -345,9 +220,8 @@ p {
     font-size: 0.8rem;
 }
 
-/***********************************************************
-  Scrollbar Styles
-************************************************************/
+/* Scrollbar Styles */
+
 ::-webkit-scrollbar-track {
     background-color: transparent;
 }
@@ -355,42 +229,4 @@ p {
 ::-webkit-scrollbar-thumb {
     background-color: #4e4e4e;
     border-radius: 5px;
-}
-
-/***********************************************************
-  Responsive Fixes
-************************************************************/
-@media (max-width: 992px) {
-    #conversationContainer {
-        max-width: 90% !important;
-        margin: 0 auto;
-    }
-
-    #chatInputBar .container {
-        max-width: 90% !important;
-        margin: 0 auto !important;
-    }
-
-    .custom-spacing {
-        padding-top: 0.5rem;
-    }
-}
-
-@media (max-width: 576px) {
-    #conversationContainer {
-        max-width: 90% !important;
-        margin: 0 auto;
-    }
-
-    #chatInputBar .container {
-        max-width: 100% !important;
-        margin: 0 auto !important;
-        padding: 0;
-    }
-
-    .custom-spacing {
-        padding-top: 0.5rem;
-        /* padding-bottom: 0.2rem;*/
-        border-bottom: 1px solid #2f2f2f88;
-    }
 }

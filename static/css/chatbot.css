@@ -1,0 +1,110 @@
+/* Chat Input Messages Styles */
+
+#conversationContainer {
+    max-width: 870px;
+    margin: 0 auto;
+}
+
+#chatInputBar .container {
+    max-width: 900px !important;
+    margin: 0 auto !important;
+}
+
+.chat-input {
+    height: 55px;
+    padding: 15px 1rem 0 1rem;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    border-radius: 30px;
+    border: none;
+    background-color: #333333 !important;
+    color: #ffffff !important;
+    outline: none;
+    box-shadow: none;
+    resize: none;
+}
+
+.chat-input::placeholder {
+    color: #999 !important;
+}
+
+.chat-input:focus {
+    box-shadow: none;
+}
+
+.input-group {
+    display: flex;
+    align-items: stretch;
+}
+
+.btn.btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    border-top-right-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+    transition: transform 0.2s ease, background-color 0.4s, color 0.4s;
+}
+
+.btn.btn-primary:active,
+.btn.btn-primary:focus:active {
+    transform: scale(0.9);
+}
+
+/* Chat Alert Bubbles Styles */
+
+.alert {
+    border: none;
+    border-radius: 1.2rem;
+    line-height: 1.5;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+}
+
+.alert.alert-secondary {
+    background-color: #333;
+    color: #fff;
+}
+
+.alert.alert-info {
+    background-color: #3c3c3c;
+    color: #fff;
+}
+
+.chat-bubble {
+    max-width: 80%;
+    word-wrap: break-word;
+}
+
+.user-message {
+    margin-left: auto;
+    margin-top: 2rem;
+    max-width: 80%;
+    margin-bottom: 1rem;
+    text-align: unset;
+}
+
+.user-message .alert {
+    text-align: left;
+}
+
+.bot-message {
+    margin-right: auto;
+    margin-bottom: 1rem;
+    text-align: unset;
+    max-width: 80%;
+}
+
+.bot-message .alert {
+    text-align: left;
+}
+
+.bot-message .alert small {
+    color: #959595;
+}
+
+.user-message .alert small {
+    color: #959595;
+    margin-top: 1rem;
+}
