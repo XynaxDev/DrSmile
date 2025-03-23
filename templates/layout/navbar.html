@@ -3,7 +3,6 @@
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container-fluid custom-spacing">
-        <!-- Top row: brand + toggler -->
         <div class="d-flex w-100 align-items-center justify-content-between">
             <div class="d-flex align-items-center">
                 <a href="{{ url_for('new_chat') }}" class="drs-new-chat me-2" data-bs-toggle="tooltip"
@@ -23,7 +22,7 @@
             </button>
         </div>
 
-        <!-- Large-screen nav links (unchanged) -->
+        <!-- Large-screen nav links -->
         <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end mt-2" id="navbarNav">
             <ul class="navbar-nav align-items-center">
                 {% if session.get('logged_in') %}
@@ -68,7 +67,6 @@
     <div class="drs-sidebar-body">
         <ul class="drs-sidebar-nav">
             {% if session.get('logged_in') %}
-            <!-- Show Dashboard + Logout if logged in -->
             <li class="drs-sidebar-item">
                 <a class="drs-sidebar-link" href="{{ url_for('dashboard') }}">
                     Dashboard
@@ -80,7 +78,6 @@
                 </a>
             </li>
             {% else %}
-            <!-- Show Login + Register if not logged in -->
             <li class="drs-sidebar-item">
                 <a class="drs-sidebar-link lgin" href="{{ url_for('login') }}">
                     Login
@@ -96,6 +93,5 @@
     </div>
 </div>
 
-<!-- Dark overlay -->
 <div id="sidebarOverlay" class="drs-sidebar-overlay" onclick="toggleSidebar()"></div>
 {% endblock %}
