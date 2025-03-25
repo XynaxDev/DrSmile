@@ -1,0 +1,194 @@
+/***********************************************************
+  Overall Page Layout
+************************************************************/
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    color: #333;
+    height: 100%;
+}
+
+.brand-bar {
+    position: absolute;
+    top: 1rem;
+    left: 1.2rem;
+}
+
+.brand-link {
+    text-decoration: none;
+    color: #333;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+
+.login-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 50px);
+    box-sizing: border-box;
+    padding: 2rem 1rem;
+}
+
+.login-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/***********************************************************
+  Error Message
+************************************************************/
+.login-error {
+    color: #d00;
+    background: #fdd;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+    text-align: center;
+    border: 1px solid #d00;
+    font-size: 0.9rem;
+}
+
+/***********************************************************
+  Floating Label Form
+************************************************************/
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 2rem;
+}
+
+.floating-label-group {
+    position: relative;
+    margin-bottom: 1.4rem;
+    width: 89%;
+}
+
+.floating-input {
+    width: 100%;
+    padding: 1.1rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    background: transparent;
+}
+
+.floating-input::placeholder {
+    color: transparent;
+}
+
+.floating-input:focus {
+    border-color: #00a67d;
+}
+
+.floating-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    background: #fff;
+    padding: 0 0.25rem;
+}
+
+.floating-input:focus+.floating-label,
+.floating-input:not(:placeholder-shown)+.floating-label {
+    top: 0;
+    left: 0.8rem;
+    font-size: 0.9rem;
+    color: #00a67d;
+    font-weight: 600;
+}
+
+/***********************************************************
+  Continue Button
+************************************************************/
+.btn-continue {
+    display: block;
+    width: 100%;
+    background: #00a67d;
+    color: #fff;
+    font-size: 1rem;
+    padding: 1.1rem 2rem;
+    margin-top: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-continue:hover {
+    background: #008c68;
+}
+
+/***********************************************************
+  Register Line
+************************************************************/
+.register-line {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.register-line a {
+    color: #00a67d;
+    text-decoration: none;
+}
+
+.register-line a:hover {
+    text-decoration: underline;
+}
+
+/***********************************************************
+  Footer Terms & Privacy (Fixed at Bottom)
+************************************************************/
+.footer-terms {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    text-align: center;
+    padding: 0.75rem 0;
+    /* border-top: 1px solid #ddd; */
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.footer-terms a {
+    color: #00a67d;
+    text-decoration: none;
+}
+
+.footer-terms a:hover {
+    text-decoration: underline;
+}
+
+/***********************************************************
+  Responsive Tweaks
+************************************************************/
+@media (max-width: 576px) {
+    .login-title {
+        font-size: 1.6rem;
+    }
+
+    .login-form {
+        max-width: 90%;
+    }
+
+    .btn-continue{
+        width: 98%;
+    }
+}

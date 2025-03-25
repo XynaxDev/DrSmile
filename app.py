@@ -78,12 +78,16 @@ def login():
 
         if email == 'test@example.com' and password == 'password':
             session['logged_in'] = True
-            session['username'] = email 
+            session['username'] = email
             return redirect(url_for('dashboard'))
         else:
-            error = "Invalid credentials. Please try again."
-            return render_template('auth/login.html', error=error)
-    return render_template('auth/login.html')
+            # Store error in session, then redirect
+            session['error'] = "Invalid credentials. Please try again."
+            return redirect(url_for('login'))
+
+    # On GET, pop the error from session so it doesn't persist on refresh
+    error = session.pop('error', None)
+    return render_template('auth/login.html', error=error)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -109,8 +113,16 @@ def profile():
 @app.route('/logout')
 def logout():
     session.pop('logged_in', None)
-    session.pop('username', None) 
+    session.pop('username', None)
     return redirect(url_for('chatbot'))
+
+@app.route('/terms')
+def terms():
+    return render_template('terms.html')
+
+@app.route('/privacy')
+def privacy():
+    return render_template('privacy.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

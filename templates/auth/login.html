@@ -1,38 +1,53 @@
-{% extends 'layout/navbar.html' %}
-{% block title %}Login{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-<div class="container my-4" style="max-width: 900px;">
-    <div style="background: #1e1e1e; border-radius: 8px; padding: 1rem;">
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="card shadow bg-dark text-white">
-                    <div class="card-header bg-secondary text-white text-center">
-                        <h5>User Login</h5>
-                    </div>
-                    <div class="card-body">
-                        {% if error %}
-                        <div class="alert alert-danger" role="alert">
-                            {{ error }}
-                        </div>
-                        {% endif %}
-                        <form method="POST">
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="Enter email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Enter password" required>
-                            </div>
-                            <button type="submit" class="btn btn-secondary w-100">Log in</button>
-                        </form>
-                    </div>
-                </div>
+<head>
+    <meta charset="UTF-8">
+    <title>Login - DrSmile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+
+<body>
+
+    <div class="brand-bar">
+        <a href="{{ url_for('chatbot') }}" class="brand-link">DrSmile</a>
+    </div>
+
+    <div class="login-page-container">
+        <h1 class="login-title">Welcome back</h1>
+
+        {% if error %}
+        <div class="login-error">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form method="POST" class="login-form">
+            <div class="floating-label-group">
+                <input type="email" name="email" id="emailInput" class="floating-input" placeholder=" " required />
+                <label for="emailInput" class="floating-label">Email address*</label>
             </div>
+
+            <div class="floating-label-group">
+                <input type="password" name="password" id="passwordInput" class="floating-input" placeholder=" "
+                    required />
+                <label for="passwordInput" class="floating-label">Password*</label>
+            </div>
+            <button type="submit" class="btn-continue">Login</button>
+
+        </form>
+
+        <div class="register-line">
+            Don't have an account?
+            <a href="{{ url_for('register') }}">Register</a>
         </div>
     </div>
-</div>
-{% endblock %}
+
+    <footer class="footer-terms">
+        <a href="{{ url_for('terms') }}">Terms of Use</a>
+        &nbsp;|&nbsp;
+        <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+    </footer>
+</body>
+
+</html>
