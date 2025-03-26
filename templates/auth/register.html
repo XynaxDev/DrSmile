@@ -1,38 +1,38 @@
-{% extends 'layout/navbar.html' %}
+{% extends 'auth/login.html' %}
+
 {% block title %}Register{% endblock %}
 
+{% block head %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block container_class %}register-page-container{% endblock %}
+
+{% block title_class %}register-title{% endblock %}
+
+{% block page_title %}Create Account{% endblock %}
+
 {% block content %}
-<div class="container my-4" style="max-width: 900px;">
-    <div style="background: #1e1e1e; border-radius: 8px; padding: 1rem;">
-        <div class="row justify-content-center">
-            <div class="col-md-5">
-                <div class="card shadow bg-dark text-white">
-                    <div class="card-header bg-secondary text-white text-center">
-                        <h5>Create Account</h5>
-                    </div>
-                    <div class="card-body">
-                        <form method="POST">
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Full Name</label>
-                                <input type="text" class="form-control" id="name" name="name"
-                                    placeholder="Enter your full name" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="email" name="email"
-                                    placeholder="Enter email" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password"
-                                    placeholder="Create password" required>
-                            </div>
-                            <button type="submit" class="btn btn-secondary w-100">Register</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+<form method="POST" class="register-form">
+    <div class="floating-label-group">
+        <input type="text" class="floating-input" id="name" name="name" placeholder=" " required>
+        <label for="name" class="floating-label">Full Name*</label>
     </div>
+    <div class="floating-label-group">
+        <input type="email" class="floating-input" id="email" name="email" placeholder=" " required>
+        <label for="email" class="floating-label">Email address*</label>
+    </div>
+    <div class="floating-label-group">
+        <input type="password" class="floating-input" id="password" name="password" placeholder=" " required>
+        <label for="password" class="floating-label">Password*</label>
+    </div>
+    <div class="btn-register-group">
+        <button type="submit" class="btn-register">Register</button>
+    </div>
+</form>
+
+<div class="register-line">
+    Already have an account? <a href="{{ url_for('login') }}">Login</a>
 </div>
 {% endblock %}

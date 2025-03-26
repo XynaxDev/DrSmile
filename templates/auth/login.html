@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>{% block title %}Login{% endblock %} - DrSmile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    {% block head %}{% endblock %}
 </head>
 
 <body>
@@ -23,7 +24,7 @@
             <!-- Email field with retained value + optional "Edit" link -->
             <div class="floating-label-group email-group">
                 <input type="email" name="email" id="emailInput" class="floating-input" placeholder=" " required
-                    value="{{ request.form.email or '' }}" {% if error and request.form.email %}edit{% endif %} />
+                    value="{{ request.form.email or '' }}" />
                 <label for="emailInput" class="floating-label">Email address*</label>
             </div>
 
@@ -39,10 +40,10 @@
                     {{ error }}
                 </div>
                 {% endif %}
-                <span class="forgot-password-container">
-                    <a href="{{ url_for('reset_password') }}" class="forgot-password-link">Forgot password?</a>
-                </span>
             </div>
+            <span class="forgot-password-container">
+                <a href="{{ url_for('reset_password') }}" class="forgot-password-link">Forgot password?</a>
+            </span>
 
             <div class="btn-continue-group">
                 <button type="submit" class="btn-continue">Login</button>
