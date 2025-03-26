@@ -76,6 +76,9 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
 
+        # Store the email in the session
+        session['last_email'] = email
+
         if email == 'test@example.com' and password == 'password':
             session['logged_in'] = True
             session['username'] = email
@@ -127,6 +130,9 @@ def reset_password():
     if request.method == 'POST':
         email = request.form.get('email')
 
+        # Store the email in the session
+        session['last_email'] = email
+
         # Simple validation: check if email matches the test user
         if email == 'test@example.com':
             # Redirect to the new check_email page with the email
@@ -135,9 +141,10 @@ def reset_password():
             error = "Email address not found. Please check and try again."
             return render_template('auth/reset_password.html', error=error, message_type='error')
 
-    # On GET request, render the reset password page
+    # On GET request, render the reset password page with the last email
     error = session.pop('error', None)
-    return render_template('auth/reset_password.html', error=error, message_type='success' if error else None)
+    last_email = session.get('last_email', '')
+    return render_template('auth/reset_password.html', error=error, message_type='success' if error else None, last_email=last_email)
 
 @app.route('/check_email')
 def check_email():
