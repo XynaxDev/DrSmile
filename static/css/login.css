@@ -120,10 +120,10 @@ p {
 }
 
 .login-error.success {
-    color: #00a67d;
-    background: #e6f7f2;
+    color: #00695C;
+    background: #E0F2F1;
     padding: 0.5rem 1rem;
-    border: 1px solid #00a67d;
+    border: 1px solid #00695C;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -133,13 +133,14 @@ p {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 1.3rem;
-    height: 1.2rem;
+    /* width: 1.2rem;
+    height: 1.2rem; */
+    padding: 0.2rem 0.5rem;
     background: #d00;
     color: #fff;
     border-radius: 60%;
     font-weight: bold;
-    font-size: 0.7rem;
+    font-size: 0.6rem;
 }
 
 /***********************************************************
@@ -193,7 +194,7 @@ p {
 }
 
 .floating-input:focus {
-    border-color: #00a67d;
+    border-color: #00695C;
 }
 
 .floating-label {
@@ -213,33 +214,9 @@ p {
     top: 0;
     left: 0.8rem;
     font-size: 0.9rem;
-    color: #00a67d;
+    color: #00695C;
+    background: #fff;
     font-weight: 600;
-}
-
-.floating-label-group.error .floating-input {
-    border-color: #d00 !important;
-}
-
-.floating-label-group.error .floating-label {
-    color: #d00 !important;
-    font-weight: 600 !important;
-}
-
-.floating-label-group.error .floating-input {
-    border-color: #d00 !important;
-}
-
-.floating-label-group.error .floating-label {
-    color: #d00 !important;
-    font-weight: 600 !important;
-}
-
-.forgot-password-container {
-    display: block;
-    margin-top: 0.5rem;
-    width: 100%;
-    text-align: left;
 }
 
 .floating-label-group.error .floating-input {
@@ -260,7 +237,7 @@ p {
 
 .forgot-password-link {
     font-size: 0.9rem;
-    color: #00a67d;
+    color: #00695C;
     text-decoration: none;
     display: inline;
 }
@@ -280,7 +257,7 @@ p {
 
 .btn-continue {
     width: 100%;
-    background: #00a67d;
+    background: #00695C;
     color: #fff;
     font-size: 1rem;
     padding: 1rem 2rem;
@@ -291,7 +268,8 @@ p {
 }
 
 .btn-continue:hover {
-    background: #008c68;
+    background: #004D40;
+    /* Darker shade of the new teal for hover */
 }
 
 .btn-resend-group {
@@ -314,8 +292,6 @@ p {
 }
 
 .btn-resend:hover {
-    /* border-color: #a5a5a5; */
-    /* color: #00a67d; */
     background-color: #e4e4e4;
 }
 
@@ -329,7 +305,7 @@ p {
 }
 
 .register-line a {
-    color: #00a67d;
+    color: #00695C;
     text-decoration: none;
 }
 
@@ -344,7 +320,7 @@ p {
 }
 
 .back-to-login-line a {
-    color: #00a67d;
+    color: #00695C;
     text-decoration: none;
 }
 
@@ -357,7 +333,7 @@ p {
 ************************************************************/
 .footer-terms {
     position: fixed;
-    bottom: 0;
+    bottom: 1;
     left: 0;
     width: 100%;
     background: #fff;
@@ -368,12 +344,8 @@ p {
 }
 
 .footer-terms a {
-    color: #00a67d;
+    color: #00695C;
     text-decoration: none;
-}
-
-.footer-terms a:hover {
-    text-decoration: underline;
 }
 
 /***********************************************************
@@ -419,6 +391,6 @@ input:-internal-autofill-selected:focus {
     background-color: #fff !important;
     -webkit-text-fill-color: #333 !important;
     border-radius: 8px !important;
-    border: 1px solid #00a67d !important;
+    border: 1px solid #00695C !important;
     background-clip: content-box !important;
 }
