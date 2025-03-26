@@ -1,0 +1,184 @@
+/***********************************************************
+  Overall Page Layout
+************************************************************/
+html,
+body,
+input,
+p {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    color: #333;
+    height: 100%;
+}
+
+.register-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 50px);
+    box-sizing: border-box;
+    padding: 2rem 1rem;
+}
+
+.register-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #333;
+}
+
+/***********************************************************
+  Floating Label Form
+************************************************************/
+.register-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    gap: 1rem;
+    margin: 0 auto 1rem;
+}
+
+.register-form .floating-label-group {
+    position: relative;
+    margin-bottom: 0.5rem;
+}
+
+.register-form .floating-input {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    border: 1px solid #9a9a9a;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.register-form .floating-input:focus {
+    border-color: #00695C;
+}
+
+.register-form .floating-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    color: #999;
+    pointer-events: none;
+    transition: 0.2s ease all;
+    background: #fff;
+    /* Set the label background to white */
+    display: inline;
+    line-height: 1;
+    z-index: 1;
+}
+
+.register-form .floating-input:focus+.floating-label,
+.register-form .floating-input:not(:placeholder-shown)+.floating-label {
+    top: 0;
+    left: 0.8rem;
+    font-size: 0.9rem;
+    color: #00695C;
+    font-weight: 600;
+    background: #fff;
+    /* Set the label background to white */
+    display: inline;
+    line-height: 1;
+}
+
+/***********************************************************
+  Register Button
+************************************************************/
+.register-form .btn-register-group {
+    width: 100%;
+    margin-top: 0.5rem;
+    /* Spacing between last input and button */
+    box-sizing: border-box;
+}
+
+.register-form .btn-register {
+    width: 100%;
+    background: #00695C;
+    color: #fff;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.register-form .btn-register:hover {
+    background: #004D40;
+    /* Darker shade of teal for hover */
+}
+
+/***********************************************************
+  Register Line
+************************************************************/
+.register-line {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.register-line a {
+    color: #00695C;
+    text-decoration: none;
+}
+
+.register-line a:hover {
+    text-decoration: underline;
+}
+
+/***********************************************************
+  Responsive Tweaks
+************************************************************/
+@media (max-width: 576px) {
+    .register-title {
+        font-size: 1.6rem;
+    }
+
+    .register-form {
+        max-width: 90%;
+    }
+
+    .register-form .floating-label-group,
+    .register-form .btn-register-group {
+        width: 100%;
+    }
+}
+
+/***********************************************************
+  Autofill Fix for Chromium, Edge, and Firefox
+************************************************************/
+.register-form .floating-input:-webkit-autofill,
+.register-form .floating-input:-webkit-autofill:focus,
+.register-form .floating-input:-webkit-autofill:hover {
+    -webkit-text-fill-color: #333;
+    /* Ensure text color remains dark */
+    border-radius: 8px;
+    -webkit-background-clip: content-box;
+    /* Apply autofill background to content area */
+    background-clip: content-box;
+    /* Standard property */
+}
+
+.register-form .floating-input:-internal-autofill-previewed,
+.register-form .floating-input:-internal-autofill-previewed:focus,
+.register-form .floating-input:-internal-autofill-selected,
+.register-form .floating-input:-internal-autofill-selected:focus {
+    -webkit-text-fill-color: #333;
+    /* Ensure text color remains dark */
+    border-radius: 8px;
+    border: 1px solid #00695C;
+    /* Ensure border color */
+    -webkit-background-clip: content-box;
+    /* Apply autofill background to content area */
+    background-clip: content-box;
+    /* Standard property */
+}
