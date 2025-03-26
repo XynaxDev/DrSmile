@@ -81,13 +81,11 @@ def login():
             session['username'] = email
             return redirect(url_for('dashboard'))
         else:
-            # Store error in session, then redirect
-            session['error'] = "Invalid credentials. Please try again."
-            return redirect(url_for('login'))
+            error = "Incorrect email address or password.\nPlease check and try again."
+            return render_template('auth/login.html', error=error, message_type='error')
 
-    # On GET, pop the error from session so it doesn't persist on refresh
     error = session.pop('error', None)
-    return render_template('auth/login.html', error=error)
+    return render_template('auth/login.html', error=error, message_type='success' if error else None)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -123,6 +121,28 @@ def terms():
 @app.route('/privacy')
 def privacy():
     return render_template('privacy.html')
+
+@app.route('/reset_password', methods=['GET', 'POST'])
+def reset_password():
+    if request.method == 'POST':
+        email = request.form.get('email')
+
+        # Simple validation: check if email matches the test user
+        if email == 'test@example.com':
+            # Redirect to the new check_email page with the email
+            return redirect(url_for('check_email', email=email))
+        else:
+            error = "Email address not found. Please check and try again."
+            return render_template('auth/reset_password.html', error=error, message_type='error')
+
+    # On GET request, render the reset password page
+    error = session.pop('error', None)
+    return render_template('auth/reset_password.html', error=error, message_type='success' if error else None)
+
+@app.route('/check_email')
+def check_email():
+    email = request.args.get('email', 'user@example.com')  # Default email if none provided
+    return render_template('auth/check_email.html', email=email)
 
 if __name__ == '__main__':
     app.run(debug=True)
