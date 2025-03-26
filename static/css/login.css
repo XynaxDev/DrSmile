@@ -2,7 +2,9 @@
   Overall Page Layout
 ************************************************************/
 html,
-body {
+body,
+input,
+p {
     margin: 0;
     padding: 0;
     background: #fff;
@@ -24,7 +26,6 @@ body {
     font-size: 1.4rem;
 }
 
-
 .login-page-container {
     display: flex;
     flex-direction: column;
@@ -42,18 +43,103 @@ body {
     text-align: center;
 }
 
+.reset-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 50px);
+    box-sizing: border-box;
+    padding: 2rem 1rem;
+}
+
+.reset-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.check-email-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 50px);
+    box-sizing: border-box;
+    padding: 2rem 1rem;
+}
+
+.check-email-title {
+    font-size: 1.8rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.instruction-text {
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.email-icon {
+    margin-bottom: 1rem;
+}
+
+.check-email-text {
+    font-size: 0.9rem;
+    color: #555;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    max-width: 300px;
+}
+
+.check-email-text strong {
+    color: #333;
+}
+
 /***********************************************************
-  Error Message
+  Error and Success Message
 ************************************************************/
 .login-error {
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.login-error.error {
     color: #d00;
-    background: #fdd;
+    background: #fff;
+}
+
+.login-error.success {
+    color: #00a67d;
+    background: #e6f7f2;
     padding: 0.5rem 1rem;
-    border-radius: 6px;
-    margin-bottom: 1rem;
-    text-align: center;
-    border: 1px solid #d00;
-    font-size: 0.9rem;
+    border: 1px solid #00a67d;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.login-error.error::before {
+    content: '!';
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.3rem;
+    height: 1.2rem;
+    background: #d00;
+    color: #fff;
+    border-radius: 60%;
+    font-weight: bold;
+    font-size: 0.7rem;
 }
 
 /***********************************************************
@@ -64,23 +150,42 @@ body {
     flex-direction: column;
     width: 100%;
     max-width: 320px;
-    margin-bottom: 2rem;
+    margin: 0 auto 1rem;
+}
+
+.reset-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 1rem;
+}
+
+.email-group {
+    margin-bottom: 1rem;
+}
+
+.floating-label-group,
+.login-error,
+.btn-continue-group,
+.btn-resend-group {
+    width: 100% !important;
+    box-sizing: border-box;
 }
 
 .floating-label-group {
     position: relative;
-    margin-bottom: 1.4rem;
-    width: 89%;
 }
 
 .floating-input {
     width: 100%;
-    padding: 1.1rem 1rem;
-    border: 1px solid #ccc;
+    padding: 1rem 1.2rem;
+    border: 1px solid #9a9a9a;
     border-radius: 8px;
     font-size: 1rem;
     outline: none;
     background: transparent;
+    box-sizing: border-box;
 }
 
 .floating-input::placeholder {
@@ -112,17 +217,73 @@ body {
     font-weight: 600;
 }
 
-/***********************************************************
-  Continue Button
-************************************************************/
-.btn-continue {
+.floating-label-group.error .floating-input {
+    border-color: #d00 !important;
+}
+
+.floating-label-group.error .floating-label {
+    color: #d00 !important;
+    font-weight: 600 !important;
+}
+
+.floating-label-group.error .floating-input {
+    border-color: #d00 !important;
+}
+
+.floating-label-group.error .floating-label {
+    color: #d00 !important;
+    font-weight: 600 !important;
+}
+
+.forgot-password-container {
     display: block;
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: left;
+}
+
+.floating-label-group.error .floating-input {
+    border-color: #d00 !important;
+}
+
+.floating-label-group.error .floating-label {
+    color: #d00 !important;
+    font-weight: 600 !important;
+}
+
+.forgot-password-container {
+    display: block;
+    margin-top: 0.5rem;
+    width: 100%;
+    text-align: left;
+}
+
+.forgot-password-link {
+    font-size: 0.9rem;
+    color: #00a67d;
+    text-decoration: none;
+    display: inline;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+/***********************************************************
+  Continue and Resend Buttons
+************************************************************/
+.btn-continue-group {
+    width: 100% !important;
+    margin-top: 1.5rem;
+    box-sizing: border-box;
+}
+
+.btn-continue {
     width: 100%;
     background: #00a67d;
     color: #fff;
     font-size: 1rem;
-    padding: 1.1rem 2rem;
-    margin-top: 0.5rem;
+    padding: 1rem 2rem;
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -131,6 +292,31 @@ body {
 
 .btn-continue:hover {
     background: #008c68;
+}
+
+.btn-resend-group {
+    width: 100% !important;
+    max-width: 300px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.btn-resend {
+    width: 100%;
+    background: transparent;
+    color: #333;
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    border: 1px solid #9a9a9a;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.btn-resend:hover {
+    /* border-color: #a5a5a5; */
+    /* color: #00a67d; */
+    background-color: #e4e4e4;
 }
 
 /***********************************************************
@@ -151,6 +337,21 @@ body {
     text-decoration: underline;
 }
 
+.back-to-login-line {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.back-to-login-line a {
+    color: #00a67d;
+    text-decoration: none;
+}
+
+.back-to-login-line a:hover {
+    text-decoration: underline;
+}
+
 /***********************************************************
   Footer Terms & Privacy (Fixed at Bottom)
 ************************************************************/
@@ -162,7 +363,6 @@ body {
     background: #fff;
     text-align: center;
     padding: 0.75rem 0;
-    /* border-top: 1px solid #ddd; */
     font-size: 0.85rem;
     color: #555;
 }
@@ -180,15 +380,45 @@ body {
   Responsive Tweaks
 ************************************************************/
 @media (max-width: 576px) {
-    .login-title {
+
+    .login-title,
+    .reset-title,
+    .check-email-title {
         font-size: 1.6rem;
     }
 
-    .login-form {
-        max-width: 90%;
+    .login-form,
+    .reset-form {
+        max-width: 90% !important;
     }
 
-    .btn-continue{
-        width: 98%;
+    .floating-label-group,
+    .login-error,
+    .btn-continue-group,
+    .btn-resend-group {
+        width: 100% !important;
     }
+}
+
+/***********************************************************
+  Autofill Fix for Chromium & Edge
+************************************************************/
+::-webkit-autofill,
+::-webkit-autofill:focus,
+::-webkit-autofill:hover {
+    box-shadow: 0 0 0 1000px #fff inset !important;
+    -webkit-text-fill-color: #333 !important;
+    border-radius: 8px !important;
+    background-clip: content-box !important;
+}
+
+input:-internal-autofill-previewed,
+input:-internal-autofill-previewed:focus,
+input:-internal-autofill-selected,
+input:-internal-autofill-selected:focus {
+    background-color: #fff !important;
+    -webkit-text-fill-color: #333 !important;
+    border-radius: 8px !important;
+    border: 1px solid #00a67d !important;
+    background-clip: content-box !important;
 }
