@@ -3,49 +3,64 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login - DrSmile</title>
+    <title>{% block title %}Login{% endblock %} - DrSmile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 
 <body>
-
+    <!-- Brand bar at top-left -->
     <div class="brand-bar">
         <a href="{{ url_for('chatbot') }}" class="brand-link">DrSmile</a>
     </div>
 
-    <div class="login-page-container">
-        <h1 class="login-title">Welcome back</h1>
+    <!-- Main container: center content vertically, with space for footer -->
+    <div class="{% block container_class %}login-page-container{% endblock %}">
+        <h1 class="{% block title_class %}login-title{% endblock %}">{% block page_title %}Welcome back{% endblock %}
+        </h1>
 
-        {% if error %}
-        <div class="login-error">
-            {{ error }}
-        </div>
-        {% endif %}
-
+        {% block content %}
         <form method="POST" class="login-form">
-            <div class="floating-label-group">
-                <input type="email" name="email" id="emailInput" class="floating-input" placeholder=" " required />
+            <!-- Email field with retained value + optional "Edit" link -->
+            <div class="floating-label-group email-group">
+                <input type="email" name="email" id="emailInput" class="floating-input" placeholder=" " required
+                    value="{{ request.form.email or '' }}" {% if error and request.form.email %}edit{% endif %} />
                 <label for="emailInput" class="floating-label">Email address*</label>
             </div>
 
-            <div class="floating-label-group">
-                <input type="password" name="password" id="passwordInput" class="floating-input" placeholder=" "
-                    required />
-                <label for="passwordInput" class="floating-label">Password*</label>
+            <!-- Password field with error message and Forgot Password link -->
+            <div class="password-group">
+                <div class="floating-label-group {% if error %}error{% endif %}">
+                    <input type="password" name="password" id="passwordInput" class="floating-input" placeholder=" "
+                        required />
+                    <label for="passwordInput" class="floating-label">Password*</label>
+                </div>
+                {% if error %}
+                <div class="login-error {{ message_type }}">
+                    {{ error }}
+                </div>
+                {% endif %}
+                <span class="forgot-password-container">
+                    <a href="{{ url_for('reset_password') }}" class="forgot-password-link">Forgot password?</a>
+                </span>
             </div>
-            <button type="submit" class="btn-continue">Login</button>
 
+            <div class="btn-continue-group">
+                <button type="submit" class="btn-continue">Login</button>
+            </div>
         </form>
 
+        <!-- "Don't have an account?" line -->
         <div class="register-line">
             Don't have an account?
             <a href="{{ url_for('register') }}">Register</a>
         </div>
+        {% endblock %}
     </div>
 
+    <!-- Fixed footer for Terms & Privacy at the bottom -->
     <footer class="footer-terms">
         <a href="{{ url_for('terms') }}">Terms of Use</a>
-        &nbsp;|&nbsp;
+         | 
         <a href="{{ url_for('privacy') }}">Privacy Policy</a>
     </footer>
 </body>
