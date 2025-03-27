@@ -2,18 +2,27 @@
 html {
     position: relative;
     overflow-y: scroll;
+    /* Always show scrollbar to prevent layout shift */
+    height: 100vh;
     min-height: 100%;
     overflow-x: hidden !important;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 body {
     background-color: #0F0F0F;
-    /* Changed to Grok's deep black */
     font-family: 'Inter', Tahoma, Geneva, Verdana, sans-serif;
     margin-bottom: 70px;
     color: #e0e0e0;
     padding-top: 70px;
     transition: background-color 0.3s, color 0.3s;
+    min-height: 100%;
+    box-sizing: border-box;
+    width: calc(100% - 7px);
+    /* Subtract scrollbar width to prevent layout shift */
+    margin-right: 7px;
+    /* Reserve space for the scrollbar */
 }
 
 p {
@@ -28,7 +37,6 @@ p {
     width: 260px;
     height: 100%;
     background-color: #0F0F0F;
-    /* Changed to match body */
     transition: left 0.3s ease;
     z-index: 5000 !important;
     overflow-y: auto;
@@ -114,7 +122,6 @@ p {
 
 .navbar-dark.bg-dark {
     background-color: #0F0F0F !important;
-    /* Changed to match body */
 }
 
 .drs-new-chat {
@@ -218,11 +225,19 @@ p {
 }
 
 /* Scrollbar Styles */
-::-webkit-scrollbar-track {
-    background-color: transparent;
+body::-webkit-scrollbar {
+    width: 7px;
+    /* Keep the current width */
 }
 
-::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-track {
+    background-color: #0F0F0F !important;
+    /* Match body background, with higher priority */
+}
+
+body::-webkit-scrollbar-thumb {
     background-color: #4e4e4e;
+    /* Light gray thumb */
     border-radius: 5px;
+    /* Rounded corners */
 }
