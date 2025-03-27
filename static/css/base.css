@@ -1,5 +1,4 @@
 /* Global Styles */
-
 html {
     position: relative;
     overflow-y: scroll;
@@ -8,8 +7,9 @@ html {
 }
 
 body {
-    background-color: #1e1e1e;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0F0F0F;
+    /* Changed to Grok's deep black */
+    font-family: 'Inter', Tahoma, Geneva, Verdana, sans-serif;
     margin-bottom: 70px;
     color: #e0e0e0;
     padding-top: 70px;
@@ -21,14 +21,14 @@ p {
 }
 
 /* Custom Mobile Sidebar Styles */
-
 .drs-sidebar {
     position: fixed;
     top: 0;
     left: -260px;
     width: 260px;
     height: 100%;
-    background-color: #1e1e1e;
+    background-color: #0F0F0F;
+    /* Changed to match body */
     transition: left 0.3s ease;
     z-index: 5000 !important;
     overflow-y: auto;
@@ -94,7 +94,6 @@ p {
     padding: 0.5rem 1rem;
     border-radius: 0.3rem;
     transition: background-color 0.2s ease;
-    /* line-height: 1.4; */
 }
 
 .drs-sidebar-link:hover {
@@ -102,7 +101,6 @@ p {
 }
 
 /* Navbar Styles */
-
 .navbar {
     position: fixed !important;
     top: 0;
@@ -115,7 +113,8 @@ p {
 }
 
 .navbar-dark.bg-dark {
-    background-color: #1e1e1e !important;
+    background-color: #0F0F0F !important;
+    /* Changed to match body */
 }
 
 .drs-new-chat {
@@ -154,9 +153,9 @@ p {
 }
 
 .navbar-nav .nav-link {
-    padding: 0.5rem 0.9rem !important;
+    padding: 0.5rem 0.8rem !important;
     border-radius: 1.2rem;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     border: 1px solid #404040;
     transition: background-color 0.2s, color 0.2s;
     font-weight: 500;
@@ -193,7 +192,6 @@ p {
     background: url("/static/images/cross-icon.png") center/contain no-repeat !important;
     width: 1.4rem;
     height: 1.5rem;
-    /* transform: scale(0.5rem); */
     border: none !important;
     outline: none !important;
     box-shadow: none !important;
@@ -207,7 +205,6 @@ p {
 }
 
 /* Tooltip Styles */
-
 .tooltip.bs-tooltip-bottom .tooltip-arrow {
     display: block !important;
 }
@@ -221,7 +218,6 @@ p {
 }
 
 /* Scrollbar Styles */
-
 ::-webkit-scrollbar-track {
     background-color: transparent;
 }

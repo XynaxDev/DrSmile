@@ -1,5 +1,4 @@
 /* Chat Input Messages Styles */
-
 #conversationContainer {
     max-width: 870px;
     margin: 0 auto;
@@ -18,6 +17,7 @@
     border-radius: 30px;
     border: none;
     background-color: #333333 !important;
+    /* Kept as is per your original style */
     color: #ffffff !important;
     outline: none;
     box-shadow: none;
@@ -53,7 +53,6 @@
 }
 
 /* Chat Alert Bubbles Styles */
-
 .alert {
     border: none;
     border-radius: 1.2rem;
@@ -63,12 +62,14 @@
 }
 
 .alert.alert-secondary {
-    background-color: #333;
+    background-color: #2A2A2A;
+    /* Changed to Grok-inspired color */
     color: #fff;
 }
 
 .alert.alert-info {
-    background-color: #3c3c3c;
+    background-color: #2A2A2A;
+    /* Changed to Grok-inspired color, same as user */
     color: #fff;
 }
 

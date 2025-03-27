@@ -7,8 +7,9 @@ input,
 p {
     margin: 0;
     padding: 0;
-    background: #fff;
-    font-family: "Segoe UI", Tahoma, sans-serif;
+    background: #F5F7FA;
+    /* Solid light grayish-blue background */
+    font-family: "Inter", Tahoma, sans-serif;
     color: #333;
     height: 100%;
 }
@@ -21,7 +22,8 @@ p {
 
 .brand-link {
     text-decoration: none;
-    color: #333;
+    color: #FF6F61;
+    /* Vibrant coral */
     font-weight: 700;
     font-size: 1.4rem;
 }
@@ -41,6 +43,7 @@ p {
     font-weight: 700;
     margin-bottom: 2rem;
     text-align: center;
+    color: #333;
 }
 
 .reset-page-container {
@@ -58,6 +61,7 @@ p {
     font-weight: 700;
     margin-bottom: 2rem;
     text-align: center;
+    color: #333;
 }
 
 .check-email-container {
@@ -75,11 +79,13 @@ p {
     font-weight: 500;
     margin-bottom: 2rem;
     text-align: center;
+    color: #333;
 }
 
 .instruction-text {
     font-size: 0.9rem;
-    color: #555;
+    color: #666;
+    /* Softer gray for secondary text */
     text-align: center;
     margin-bottom: 1rem;
 }
@@ -90,7 +96,8 @@ p {
 
 .check-email-text {
     font-size: 0.9rem;
-    color: #555;
+    color: #666;
+    /* Softer gray for secondary text */
     text-align: center;
     margin-bottom: 1.5rem;
     max-width: 300px;
@@ -116,14 +123,16 @@ p {
 
 .login-error.error {
     color: #d00;
-    background: #fff;
+    background: #F5F7FA;
 }
 
 .login-error.success {
-    color: #00695C;
-    background: #E0F2F1;
+    color: #28A745;
+    /* Vibrant green for success */
+    background: #E6F4EA;
+    /* Light green background */
     padding: 0.5rem 1rem;
-    border: 1px solid #00695C;
+    border: 1px solid #28A745;
     border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -133,8 +142,6 @@ p {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    /* width: 1.2rem;
-    height: 1.2rem; */
     padding: 0.2rem 0.5rem;
     background: #d00;
     color: #fff;
@@ -170,7 +177,7 @@ p {
 .login-error,
 .btn-continue-group,
 .btn-resend-group {
-    width: 100% !important;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -181,7 +188,8 @@ p {
 .floating-input {
     width: 100%;
     padding: 1rem 1.2rem;
-    border: 1px solid #9a9a9a;
+    border: 1px solid #B0B0B0;
+    /* Lighter gray border */
     border-radius: 8px;
     font-size: 1rem;
     outline: none;
@@ -194,7 +202,8 @@ p {
 }
 
 .floating-input:focus {
-    border-color: #00695C;
+    border-color: #FF6F61;
+    /* Vibrant coral */
 }
 
 .floating-label {
@@ -202,10 +211,12 @@ p {
     top: 50%;
     left: 1rem;
     transform: translateY(-50%);
-    color: #999;
+    color: #666;
+    /* Softer gray for labels */
     pointer-events: none;
     transition: 0.2s ease all;
-    background: #fff;
+    background: #F5F7FA;
+    /* Solid color to match body */
     padding: 0 0.25rem;
 }
 
@@ -214,18 +225,21 @@ p {
     top: 0;
     left: 0.8rem;
     font-size: 0.9rem;
-    color: #00695C;
-    background: #fff;
+    color: #FF6F61;
+    /* Vibrant coral */
+    background: #F5F7FA;
+    /* Solid color to match body */
     font-weight: 600;
+    padding: 0 0.25rem;
 }
 
 .floating-label-group.error .floating-input {
-    border-color: #d00 !important;
+    border-color: #d00;
 }
 
 .floating-label-group.error .floating-label {
-    color: #d00 !important;
-    font-weight: 600 !important;
+    color: #d00;
+    font-weight: 600;
 }
 
 .forgot-password-container {
@@ -237,7 +251,8 @@ p {
 
 .forgot-password-link {
     font-size: 0.9rem;
-    color: #00695C;
+    color: #FF6F61;
+    /* Vibrant coral */
     text-decoration: none;
     display: inline;
 }
@@ -250,14 +265,15 @@ p {
   Continue and Resend Buttons
 ************************************************************/
 .btn-continue-group {
-    width: 100% !important;
+    width: 100%;
     margin-top: 1.5rem;
     box-sizing: border-box;
 }
 
 .btn-continue {
     width: 100%;
-    background: #00695C;
+    background: #FF6F61;
+    /* Vibrant coral */
     color: #fff;
     font-size: 1rem;
     padding: 1rem 2rem;
@@ -268,12 +284,12 @@ p {
 }
 
 .btn-continue:hover {
-    background: #004D40;
-    /* Darker shade of the new teal for hover */
+    background: #E65A4F;
+    /* Darker coral for hover */
 }
 
 .btn-resend-group {
-    width: 100% !important;
+    width: 100%;
     max-width: 300px;
     margin: 0 auto;
     box-sizing: border-box;
@@ -285,7 +301,8 @@ p {
     color: #333;
     font-size: 1rem;
     padding: 1rem 2rem;
-    border: 1px solid #9a9a9a;
+    border: 1px solid #B0B0B0;
+    /* Lighter gray border */
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
@@ -301,11 +318,13 @@ p {
 .register-line {
     text-align: center;
     font-size: 0.9rem;
-    color: #555;
+    color: #666;
+    /* Softer gray for secondary text */
 }
 
 .register-line a {
-    color: #00695C;
+    color: #FF6F61;
+    /* Vibrant coral */
     text-decoration: none;
 }
 
@@ -316,11 +335,13 @@ p {
 .back-to-login-line {
     text-align: center;
     font-size: 0.9rem;
-    color: #555;
+    color: #666;
+    /* Softer gray for secondary text */
 }
 
 .back-to-login-line a {
-    color: #00695C;
+    color: #FF6F61;
+    /* Vibrant coral */
     text-decoration: none;
 }
 
@@ -333,18 +354,21 @@ p {
 ************************************************************/
 .footer-terms {
     position: fixed;
-    bottom: 1;
+    bottom: 0;
     left: 0;
     width: 100%;
-    background: #fff;
+    background: #F5F7FA;
+    /* Solid color to match body */
     text-align: center;
     padding: 0.75rem 0;
     font-size: 0.85rem;
-    color: #555;
+    color: #666;
+    /* Softer gray for secondary text */
 }
 
 .footer-terms a {
-    color: #00695C;
+    color: #FF6F61;
+    /* Vibrant coral */
     text-decoration: none;
 }
 
@@ -361,14 +385,14 @@ p {
 
     .login-form,
     .reset-form {
-        max-width: 90% !important;
+        max-width: 90%;
     }
 
     .floating-label-group,
     .login-error,
     .btn-continue-group,
     .btn-resend-group {
-        width: 100% !important;
+        width: 100%;
     }
 }
 
@@ -378,19 +402,20 @@ p {
 ::-webkit-autofill,
 ::-webkit-autofill:focus,
 ::-webkit-autofill:hover {
-    box-shadow: 0 0 0 1000px #fff inset !important;
-    -webkit-text-fill-color: #333 !important;
-    border-radius: 8px !important;
-    background-clip: content-box !important;
+    box-shadow: 0 0 0 1000px #fff inset;
+    -webkit-text-fill-color: #333;
+    border-radius: 8px;
+    background-clip: content-box;
 }
 
 input:-internal-autofill-previewed,
 input:-internal-autofill-previewed:focus,
 input:-internal-autofill-selected,
 input:-internal-autofill-selected:focus {
-    background-color: #fff !important;
-    -webkit-text-fill-color: #333 !important;
-    border-radius: 8px !important;
-    border: 1px solid #00695C !important;
-    background-clip: content-box !important;
+    background-color: #fff;
+    -webkit-text-fill-color: #333;
+    border-radius: 8px;
+    border: 1px solid #FF6F61;
+    /* Vibrant coral */
+    background-clip: content-box;
 }
