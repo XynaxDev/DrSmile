@@ -1,5 +1,102 @@
-{% extends 'layout/navbar.html' %}
+{% extends 'layout/base.html' %}
+
 {% block title %}DrSmile{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container-fluid custom-spacing">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <a href="{{ url_for('new_chat') }}" class="drs-new-chat me-2" data-bs-toggle="tooltip"
+                    data-bs-placement="bottom" title="New Chat">
+                    <img src="{{ url_for('static', filename='images/new-chat.png') }}" alt="New Chat"
+                        class="new-chat-icon" />
+                </a>
+                <a class="navbar-brand mb-0" style="font-weight: 750; color: #9a9a9a;" href="{{ url_for('chatbot') }}">
+                    DrSmile
+                </a>
+            </div>
+
+            <!-- Toggler on mobile -->
+            <button class="navbar-toggler d-lg-none" type="button" onclick="toggleSidebar()"
+                aria-label="Toggle navigation">
+                <span class="custom-toggler-icon"></span>
+            </button>
+        </div>
+
+        <!-- Large-screen nav links -->
+        <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end mt-2" id="navbarNav">
+            <ul class="navbar-nav align-items-center">
+                {% if session.get('logged_in') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('dashboard') }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Dashboard">
+                        Dashboard
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('logout') }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Logout">
+                        Logout
+                    </a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link lgin" href="{{ url_for('login') }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Login to DrSmile">
+                        Login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('register') }}" data-bs-toggle="tooltip"
+                        data-bs-placement="bottom" title="Register a new account">
+                        Register
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Sidebar -->
+<div id="mobileSidebar" class="drs-sidebar">
+    <div class="drs-sidebar-header">
+        <h5 class="drs-sidebar-title">DrSmile</h5>
+        <button type="button" class="btn-close text-reset custom-close" onclick="toggleSidebar()" aria-label="Close">
+        </button>
+    </div>
+    <div class="drs-sidebar-body">
+        <ul class="drs-sidebar-nav">
+            {% if session.get('logged_in') %}
+            <li class="drs-sidebar-item">
+                <a class="drs-sidebar-link" href="{{ url_for('dashboard') }}">
+                    Dashboard
+                </a>
+            </li>
+            <li class="drs-sidebar-item">
+                <a class="drs-sidebar-link" href="{{ url_for('logout') }}">
+                    Logout
+                </a>
+            </li>
+            {% else %}
+            <li class="drs-sidebar-item">
+                <a class="drs-sidebar-link lgin" href="{{ url_for('login') }}">
+                    Login
+                </a>
+            </li>
+            <li class="drs-sidebar-item">
+                <a class="drs-sidebar-link" href="{{ url_for('register') }}">
+                    Register
+                </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<div id="sidebarOverlay" class="drs-sidebar-overlay" onclick="toggleSidebar()"></div>
+{% endblock %}
 
 {% block content %}
 <!-- Conversation container -->
@@ -34,7 +131,7 @@
 </div>
 
 <div id="chatInputBar"
-    style="position: fixed; bottom: 0px; left: 0; width: 100%; padding-top: 0 !important; background-color: #1e1e1e; padding: 1.9rem; z-index: 999;">
+    style="position: fixed; bottom: 0px; left: 0; width: 100%; padding-top: 0 !important; background-color: #0F0F0F; padding: 1.9rem; z-index: 999;">
     <div class="container" style="max-width: 900px;">
         <div class="input-group">
             <textarea id="userInput" class="form-control chat-input" placeholder="Ask anything"
@@ -50,7 +147,5 @@
     var chatbotAjaxUrl = "{{ url_for('chatbot_ajax') }}";
 </script>
 
-<script src="{{ url_for('static', filename='scripts/chatbot.js') }}"></script> 
-
-
+<script src="{{ url_for('static', filename='scripts/chatbot.js') }}"></script>
 {% endblock %}
