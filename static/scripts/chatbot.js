@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const userInput = document.getElementById('userInput');
     const sendBtn = document.getElementById('sendBtn');
     const chatInputBar = document.getElementById('chatInputBar');
-    const brandIcon = document.querySelector('.navbar-brand'); // Select the brand icon (DrSmile logo)
+    const fileInput = document.getElementById('fileInput');
+    const brandIcon = document.querySelector('.navbar-brand');
 
     userInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -19,10 +20,27 @@ document.addEventListener('DOMContentLoaded', function () {
         adjustConversationPadding();
     });
 
+    // Send message on click of send icon
+    sendBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        sendMessage();
+    });
+
     // Scroll to bottom when the brand icon is clicked
     if (brandIcon) {
         brandIcon.addEventListener('click', function (e) {
             scrollToBottom();
+        });
+    }
+
+    // Handle file input (placeholder for future implementation)
+    if (fileInput) {
+        fileInput.addEventListener('change', function (e) {
+            const files = e.target.files;
+            if (files.length > 0) {
+                console.log('File selected:', files[0].name);
+                // Future implementation: Upload file to server and display in chat
+            }
         });
     }
 
@@ -31,9 +49,9 @@ document.addEventListener('DOMContentLoaded', function () {
         let neededHeight = userInput.scrollHeight;
         if (neededHeight > 150) {
             neededHeight = 150;
-            userInput.style.overflowY = 'auto';
+            userInput.style.overflowY = 'auto'; /* Scrollbar appears */
         } else {
-            userInput.style.overflowY = 'hidden';
+            userInput.style.overflowY = 'hidden'; /* Scrollbar hidden, but styles still apply */
         }
         userInput.style.height = neededHeight + 'px';
     }
@@ -77,10 +95,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let html = '';
         messages.forEach(msg => {
-            // Ensure the message text is properly escaped to prevent rendering issues
             const safeText = msg.sender === 'user'
                 ? escapeHtml(msg.text)
-                : msg.text; // Bot messages are already escaped on the server
+                : msg.text;
 
             if (msg.sender === 'user') {
                 html += `
@@ -107,7 +124,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return html;
     }
 
-    // Function to escape HTML characters
     function escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text;
