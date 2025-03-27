@@ -47,10 +47,10 @@ def chatbot_ajax():
         })
 
         # Bot logic
-        if user_input.lower() == 'aadi kesa hai?':
+        if user_input.lower() == 'What is my name?':
             session['messages'].append({
                 'sender': 'bot',
-                'text': 'bahut bada mauga hai',
+                'text': 'Xynax',
                 'time': current_time
             })
         else:
