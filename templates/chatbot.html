@@ -133,12 +133,21 @@
 <div id="chatInputBar"
     style="position: fixed; bottom: 0px; left: 0; width: 100%; padding-top: 0 !important; background-color: #0F0F0F; padding: 1.9rem; z-index: 999;">
     <div class="container" style="max-width: 900px;">
-        <div class="input-group">
-            <textarea id="userInput" class="form-control chat-input" placeholder="Ask anything"
-                style="max-height: 150px; overflow-y: auto; resize: none;" required></textarea>
-            <button id="sendBtn" class="btn btn-primary" style="margin-left: 0.2rem; width: 5rem;">
-                Send
-            </button>
+        <div class="input-container">
+            <div class="input-wrapper">
+                <textarea id="userInput" class="form-control chat-input" placeholder="Ask anything"
+                    style="max-height: 150px; overflow-y: auto; resize: none;" required></textarea>
+                <div class="icons-container">
+                    <label for="fileInput" class="file-attach-icon">
+                        <img src="{{ url_for('static', filename='images/paperclip.png') }}" alt="Attach File"
+                            class="icon" />
+                    </label>
+                    <input type="file" id="fileInput" style="display: none;" />
+                    <button id="sendBtn" class="send-icon">
+                        <span class="send-arrow"></span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
