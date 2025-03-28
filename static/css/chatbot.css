@@ -11,7 +11,7 @@
 
 .input-container {
     background-color: #2A2A2A;
-    border-radius: 1rem;
+    border-radius: 1.75rem;
     padding: 0.5rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
@@ -89,38 +89,42 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.25rem 0.75rem;
+    padding: 0.75rem 0.4rem 0.25rem 0.4rem;
 }
 
 .file-attach-icon {
     cursor: pointer;
+
 }
 
 .send-icon {
     background: none;
-    border: none;
+    border: 1px solid rgba(93, 93, 93, 0.485);
     cursor: pointer;
-    padding: 0;
+    padding: 0.5rem;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* Style the send arrow with a blue gradient */
-.send-arrow {
-    width: 1.25rem;
-    height: 1.25rem;
-    position: relative;
-    background: linear-gradient(135deg, #00B7EB, #0078D4);
-    /* Blue gradient */
-    clip-path: polygon(0 0, 100% 50%, 0 100%);
-    /* Right-facing arrow shape */
-    transition: transform 0.2s ease;
+.send-icon:hover .icon {
+    filter: brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(240deg);
 }
 
-.send-icon:hover .send-arrow {
-    transform: scale(1.1);
-    /* Slight scale on hover */
+.attach-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    /* filter: brightness(0) invert(1);
+    transition: filter 0.2s ease; */
+    /* background: none; */
+    border: 1px solid rgba(93, 93, 93, 0.485);
+    cursor: pointer;
+    padding: 0.7rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .icon {
