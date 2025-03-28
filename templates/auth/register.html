@@ -27,11 +27,13 @@
         <input type="password" class="floating-input" id="password" name="password" placeholder=" " required>
         <label for="password" class="floating-label">Password*</label>
     </div>
+    {% if error %}
+    <div class="login-error {{ message_type }}">{{ error }}</div>
+    {% endif %}
     <div class="btn-register-group">
         <button type="submit" class="btn-register">Register</button>
     </div>
 </form>
-
 <div class="register-line">
     Already have an account? <a href="{{ url_for('login') }}">Login</a>
 </div>
