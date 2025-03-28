@@ -139,12 +139,13 @@
                     style="max-height: 150px; overflow-y: auto; resize: none;" required></textarea>
                 <div class="icons-container">
                     <label for="fileInput" class="file-attach-icon">
-                        <img src="{{ url_for('static', filename='images/paperclip.png') }}" alt="Attach File"
-                            class="icon" />
+                        <div class="send-icon">
+                            <img src="{{ url_for('static', filename='images/paperclip.png') }}" alt="Attach File" class="icon" />
+                        </div>
                     </label>
                     <input type="file" id="fileInput" style="display: none;" />
                     <button id="sendBtn" class="send-icon">
-                        <span class="send-arrow"></span>
+                        <img src="{{ url_for('static', filename='images/send-icon.png') }}" alt="Send" class="icon" />
                     </button>
                 </div>
             </div>
