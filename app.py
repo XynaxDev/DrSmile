@@ -1,16 +1,44 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from datetime import datetime
-from dotenv import load_dotenv
 from flask_session import Session
+from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
+from dotenv import load_dotenv
+import os
+
 
 load_dotenv()
 app = Flask(__name__)
 
-# to store sessions server-side
+
+# Secret key for session (replace with a secure key in production)
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+
+# SQLite database configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Users.sqlite3'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# Initialize Bcrypt for password hashing
+bcrypt = Bcrypt(app)
+
+# Server-side session configuration
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
-# to track whether we've cleared messages
+# User model for the database
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)  # Stores hashed password
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+# Create the database tables
+with app.app_context():
+    db.create_all()
+
+# Track whether messages have been cleared
 cleared_once = False
 
 @app.before_request
@@ -19,6 +47,15 @@ def clear_messages_on_restart():
     if not cleared_once:
         session.pop('messages', None)
         cleared_once = True
+
+# Authentication check decorator
+def login_required(f):
+    def wrap(*args, **kwargs):
+        if not session.get('logged_in'):
+            return redirect(url_for('login'))
+        return f(*args, **kwargs)
+    wrap.__name__ = f.__name__  # Preserve the function name for Flask
+    return wrap
 
 @app.route('/')
 @app.route('/chatbot')
@@ -38,8 +75,6 @@ def chatbot_ajax():
 
     if user_input:
         current_time = datetime.now().strftime("%I:%M %p")
-
-        # Add user message
         session['messages'].append({
             'sender': 'user',
             'text': user_input,
@@ -47,7 +82,7 @@ def chatbot_ajax():
         })
 
         # Bot logic
-        if user_input.lower() == 'What is my name?':
+        if user_input.lower() == 'what is my name?':
             session['messages'].append({
                 'sender': 'bot',
                 'text': 'Xynax',
@@ -62,7 +97,7 @@ def chatbot_ajax():
 
         session.modified = True
 
-    return {'messages': session['messages']}
+    return jsonify({'messages': session['messages']})
 
 @app.route('/new_chat')
 def new_chat():
@@ -72,49 +107,69 @@ def new_chat():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if session.get('logged_in'):
+        return redirect(url_for('dashboard'))
+    
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
 
-        # Store the email in the session
-        session['last_email'] = email
-
-        if email == 'test@example.com' and password == 'password':
+        user = User.query.filter_by(email=email).first()
+        if user and bcrypt.check_password_hash(user.password, password):
             session['logged_in'] = True
-            session['username'] = email
+            session['username'] = user.name
+            session['email'] = user.email
             return redirect(url_for('dashboard'))
         else:
-            error = "Incorrect email address or password.\nPlease check and try again."
+            error = "Incorrect email or password. Please try again."
             return render_template('auth/login.html', error=error, message_type='error')
 
-    error = session.pop('error', None)
-    return render_template('auth/login.html', error=error, message_type='success' if error else None)
+    return render_template('auth/login.html')
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if session.get('logged_in'):
+        return redirect(url_for('dashboard'))
+    
     if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        if not all([name, email, password]):
+            error = "All fields are required."
+            return render_template('auth/register.html', error=error, message_type='error')
+
+        if User.query.filter_by(email=email).first():
+            error = "Email already registered."
+            return render_template('auth/register.html', error=error, message_type='error')
+
+        # Hash the password before storing it
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        new_user = User(name=name, email=email, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+
         return redirect(url_for('login'))
+
     return render_template('auth/register.html')
 
 @app.route('/dashboard')
+@login_required
 def dashboard():
-    username = session.get('username')
-    if not username:
-        return redirect(url_for('login'))
-    return render_template('dashboard.html', username=username)
+    return render_template('dashboard.html', username=session.get('username'))
 
 @app.route('/profile')
+@login_required
 def profile():
-    username = session.get('username')
-    if not username:
-        return redirect(url_for('login'))
-    email = username
-    return render_template('profile.html', user_name=username, email=email)
+    return render_template('profile.html', username=session.get('username'), email=session.get('email'))
 
 @app.route('/logout')
+@login_required
 def logout():
     session.pop('logged_in', None)
     session.pop('username', None)
+    session.pop('email', None)
     return redirect(url_for('chatbot'))
 
 @app.route('/terms')
@@ -127,28 +182,27 @@ def privacy():
 
 @app.route('/reset_password', methods=['GET', 'POST'])
 def reset_password():
+    if session.get('logged_in'):
+        return redirect(url_for('dashboard'))
+    
     if request.method == 'POST':
         email = request.form.get('email')
+        user = User.query.filter_by(email=email).first()
 
-        # Store the email in the session
-        session['last_email'] = email
-
-        # Simple validation: check if email matches the test user
-        if email == 'test@example.com':
-            # Redirect to the new check_email page with the email
+        if user:
             return redirect(url_for('check_email', email=email))
         else:
-            error = "Email address not found. Please check and try again."
-            return render_template('auth/reset_password.html', error=error, message_type='error')
+            error = "Email not found. Please try again."
+            return render_template('auth/reset_password.html', error=error, message_type='error', last_email=email)
 
-    # On GET request, render the reset password page with the last email
-    error = session.pop('error', None)
     last_email = session.get('last_email', '')
-    return render_template('auth/reset_password.html', error=error, message_type='success' if error else None, last_email=last_email)
+    return render_template('auth/reset_password.html', last_email=last_email)
 
 @app.route('/check_email')
 def check_email():
-    email = request.args.get('email', 'user@example.com')  # Default email if none provided
+    if session.get('logged_in'):
+        return redirect(url_for('dashboard'))
+    email = request.args.get('email', 'user@example.com')
     return render_template('auth/check_email.html', email=email)
 
 if __name__ == '__main__':
