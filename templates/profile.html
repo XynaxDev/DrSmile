@@ -4,14 +4,27 @@
 {% block content %}
 <div class="container my-4" style="max-width: 900px;">
     <div style="background: #1e1e1e; border-radius: 8px; padding: 1rem;">
-        <div class="card shadow mx-auto bg-dark text-white" style="max-width: 600px;">
-            <div class="card-header bg-secondary">
-                <h5>User Profile</h5>
+        <div class="row">
+            <div class="col-md-3 mb-3">
+                <div class="list-group shadow bg-dark">
+                    <a href="{{ url_for('dashboard') }}" class="list-group-item list-group-item-action">Dashboard</a>
+                    <a href="{{ url_for('profile') }}" class="list-group-item list-group-item-action active">Profile</a>
+                    <a href="{{ url_for('chatbot') }}" class="list-group-item list-group-item-action">Chat</a>
+                    <a href="#" class="list-group-item list-group-item-action">Settings</a>
+                    <a href="{{ url_for('logout') }}" class="list-group-item list-group-item-action">Logout</a>
+                </div>
             </div>
-            <div class="card-body">
-                <p><strong>Name:</strong> {{ username or 'User' }}</p>
-                <p><strong>Email:</strong> {{ email or 'user@example.com' }}</p>
-                <a href="#" class="btn btn-outline-light mt-3">Edit Profile</a>
+            <div class="col-md-9">
+                <div class="card shadow bg-dark text-white">
+                    <div class="card-header bg-secondary">
+                        <h5>Your Profile</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Name:</strong> {{ username }}</p>
+                        <p><strong>Email:</strong> {{ email }}</p>
+                        <a href="{{ url_for('chatbot') }}" class="btn btn-outline-light mt-3">Back to Chat</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
