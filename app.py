@@ -10,8 +10,6 @@ import os
 load_dotenv()
 app = Flask(__name__)
 
-
-# Secret key for session (replace with a secure key in production)
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
 # SQLite database configuration
