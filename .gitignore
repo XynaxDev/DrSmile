@@ -1,4 +1,6 @@
 /myenv
 /flask_session
 .env
-instance/
+__pycache__/
+*.pyc
+data/
