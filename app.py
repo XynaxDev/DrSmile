@@ -1,42 +1,26 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from datetime import datetime
 from flask_session import Session
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
+from models.db import db, bcrypt, User, init_app  # Import from models/db.py
 from dotenv import load_dotenv
 import os
 
-
 load_dotenv()
+
+# Create Flask app
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 
-# SQLite database configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Users.sqlite3'
+base_dir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(base_dir, "data", "Users.sqlite3")}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
-# Initialize Bcrypt for password hashing
-bcrypt = Bcrypt(app)
+init_app(app)
 
-# Server-side session configuration
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
-# User model for the database
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(120), nullable=False)  # Stores hashed password
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-# Create the database tables
-with app.app_context():
-    db.create_all()
-
-# Track whether messages have been cleared
 cleared_once = False
 
 @app.before_request
@@ -46,13 +30,12 @@ def clear_messages_on_restart():
         session.pop('messages', None)
         cleared_once = True
 
-# Authentication check decorator
 def login_required(f):
     def wrap(*args, **kwargs):
         if not session.get('logged_in'):
             return redirect(url_for('login'))
         return f(*args, **kwargs)
-    wrap.__name__ = f.__name__  # Preserve the function name for Flask
+    wrap.__name__ = f.__name__ 
     return wrap
 
 @app.route('/')
@@ -142,7 +125,7 @@ def register():
             error = "Email already registered."
             return render_template('auth/register.html', error=error, message_type='error')
 
-        # Hash the password before storing it
+        # storing hashed password
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
         new_user = User(name=name, email=email, password=hashed_password)
         db.session.add(new_user)
