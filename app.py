@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, jsonify
 from datetime import datetime
 from flask_session import Session
-from models.db import db, bcrypt, User, init_app  # Import from models/db.py
+from models.db import db, bcrypt, User, ChatMessage, init_app  # Import ChatMessage
 from dotenv import load_dotenv
 import os
 
@@ -21,29 +21,30 @@ init_app(app)
 app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 
-cleared_once = False
-
-@app.before_request
-def clear_messages_on_restart():
-    global cleared_once
-    if not cleared_once:
-        session.pop('messages', None)
-        cleared_once = True
-
 def login_required(f):
     def wrap(*args, **kwargs):
         if not session.get('logged_in'):
             return redirect(url_for('login'))
         return f(*args, **kwargs)
-    wrap.__name__ = f.__name__ 
+    wrap.__name__ = f.__name__
     return wrap
 
 @app.route('/')
 @app.route('/chatbot')
 def chatbot():
-    if 'messages' not in session:
-        session['messages'] = []
-    messages = session['messages']
+    if session.get('logged_in'):
+        # Logged-in user: fetch persistent chat history from database
+        user = User.query.filter_by(email=session.get('email')).first()
+        if user:
+            messages = ChatMessage.query.filter_by(user_id=user.id).order_by(ChatMessage.id.asc()).all()
+            messages = [{'sender': msg.sender, 'text': msg.text, 'time': msg.time} for msg in messages]
+        else:
+            messages = []
+    else:
+        # Not logged in: use temporary session-based chat history
+        if 'messages' not in session:
+            session['messages'] = []
+        messages = session['messages']
     return render_template('chatbot.html', messages=messages)
 
 @app.route('/chatbot_ajax', methods=['POST'])
@@ -51,22 +52,69 @@ def chatbot_ajax():
     data = request.get_json()
     user_input = data.get('user_input', '').strip()
 
-    if 'messages' not in session:
-        session['messages'] = []
+    if not user_input:
+        if session.get('logged_in'):
+            user = User.query.filter_by(email=session.get('email')).first()
+            messages = ChatMessage.query.filter_by(user_id=user.id).order_by(ChatMessage.id.asc()).all()
+            messages = [{'sender': msg.sender, 'text': msg.text, 'time': msg.time} for msg in messages]
+        else:
+            messages = session.get('messages', [])
+        return jsonify({'messages': messages})
 
-    if user_input:
-        current_time = datetime.now().strftime("%I:%M %p")
+    current_time = datetime.now().strftime("%I:%M %p")
+    
+    if session.get('logged_in'):
+        # Logged-in user: store in database
+        user = User.query.filter_by(email=session.get('email')).first()
+        if not user:
+            return jsonify({'error': 'User not found'}), 400
+
+        # Save user message
+        user_message = ChatMessage(
+            user_id=user.id,
+            sender='user',
+            text=user_input,
+            time=current_time
+        )
+        db.session.add(user_message)
+
+        # Bot response
+        if user_input.lower() == 'what is my name?':
+            bot_response = ChatMessage(
+                user_id=user.id,
+                sender='bot',
+                text=user.name,  # Use the user's actual name
+                time=current_time
+            )
+        else:
+            bot_response = ChatMessage(
+                user_id=user.id,
+                sender='bot',
+                text='This is a sample response.',
+                time=current_time
+            )
+        db.session.add(bot_response)
+        db.session.commit()
+
+        # Fetch all messages for this user
+        messages = ChatMessage.query.filter_by(user_id=user.id).order_by(ChatMessage.id.asc()).all()
+        messages = [{'sender': msg.sender, 'text': msg.text, 'time': msg.time} for msg in messages]
+    else:
+        # Not logged in: store in session (temporary)
+        if 'messages' not in session:
+            session['messages'] = []
+
         session['messages'].append({
             'sender': 'user',
             'text': user_input,
             'time': current_time
         })
 
-        # Bot logic
+        # Bot response
         if user_input.lower() == 'what is my name?':
             session['messages'].append({
                 'sender': 'bot',
-                'text': 'Xynax',
+                'text': 'You’re not logged in, so I don’t know your name!',
                 'time': current_time
             })
         else:
@@ -75,15 +123,21 @@ def chatbot_ajax():
                 'text': 'This is a sample response.',
                 'time': current_time
             })
-
         session.modified = True
+        messages = session['messages']
 
-    return jsonify({'messages': session['messages']})
+    return jsonify({'messages': messages})
 
 @app.route('/new_chat')
 def new_chat():
-    session['messages'] = []
-    session.modified = True
+    if session.get('logged_in'):
+        user = User.query.filter_by(email=session.get('email')).first()
+        if user:
+            ChatMessage.query.filter_by(user_id=user.id).delete()
+            db.session.commit()
+    else:
+        session['messages'] = []
+        session.modified = True
     return redirect(url_for('chatbot'))
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -100,6 +154,7 @@ def login():
             session['logged_in'] = True
             session['username'] = user.name
             session['email'] = user.email
+            session.pop('messages', None)
             return redirect(url_for('dashboard'))
         else:
             error = "Incorrect email or password. Please try again."
@@ -125,7 +180,6 @@ def register():
             error = "Email already registered."
             return render_template('auth/register.html', error=error, message_type='error')
 
-        # storing hashed password
         hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
         new_user = User(name=name, email=email, password=hashed_password)
         db.session.add(new_user)
