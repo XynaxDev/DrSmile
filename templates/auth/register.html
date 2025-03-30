@@ -16,19 +16,27 @@
 {% block content %}
 <form method="POST" class="register-form">
     <div class="floating-label-group">
-        <input type="text" class="floating-input" id="name" name="name" placeholder=" " required>
+        <input type="text" class="floating-input" id="name" name="name" placeholder=" " required value="{{ name }}">
         <label for="name" class="floating-label">Full Name*</label>
     </div>
     <div class="floating-label-group">
-        <input type="email" class="floating-input" id="email" name="email" placeholder=" " required>
+        <input type="email" class="floating-input" id="email" name="email" placeholder=" " required value="{{ email }}">
         <label for="email" class="floating-label">Email address*</label>
     </div>
-    <div class="floating-label-group">
+    <div class="floating-label-group {% if highlight_password %}error{% endif %}">
         <input type="password" class="floating-input" id="password" name="password" placeholder=" " required>
         <label for="password" class="floating-label">Password*</label>
     </div>
     {% if error %}
     <div class="login-error {{ message_type }}">{{ error }}</div>
+    {% if error_type == "length" %}
+    <div class="password-requirements">
+        <p>Your password must contain:</p>
+        <ul>
+            <li>At least 8 characters</li>
+        </ul>
+    </div>
+    {% endif %}
     {% endif %}
     <div class="btn-register-group">
         <button type="submit" class="btn-register">Register</button>
