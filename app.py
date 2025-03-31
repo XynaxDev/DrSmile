@@ -9,9 +9,6 @@ import secrets
 
 load_dotenv()
 
-# print("MAIL_USERNAME:", os.getenv('MAIL_USERNAME'))
-# print("MAIL_PASSWORD:", os.getenv('MAIL_PASSWORD'))
-
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
@@ -33,7 +30,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 init_app(app)
 
 app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_FILE_DIR'] = os.path.join(base_dir, 'flask_session')
 Session(app)
+
+# Store a server startup timestamp in the app config
+app.config['SERVER_STARTUP_TIME'] = datetime.now().timestamp()
 
 def login_required(f):
     def wrap(*args, **kwargs):
@@ -46,6 +47,17 @@ def login_required(f):
 @app.route('/')
 @app.route('/chatbot')
 def chatbot():
+    # Check if the server has restarted by comparing the startup timestamp
+    if not session.get('logged_in'):
+        current_startup_time = app.config['SERVER_STARTUP_TIME']
+        session_startup_time = session.get('server_startup_time', 0)
+
+        # If the server startup time has changed, clear temporary chats
+        if session_startup_time != current_startup_time:
+            session['messages'] = []  # Clear temporary chat messages
+            session['server_startup_time'] = current_startup_time  # Update the timestamp in the session
+            session.modified = True
+
     if session.get('logged_in'):
         user = User.query.filter_by(email=session.get('email')).first()
         if user:
@@ -168,7 +180,6 @@ def login():
             error = "Incorrect email or password. Please try again."
             return render_template('auth/login.html', error=error, message_type='error', last_email=email)
 
-    # Pass last_email to template for pre-filling
     last_email = session.get('last_email', '')
     return render_template('auth/login.html', last_email=last_email)
 
@@ -228,7 +239,7 @@ def logout():
     session.pop('logged_in', None)
     session.pop('username', None)
     session.pop('email', None)
-    session.pop('last_email', None)  # Clear last_email on logout
+    session.pop('last_email', None)
     return redirect(url_for('chatbot'))
 
 @app.route('/terms')
@@ -250,7 +261,7 @@ def reset_password():
             error = "Please enter an email to reset password."
             return render_template('auth/reset_password.html', error=error, message_type='error', last_email='')
         
-        session['last_email'] = email  # Store email in session for resend
+        session['last_email'] = email
         user = User.query.filter_by(email=email).first()
 
         if user:
