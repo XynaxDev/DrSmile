@@ -1,4 +1,7 @@
 /* Chat Input Messages Styles */
+#conversation{
+    margin-bottom: 3rem !important;
+}
 #conversationContainer {
     max-width: 870px;
     margin: 0 auto;
