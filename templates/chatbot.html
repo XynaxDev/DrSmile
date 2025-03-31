@@ -1,106 +1,10 @@
-{% extends 'layout/base.html' %}
+{% extends 'layout/navbar.html' %}
 
 {% block title %}DrSmile{% endblock %}
 
-{% block navbar %}
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
-    <div class="container-fluid custom-spacing">
-        <div class="d-flex w-100 align-items-center justify-content-between">
-            <div class="d-flex align-items-center">
-                <a href="{{ url_for('new_chat') }}" class="drs-new-chat me-2" data-bs-toggle="tooltip"
-                    data-bs-placement="bottom" title="New Chat">
-                    <img src="{{ url_for('static', filename='images/new-chat.png') }}" alt="New Chat"
-                        class="new-chat-icon" />
-                </a>
-                <a class="navbar-brand mb-0" style="font-weight: 750; color: #9a9a9a;" href="{{ url_for('chatbot') }}">
-                    DrSmile
-                </a>
-            </div>
-
-            <!-- Toggler on mobile -->
-            <button class="navbar-toggler d-lg-none" type="button" onclick="toggleSidebar()"
-                aria-label="Toggle navigation">
-                <span class="custom-toggler-icon"></span>
-            </button>
-        </div>
-
-        <!-- Large-screen nav links -->
-        <div class="collapse navbar-collapse d-none d-lg-flex justify-content-end mt-2" id="navbarNav">
-            <ul class="navbar-nav align-items-center">
-                {% if session.get('logged_in') %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('dashboard') }}" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom" title="Dashboard">
-                        Dashboard
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('logout') }}" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom" title="Logout">
-                        Logout
-                    </a>
-                </li>
-                {% else %}
-                <li class="nav-item">
-                    <a class="nav-link lgin" href="{{ url_for('login') }}" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom" title="Login to DrSmile">
-                        Login
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('register') }}" data-bs-toggle="tooltip"
-                        data-bs-placement="bottom" title="Register a new account">
-                        Register
-                    </a>
-                </li>
-                {% endif %}
-            </ul>
-        </div>
-    </div>
-</nav>
-
-<!-- Mobile Sidebar -->
-<div id="mobileSidebar" class="drs-sidebar">
-    <div class="drs-sidebar-header">
-        <h5 class="drs-sidebar-title">DrSmile</h5>
-        <button type="button" class="btn-close text-reset custom-close" onclick="toggleSidebar()" aria-label="Close">
-        </button>
-    </div>
-    <div class="drs-sidebar-body">
-        <ul class="drs-sidebar-nav">
-            {% if session.get('logged_in') %}
-            <li class="drs-sidebar-item">
-                <a class="drs-sidebar-link" href="{{ url_for('dashboard') }}">
-                    Dashboard
-                </a>
-            </li>
-            <li class="drs-sidebar-item">
-                <a class="drs-sidebar-link" href="{{ url_for('logout') }}">
-                    Logout
-                </a>
-            </li>
-            {% else %}
-            <li class="drs-sidebar-item">
-                <a class="drs-sidebar-link lgin" href="{{ url_for('login') }}">
-                    Login
-                </a>
-            </li>
-            <li class="drs-sidebar-item">
-                <a class="drs-sidebar-link" href="{{ url_for('register') }}">
-                    Register
-                </a>
-            </li>
-            {% endif %}
-        </ul>
-    </div>
-</div>
-
-<div id="sidebarOverlay" class="drs-sidebar-overlay" onclick="toggleSidebar()"></div>
-{% endblock %}
-
 {% block content %}
 <!-- Conversation container -->
-<div class="container my-9" style="max-width: 870px;" id="conversationContainer">
+<div class="container" style="max-width: 870px;" id="conversationContainer">
     <div id="conversation">
         {% if messages %}
         {% for message in messages %}
@@ -140,7 +44,8 @@
                 <div class="icons-container">
                     <label for="fileInput" class="file-attach-icon">
                         <div class="send-icon">
-                            <img src="{{ url_for('static', filename='images/paperclip.png') }}" alt="Attach File" class="icon" />
+                            <img src="{{ url_for('static', filename='images/paperclip.png') }}" alt="Attach File"
+                                class="icon" />
                         </div>
                     </label>
                     <input type="file" id="fileInput" style="display: none;" />
