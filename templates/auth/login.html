@@ -3,8 +3,10 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>{% block title %}Login{% endblock %} - DrSmile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,7 +17,7 @@
 
 <body>
     <div class="brand-bar">
-        <a href="{{ url_for('chatbot') }}" class="brand-link">DrSmile</a>
+        <span class="brand-link">DrSmile</span>
     </div>
     <div class="{% block container_class %}login-page-container{% endblock %}">
         <h1 class="{% block title_class %}login-title{% endblock %}">{% block page_title %}Welcome back{% endblock %}
