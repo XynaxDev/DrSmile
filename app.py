@@ -48,7 +48,6 @@ def login_required(f):
 def landing():
     return render_template('landing.html')
 
-
 @app.route('/chatbot')
 def chatbot():
     # Check if the server has restarted by comparing the startup timestamp
@@ -168,10 +167,22 @@ def login():
         return redirect(url_for('dashboard'))
     
     if request.method == 'POST':
+        # Check if the request is coming from password_reset_success.html
+        if 'last_email' in request.form:
+            last_email = request.form.get('last_email', '')
+            print(f"last_email from form in login (POST): {last_email}")  # Debug print
+            if last_email:
+                session['last_email'] = last_email
+                session.modified = True  # Ensure the session is updated
+            return redirect(url_for('login', email=last_email))
+
+        # Handle login form submission
         email = request.form.get('email')
         password = request.form.get('password')
 
+        print(f"Login attempt with email: {email}")  # Debug print
         session['last_email'] = email
+        session.modified = True  # Ensure the session is saved
 
         user = User.query.filter_by(email=email).first()
         if user and bcrypt.check_password_hash(user.password, password):
@@ -184,8 +195,30 @@ def login():
             error = "Incorrect email or password. Please try again."
             return render_template('auth/login.html', error=error, message_type='error', last_email=email)
 
-    last_email = session.get('last_email', '')
-    return render_template('auth/login.html', last_email=last_email)
+    # Handle GET request
+    last_email = request.args.get('email', session.get('last_email', ''))
+    print(f"last_email in login (GET, initial): {last_email}")  # Debug print
+    if not last_email:  # Fallback: retrieve the email from the last reset token
+        last_reset_token = ResetToken.query.order_by(ResetToken.id.desc()).first()
+        if last_reset_token:
+            user = User.query.get(last_reset_token.user_id)
+            if user:
+                last_email = user.email
+                session['last_email'] = last_email
+                session.modified = True
+                print(f"Fallback: Retrieved last_email from user in login (GET): {last_email}")  # Debug print
+    if last_email and last_email != session.get('last_email', ''):
+        session['last_email'] = last_email
+        session.modified = True
+    
+    # Ensure last_email is not None
+    last_email = last_email if last_email else ''
+    print(f"last_email in login (GET, final): {last_email}")  # Debug print
+    
+    # Only pass error and message_type if they exist from a previous failed login
+    error = None
+    message_type = None
+    return render_template('auth/login.html', last_email=last_email, error=error, message_type=message_type)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -266,6 +299,8 @@ def reset_password():
             return render_template('auth/reset_password.html', error=error, message_type='error', last_email='')
         
         session['last_email'] = email
+        session.modified = True  # Ensure the session is saved
+        print(f"Set session['last_email'] in reset_password: {session['last_email']}")  # Debug print
         user = User.query.filter_by(email=email).first()
 
         if user:
@@ -296,6 +331,7 @@ def reset_password():
             return render_template('auth/reset_password.html', error=error, message_type='error', last_email=email)
 
     last_email = request.args.get('email', session.get('last_email', ''))
+    print(f"last_email in reset_password (GET): {last_email}")  # Debug print
     return render_template('auth/reset_password.html', last_email=last_email)
 
 @app.route('/check_email')
@@ -356,6 +392,7 @@ def reset_password_confirm(token):
         return render_template('auth/reset_password.html', error=error, message_type='error', last_email='')
 
     user = User.query.get(reset_token.user_id)
+    print(f"session['last_email'] in reset_password_confirm: {session.get('last_email', '')}")  # Debug print
     if request.method == 'POST':
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
@@ -391,9 +428,27 @@ def reset_password_confirm(token):
         user.password = bcrypt.generate_password_hash(password).decode('utf-8')
         db.session.delete(reset_token)
         db.session.commit()
-        return redirect(url_for('login'))
+        return redirect(url_for('password_reset_success'))
 
     return render_template('auth/reset_password_confirm.html', token=token, password='', confirm_password='')
 
+@app.route('/password_reset_success')
+def password_reset_success():
+    last_email = session.get('last_email', '')
+    print(f"last_email in password_reset_success (from session): {last_email}")  # Debug print
+    if not last_email:  # Fallback: retrieve the email from the last reset token
+        last_reset_token = ResetToken.query.order_by(ResetToken.id.desc()).first()
+        if last_reset_token:
+            user = User.query.get(last_reset_token.user_id)
+            if user:
+                last_email = user.email
+                session['last_email'] = last_email
+                session.modified = True
+                print(f"Fallback: Retrieved last_email from user: {last_email}")  # Debug print
+        if not last_email:  # If still empty, set a default for debugging
+            last_email = ''
+            print("Warning: Could not retrieve last_email in password_reset_success")  # Debug print
+    return render_template('auth/password_reset_success.html', last_email=last_email if last_email else '')
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
