@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to DrSmile</title>
+    <!-- Custom CSS for Landing Page -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/landing.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Brand Name at Top-Left -->
+        <div class="brand-name">
+            <h3>DrSmile</h3>
+        </div>
+        <!-- Left Container: Prompt -->
+        <div class="left-container">
+            <div class="prompt-container">
+                <h1 class="prompt-text" id="rotating-prompt"></h1>
+            </div>
+        </div>
+        <!-- Right Container: Action Buttons -->
+        <div class="right-container">
+            <div class="content-wrapper">
+                <h2 class="get-started-text">Get Started</h2>
+                <div class="action-buttons">
+                    <a href="{{ url_for('login') }}" class="action-btn">Log in</a>
+                    <a href="{{ url_for('register') }}" class="action-btn">Register</a>
+                </div>
+                <a href="{{ url_for('chatbot') }}" class="try-it-link">Try it first</a>
+            </div>
+            <div class="footer-links">
+                <a href="{{ url_for('terms') }}" class="footer-link">Terms of Use</a>
+                <span class="text-white">|</span>
+                <a href="{{ url_for('privacy') }}" class="footer-link">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+    <!-- JavaScript for Typewriter Effect and Rotating Prompts -->
+    <script>
+        const prompts = [
+            "Get expert dental advice from DrSmile instantly!",
+            "Ask DrSmile anything about your dental health!",
+            "Need dental tips? Let DrSmile assist you!",
+            "Ask DrSmile how to relieve tooth pain at home!"
+        ];
+        let currentPromptIndex = 0;
+        const promptElement = document.getElementById('rotating-prompt');
+
+        function typeWriter(text, i, callback) {
+            if (i < text.length) {
+                promptElement.textContent = text.substring(0, i + 1);
+                setTimeout(() => typeWriter(text, i + 1, callback), 50); // Adjust speed (50ms per character)
+            } else if (callback) {
+                setTimeout(callback, 1000); // Pause before moving to the next prompt
+            }
+        }
+
+        function rotatePrompt() {
+            const currentPrompt = prompts[currentPromptIndex];
+            promptElement.textContent = ""; // Clear the previous text
+            typeWriter(currentPrompt, 0, () => {
+                currentPromptIndex = (currentPromptIndex + 1) % prompts.length;
+                setTimeout(rotatePrompt, 2000); // Wait 2 seconds before starting the next prompt
+            });
+        }
+
+        // Start the rotation
+        rotatePrompt();
+    </script>
+</body>
+
+</html>
