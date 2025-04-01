@@ -45,6 +45,10 @@ def login_required(f):
     return wrap
 
 @app.route('/')
+def landing():
+    return render_template('landing.html')
+
+
 @app.route('/chatbot')
 def chatbot():
     # Check if the server has restarted by comparing the startup timestamp
