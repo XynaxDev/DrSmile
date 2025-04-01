@@ -326,10 +326,30 @@ p {
     font-size: 1rem;
     padding: 1rem 2rem;
     border: 1px solid #B0B0B0;
-    /* Lighter gray border */
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
+}
+
+.back-to-login {
+    width: 100%;
+    background: rgb(158, 116, 206);
+    /* color: #ffffff; */
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.back-to-login a{
+    text-decoration: none;
+    color: #fff;
+}
+.back-to-login:hover {
+    background-color: rgb(136, 92, 187);
 }
 
 .btn-resend:hover {
