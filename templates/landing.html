@@ -12,17 +12,14 @@
 
 <body>
     <div class="main-container">
-        <!-- Brand Name at Top-Left -->
         <div class="brand-name">
             <h3>DrSmile</h3>
         </div>
-        <!-- Left Container: Prompt -->
         <div class="left-container">
             <div class="prompt-container">
                 <h1 class="prompt-text" id="rotating-prompt"></h1>
             </div>
         </div>
-        <!-- Right Container: Action Buttons -->
         <div class="right-container">
             <div class="content-wrapper">
                 <h2 class="get-started-text">Get Started</h2>
@@ -39,7 +36,6 @@
             </div>
         </div>
     </div>
-    <!-- JavaScript for Typewriter Effect and Rotating Prompts -->
     <script>
         const prompts = [
             "Get expert dental advice from DrSmile instantly!",
@@ -53,22 +49,21 @@
         function typeWriter(text, i, callback) {
             if (i < text.length) {
                 promptElement.textContent = text.substring(0, i + 1);
-                setTimeout(() => typeWriter(text, i + 1, callback), 50); // Adjust speed (50ms per character)
+                setTimeout(() => typeWriter(text, i + 1, callback), 50);
             } else if (callback) {
-                setTimeout(callback, 1000); // Pause before moving to the next prompt
+                setTimeout(callback, 1000);
             }
         }
 
         function rotatePrompt() {
             const currentPrompt = prompts[currentPromptIndex];
-            promptElement.textContent = ""; // Clear the previous text
+            promptElement.textContent = ""; 
             typeWriter(currentPrompt, 0, () => {
                 currentPromptIndex = (currentPromptIndex + 1) % prompts.length;
-                setTimeout(rotatePrompt, 2000); // Wait 2 seconds before starting the next prompt
+                setTimeout(rotatePrompt, 2000);
             });
         }
 
-        // Start the rotation
         rotatePrompt();
     </script>
 </body>
