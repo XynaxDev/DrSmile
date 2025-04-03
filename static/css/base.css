@@ -20,9 +20,7 @@ body {
     min-height: 100%;
     box-sizing: border-box;
     width: calc(100% - 7px);
-    /* Subtract scrollbar width to prevent layout shift */
     margin-right: 7px;
-    /* Reserve space for the scrollbar */
 }
 
 p {

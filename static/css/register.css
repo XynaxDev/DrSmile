@@ -61,7 +61,7 @@ p {
 }
 
 .register-form .floating-input:focus {
-    border-color: #FF6F61;
+    border-color: #a777e3;
     /* Vibrant coral */
 }
 
@@ -87,7 +87,7 @@ p {
     top: 0;
     left: 0.8rem;
     font-size: 0.9rem;
-    color: #FF6F61;
+    color: #a777e3;
     /* Vibrant coral */
     font-weight: 600;
     background: #F5F7FA;
@@ -108,7 +108,7 @@ p {
 
 .register-form .btn-register {
     width: 100%;
-    background: #FF6F61;
+    background: #a777e3;
     /* Vibrant coral */
     color: #fff;
     font-size: 1rem;
@@ -120,7 +120,7 @@ p {
 }
 
 .register-form .btn-register:hover {
-    background: #E65A4F;
+    background: #8e65c1;
     /* Darker coral for hover */
 }
 
@@ -135,7 +135,7 @@ p {
 }
 
 .register-line a {
-    color: #FF6F61;
+    color: #a777e3;
     /* Vibrant coral */
     text-decoration: none;
 }
@@ -223,7 +223,7 @@ p {
 .register-form .floating-input:-internal-autofill-selected:focus {
     -webkit-text-fill-color: #333;
     border-radius: 8px;
-    border: 1px solid #FF6F61;
+    border: 1px solid #a777e3;
     /* Vibrant coral */
     -webkit-background-clip: content-box;
     background-clip: content-box;

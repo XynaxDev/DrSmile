@@ -22,7 +22,7 @@ p {
 
 .brand-link {
     text-decoration: none;
-    color: #FF6F61;
+    color: #a777e3;
     /* Vibrant coral */
     font-weight: 700;
     font-size: 1.4rem;
@@ -108,7 +108,7 @@ p {
 }
 
 .password-requirements {
-    margin: 20px 0;
+    margin: 10px 0;
     padding: 10px;
     background-color: #f5f5f5;
     border: 1px solid #ddd;
@@ -166,7 +166,7 @@ p {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 0.2rem 0.5rem;
+    padding: 0.2rem 0.475rem;
     background: #d00;
     color: #fff;
     border-radius: 60%;
@@ -226,7 +226,7 @@ p {
 }
 
 .floating-input:focus {
-    border-color: #FF6F61;
+    border-color: #a777e3;
     /* Vibrant coral */
 }
 
@@ -249,7 +249,7 @@ p {
     top: 0;
     left: 0.8rem;
     font-size: 0.9rem;
-    color: #FF6F61;
+    color: #a777e3;
     /* Vibrant coral */
     background: #F5F7FA;
     /* Solid color to match body */
@@ -275,7 +275,7 @@ p {
 
 .forgot-password-link {
     font-size: 0.9rem;
-    color: #FF6F61;
+    color: #a777e3;
     /* Vibrant coral */
     text-decoration: none;
     display: inline;
@@ -296,7 +296,7 @@ p {
 
 .btn-continue {
     width: 100%;
-    background: #FF6F61;
+    background: #a777e3;
     /* Vibrant coral */
     color: #fff;
     font-size: 1rem;
@@ -308,7 +308,7 @@ p {
 }
 
 .btn-continue:hover {
-    background: #E65A4F;
+    background: #8e65c1;
     /* Darker coral for hover */
 }
 
@@ -333,8 +333,8 @@ p {
 
 .back-to-login {
     width: 100%;
-    background: rgb(158, 116, 206);
-    /* color: #ffffff; */
+    background: #a777e3;
+    color: #ffffff;
     font-size: 1rem;
     padding: 1rem 2rem;
     border: none;
@@ -344,12 +344,11 @@ p {
     transition: background-color 0.2s, color 0.2s;
 }
 
-.back-to-login a{
-    text-decoration: none;
-    color: #fff;
+.back-to-login:focus{
+    outline: none;
 }
 .back-to-login:hover {
-    background-color: rgb(136, 92, 187);
+    background-color: #8e65c1;
 }
 
 .btn-resend:hover {
@@ -367,7 +366,7 @@ p {
 }
 
 .register-line a {
-    color: #FF6F61;
+    color: #a777e3;
     /* Vibrant coral */
     text-decoration: none;
 }
@@ -384,7 +383,7 @@ p {
 }
 
 .back-to-login-line a {
-    color: #FF6F61;
+    color: #a777e3;
     /* Vibrant coral */
     text-decoration: none;
 }
@@ -411,7 +410,7 @@ p {
 }
 
 .footer-terms a {
-    color: #FF6F61;
+    color: #a777e3;
     /* Vibrant coral */
     text-decoration: none;
 }
@@ -475,7 +474,7 @@ input:-internal-autofill-selected:focus {
     background-color: #fff;
     -webkit-text-fill-color: #333;
     border-radius: 8px;
-    border: 1px solid #FF6F61;
+    border: 1px solid #a777e3;
     /* Vibrant coral */
     background-clip: content-box;
 }
