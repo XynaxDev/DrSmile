@@ -1,7 +1,8 @@
 /* Chat Input Messages Styles */
-#conversation{
+#conversation {
     margin-bottom: 3rem !important;
 }
+
 #conversationContainer {
     max-width: 870px;
     margin: 0 auto;
@@ -46,12 +47,25 @@
     box-shadow: none;
 }
 
+
+.fixed-message {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    color: #636363;
+    z-index: 10;
+}
+
 /* Scrollbar styles for the chat input textarea */
 #userInput {
     scrollbar-width: thin;
-    /* Firefox */
     scrollbar-color: #4e4e4e transparent;
-    /* Firefox */
 }
 
 #userInput::-webkit-scrollbar {
@@ -67,7 +81,6 @@
     border-radius: 5px;
 }
 
-/* Style the up and down arrows using CSS (WebKit only) */
 #userInput::-webkit-scrollbar-button:vertical:decrement {
     display: block;
     height: 10px;
@@ -118,9 +131,6 @@
 .attach-icon {
     width: 1.25rem;
     height: 1.25rem;
-    /* filter: brightness(0) invert(1);
-    transition: filter 0.2s ease; */
-    /* background: none; */
     border: 1px solid rgba(93, 93, 93, 0.485);
     cursor: pointer;
     padding: 0.7rem;

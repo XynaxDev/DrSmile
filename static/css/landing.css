@@ -188,8 +188,63 @@ body {
     color: #FFFFFF;
 }
 
-@media (max-width: 768px) {
+/* Tablets (max-width: 992px) */
+@media (max-width: 1024px) and (min-width: 769px) {
+    .main-container {
+        flex-direction: row;
+    }
 
+    .left-container {
+        flex: 1;
+        padding: 2rem 1rem;
+    }
+
+    .prompt-text {
+        font-size: 2rem;
+    }
+
+    .right-container {
+        flex: 1;
+        padding: 1.5rem;
+        justify-content: center;
+    }
+
+    .get-started-text {
+        font-size: 1.8rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .action-btn {
+        padding: 0.9rem 3rem;
+        font-size: 1.1rem;
+        border-radius: 20px;
+        width: auto;
+        min-width: 200px;
+        text-align: center;
+    }
+
+    .try-it-link {
+        font-size: 1rem;
+        /* Larger font size */
+        padding: 0.6rem 1.2rem;
+    }
+
+    .footer-links {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Mobile Phones (max-width: 768px) */
+@media (max-width: 768px) {
     .main-container {
         flex-direction: column;
         overflow: hidden;
