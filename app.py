@@ -24,7 +24,10 @@ app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_USERNAME')
 mail = Mail(app)
 
 base_dir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{os.path.join(base_dir, "data", "Users.sqlite3")}'
+data_dir = os.path.join(base_dir, "data")
+os.makedirs(data_dir, exist_ok=True) 
+db_path = os.path.join(data_dir, "Users.sqlite3")
+app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_path}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 init_app(app)
