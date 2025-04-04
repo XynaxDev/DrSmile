@@ -2,7 +2,6 @@
 html {
     position: relative;
     overflow-y: scroll;
-    /* Always show scrollbar to prevent layout shift */
     height: 100vh;
     min-height: 100%;
     overflow-x: hidden !important;
@@ -11,16 +10,14 @@ html {
 }
 
 body {
-    background-color: #0F0F0F;
+    background-color: #000;
     font-family: 'Inter', Tahoma, Geneva, Verdana, sans-serif;
     margin-bottom: 70px;
     color: #e0e0e0;
     padding-top: 70px;
-    transition: background-color 0.3s, color 0.3s;
     min-height: 100%;
     box-sizing: border-box;
-    width: calc(100% - 7px);
-    margin-right: 7px;
+    width: 100%;
 }
 
 p {
@@ -34,7 +31,7 @@ p {
     left: -260px;
     width: 260px;
     height: 100%;
-    background-color: #0F0F0F;
+    background-color: #000;
     transition: left 0.3s ease;
     z-index: 5000 !important;
     overflow-y: auto;
@@ -50,7 +47,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.85rem 0rem;
+    padding: 0.65rem 0rem;
     border-bottom: 1px solid #2f2f2f;
 }
 
@@ -119,7 +116,8 @@ p {
 }
 
 .navbar-dark.bg-dark {
-    background-color: #0F0F0F !important;
+    background-color: #000 !important;
+    padding-bottom: 0 !important;
 }
 
 .drs-new-chat {
