@@ -104,17 +104,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 <div class="chat-message user-message text-end mb-3">
                     <div class="alert alert-secondary d-inline-block chat-bubble border-0">
                         ${safeText}<br>
-                        <small>${msg.time}</small>
                     </div>
                 </div>`;
             } else {
                 html += `
                 <div class="chat-message bot-message d-flex align-items-start mb-3">
-                    <img src="static/images/bot_avatar.png"
-                        alt="Bot Logo"
-                        class="rounded-circle me-2"
-                        style="width: 40px; height: 40px;">
-                    <div class="alert alert-info d-inline-block chat-bubble mb-0 border-0">
+                    <div class="alert alert-info d-inline-block chat-bubble mb-0 border-0 bot-bubble">
                         ${safeText}<br>
                         <small>${msg.time}</small>
                     </div>
