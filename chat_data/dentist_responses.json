@@ -1,45 +1,364 @@
 {
-    "dentist_responses": [
-      {
-        "query": "Hi",
-        "response": "It is recommended to get a dental cleaning every six months to maintain optimal oral health."
-      },
-      {
-        "query": "How often should I get a dental cleaning?",
-        "response": "It is recommended to get a dental cleaning every six months to maintain optimal oral health."
-      },
-      {
-        "query": "What are the best ways to whiten my teeth?",
-        "response": "Professional teeth whitening in the dental office and at-home whitening kits are effective options. Consult your dentist for personalized advice."
-      },
-      {
-        "query": "How can I prevent cavities?",
-        "response": "Regular brushing and flossing, reducing sugary foods, and visiting your dentist for routine check-ups can help prevent cavities."
-      },
-      {
-        "query": "Do you offer braces or orthodontic treatment?",
-        "response": "Yes, we offer a range of orthodontic treatments including traditional braces and clear aligners. Please schedule a consultation for more details."
-      },
-      {
-        "query": "What is a dental implant and how does it work?",
-        "response": "A dental implant is a titanium post that replaces the root of a missing tooth, upon which a crown is placed. It offers a durable and natural-looking solution."
-      },
-      {
-        "query": "How do I care for my dental implants?",
-        "response": "Maintain good oral hygiene by brushing, flossing, and regular dental check-ups to ensure the longevity of your dental implants."
-      },
-      {
-        "query": "What should I do about tooth sensitivity?",
-        "response": "Tooth sensitivity can be managed with desensitizing toothpaste and avoiding extremely hot or cold foods. Consult your dentist for further evaluation."
-      },
-      {
-        "query": "Are dental X-rays safe?",
-        "response": "Yes, dental X-rays are generally safe and use very low levels of radiation. They are an important tool in diagnosing dental issues."
-      },
-      {
-        "query": "What you do?",
-        "response": "Answers your dental query."
-      }
-    ]
-  }
-  
+  "dentist_responses": [
+    {
+      "query": "How often should I get a dental cleaning?",
+      "response": "It is recommended to get a dental cleaning every six months to maintain optimal oral health, though your dentist may adjust this based on your individual needs."
+    },
+    {
+      "query": "What are the best ways to whiten my teeth?",
+      "response": "Professional teeth whitening in a dental office and dentist-prescribed at-home kits are effective options. Consult your dentist for personalized advice and safety."
+    },
+    {
+      "query": "How can I prevent cavities?",
+      "response": "Brush twice daily with fluoride toothpaste, floss daily, limit sugary foods and drinks, and visit your dentist regularly for check-ups and cleanings."
+    },
+    {
+      "query": "Do you offer braces or orthodontic treatment?",
+      "response": "Yes, we offer traditional braces and clear aligners. Please schedule a consultation for a personalized treatment plan."
+    },
+    {
+      "query": "What is a dental implant and how does it work?",
+      "response": "A dental implant is a titanium post surgically placed in the jawbone to replace a missing tooth root, topped with a crown for a durable, natural look."
+    },
+    {
+      "query": "How do I care for my dental implants?",
+      "response": "Brush, floss daily, and attend regular dental check-ups. Avoid hard foods that could damage the implant, and follow your dentist’s guidance."
+    },
+    {
+      "query": "What should I do about tooth sensitivity?",
+      "response": "Use desensitizing toothpaste, avoid extreme hot or cold foods, and consult your dentist to address underlying causes like enamel wear or gum issues."
+    },
+    {
+      "query": "Are dental X-rays safe?",
+      "response": "Yes, dental X-rays use minimal radiation and are safe, playing a key role in diagnosing issues like cavities or bone loss with strict safety protocols."
+    },
+    {
+      "query": "How can I prevent gum disease?",
+      "response": "Brush twice daily, floss daily, use an antiseptic mouthwash, and see your dentist regularly. Seek evaluation if you notice bleeding gums."
+    },
+    {
+      "query": "Should I get my teeth checked for oral cancer?",
+      "response": "Yes, dental check-ups include oral cancer screening. Report persistent sores, lumps, or mouth changes to your dentist for early detection."
+    },
+    {
+      "query": "Is fluoride safe for my teeth?",
+      "response": "Yes, fluoride is safe and effective for preventing cavities when used as recommended in toothpaste or water. Consult your dentist for guidance."
+    },
+    {
+      "query": "What are dental sealants and do I need them?",
+      "response": "Dental sealants are coatings on back teeth to prevent cavities, recommended for children and teens, and sometimes adults ask your dentist."
+    },
+    {
+      "query": "How often should children visit the dentist?",
+      "response": "Children should visit by their first birthday or within six months of their first tooth, then every six months for check-ups and cleanings."
+    },
+    {
+      "query": "What causes bad breath and how can I fix it?",
+      "response": "Bad breath can result from poor oral hygiene, gum disease, or dry mouth. Brush, floss, use mouthwash, stay hydrated, and see your dentist if it persists."
+    },
+    {
+      "query": "How do I care for my child’s teeth?",
+      "response": "Clean your child’s teeth with a soft brush twice daily, use a tiny amount of fluoride toothpaste, and schedule their first dental visit by age one."
+    },
+    {
+      "query": "What should I do if I have a toothache?",
+      "response": "Rinse with warm saltwater, avoid chewing on the affected side, and contact your dentist promptly to address potential infection or damage."
+    },
+    {
+      "query": "Are there risks with dental fillings?",
+      "response": "Dental fillings are generally safe, but rare risks include allergic reactions or sensitivity. Discuss materials (e.g., amalgam, composite) with your dentist."
+    },
+    {
+      "query": "How can I protect my teeth during sports?",
+      "response": "Wear a properly fitted mouthguard during sports to prevent dental injuries, and consult your dentist for a custom option."
+    },
+    {
+      "query": "What is periodontal disease and its signs?",
+      "response": "Periodontal disease is gum inflammation that can lead to tooth loss. Signs include bleeding gums, swelling, or persistent bad breath—see your dentist."
+    },
+    {
+      "query": "Can diet affect my oral health?",
+      "response": "Yes, a diet high in sugar and acids can harm teeth, while fruits, vegetables, and water support oral health. Limit sugary snacks and drinks."
+    },
+    {
+      "query": "How often should I replace my toothbrush?",
+      "response": "Replace your toothbrush every 3-4 months or sooner if bristles are frayed to maintain effective cleaning and prevent bacteria buildup."
+    },
+    {
+      "query": "What is a root canal and when is it needed?",
+      "response": "A root canal treats infection inside a tooth by removing damaged tissue. It’s needed for severe pain, swelling, or deep decay—consult your dentist."
+    },
+    {
+      "query": "How can I care for my teeth as I age?",
+      "response": "Brush twice daily, floss, use fluoride, visit your dentist regularly, and address dry mouth or gum issues common in older adults."
+    },
+    {
+      "query": "Is smoking bad for my teeth?",
+      "response": "Yes, smoking increases risks of gum disease, tooth loss, and oral cancer. Quitting can improve your oral health—ask your dentist for support."
+    },
+    {
+      "query": "What are the signs of an oral infection?",
+      "response": "Signs include severe pain, swelling, fever, or pus around a tooth. Seek immediate dental care to prevent complications."
+    },
+    {
+      "query": "How does pregnancy affect oral health?",
+      "response": "Pregnancy can increase gum inflammation or sensitivity due to hormonal changes. Maintain hygiene and consult your dentist for safe care."
+    },
+    {
+      "query": "What is dry mouth and how can I treat it?",
+      "response": "Dry mouth, often from medication or dehydration, can be managed with water, sugar-free gum, or saliva substitutes—see your dentist if persistent."
+    },
+    {
+      "query": "Are dental check-ups necessary if I have no pain?",
+      "response": "Yes, regular check-ups detect issues like cavities or gum disease early, even without pain, improving long-term oral health."
+    },
+    {
+      "query": "What should I do if a tooth is knocked out?",
+      "response": "Rinse it gently, hold it in place or in milk, and see a dentist within 30 minutes for a chance to save it."
+    },
+    {
+      "query": "Can teeth grinding damage my teeth?",
+      "response": "Yes, teeth grinding (bruxism) can wear down enamel or cause cracks. A nightguard and stress management may help—consult your dentist."
+    },
+    {
+      "query": "How effective are electric toothbrushes?",
+      "response": "Electric toothbrushes can be more effective at removing plaque than manual ones, especially for those with limited mobility—ask your dentist."
+    },
+    {
+      "query": "What causes tooth discoloration?",
+      "response": "Tooth discoloration can result from coffee, tea, smoking, or aging. Professional whitening or good hygiene can help—consult your dentist."
+    },
+    {
+      "query": "How can I help my child stop thumb sucking?",
+      "response": "Encourage stopping by age 4 to avoid dental issues. Use positive reinforcement or consult your dentist for advice if it persists."
+    },
+    {
+      "query": "What are the benefits of flossing?",
+      "response": "Flossing removes plaque and food between teeth, preventing cavities and gum disease where brushing can’t reach."
+    },
+    {
+      "query": "Can diabetes affect my oral health?",
+      "response": "Yes, diabetes increases gum disease risk. Control blood sugar and see your dentist regularly to manage oral complications."
+    },
+    {
+      "query": "What is a dental crown and when is it used?",
+      "response": "A dental crown covers a damaged tooth to restore its shape and strength, used for decay, cracks, or after a root canal."
+    },
+    {
+      "query": "How can I prevent oral injuries?",
+      "response": "Wear mouthguards during sports, avoid chewing hard objects, and use helmets or face protection in high-risk activities."
+    },
+    {
+      "query": "What should I know about dentures?",
+      "response": "Dentures replace missing teeth, improving chewing and appearance. Clean them daily and visit your dentist for adjustments."
+    },
+    {
+      "query": "How does stress affect my teeth?",
+      "response": "Stress can lead to teeth grinding or neglect of oral hygiene, increasing damage or disease risk—manage stress and see your dentist."
+    },
+    {
+      "query": "What is the role of saliva in oral health?",
+      "response": "Saliva washes away food, neutralizes acids, and helps remineralize teeth. Dry mouth can increase decay risk—stay hydrated."
+    },
+    {
+      "query": "How can I care for braces?",
+      "response": "Brush after meals, floss with orthodontic tools, and attend regular dental visits to maintain oral health with braces."
+    },
+    {
+      "query": "What are the signs of wisdom tooth problems?",
+      "response": "Pain, swelling, or difficulty opening your mouth may indicate wisdom tooth issues. See your dentist for evaluation or removal."
+    },
+    {
+      "query": "Can poor oral health affect my heart?",
+      "response": "Yes, gum disease may be linked to heart issues. Good oral hygiene and regular check-ups can help reduce this risk."
+    },
+    {
+      "query": "What is the cost of dental implants?",
+      "response": "Costs vary by location and complexity, typically ranging from $1,000 to $3,000 per implant. Consult your dentist for an estimate."
+    },
+    {
+      "query": "How can I find a good dentist?",
+      "response": "Look for a licensed dentist with good reviews, check credentials with your dental association, and schedule a consultation."
+    },
+    {
+      "query": "What should I do after a dental procedure?",
+      "response": "Follow your dentist’s instructions, avoid hard foods, and maintain oral hygiene to ensure proper healing."
+    },
+    {
+      "query": "Can children get gum disease?",
+      "response": "Yes, children can develop gingivitis from poor hygiene. Regular brushing, flossing, and dental visits can prevent it."
+    },
+    {
+      "query": "What is a dental bridge?",
+      "response": "A dental bridge fills a gap from missing teeth using crowns on adjacent teeth, restoring function and appearance."
+    },
+    {
+      "query": "How can I improve my oral health naturally?",
+      "response": "Eat a balanced diet, drink water, avoid tobacco, and maintain consistent brushing and flossing habits."
+    },
+    {
+      "query": "What should I do for a broken tooth?",
+      "response": "Rinse your mouth with water, apply a cold compress for swelling, and see a dentist immediately to repair or protect the tooth."
+    },
+    {
+      "query": "How long do dental fillings last?",
+      "response": "Dental fillings typically last 5-15 years depending on material and care—consult your dentist for maintenance tips."
+    },
+    {
+      "query": "Can veneers fix my smile?",
+      "response": "Yes, veneers can improve the appearance of chipped or discolored teeth. Discuss options and durability with your dentist."
+    },
+    {
+      "query": "What is a dental emergency?",
+      "response": "A dental emergency includes severe pain, swelling, bleeding, or a knocked-out tooth—seek immediate dental care."
+    },
+    {
+      "query": "How can I reduce dental anxiety?",
+      "response": "Use relaxation techniques, communicate with your dentist, or ask about sedation options to ease anxiety."
+    },
+    {
+      "query": "What are the benefits of professional cleanings?",
+      "response": "Professional cleanings remove tartar and plaque, reducing cavity and gum disease risk beyond what home care can achieve."
+    },
+    {
+      "query": "Can I whiten teeth with natural remedies?",
+      "response": "Natural remedies like baking soda may help slightly but can damage enamel—opt for dentist-approved whitening for safety."
+    },
+    {
+      "query": "How does alcohol affect oral health?",
+      "response": "Alcohol can dry the mouth, increasing decay risk, and heavy use is linked to oral cancer—limit intake and consult your dentist."
+    },
+    {
+      "query": "What is a tooth extraction and when is it needed?",
+      "response": "A tooth extraction removes a damaged or impacted tooth, needed for severe decay, crowding, or infection—see your dentist."
+    },
+    {
+      "query": "How can I care for my gums?",
+      "response": "Brush gently twice daily, floss daily, and use a soft-bristled toothbrush to maintain healthy gums."
+    },
+    {
+      "query": "What are the signs of a cavity?",
+      "response": "Signs include tooth pain, sensitivity, visible holes, or dark spots—visit your dentist for diagnosis and treatment."
+    },
+    {
+      "query": "Can orthodontic treatment fix jaw alignment?",
+      "response": "Yes, braces or aligners can improve jaw alignment, but severe cases may need surgery—consult an orthodontist."
+    },
+    {
+      "query": "How often should I use mouthwash?",
+      "response": "Use mouthwash once or twice daily as a supplement to brushing and flossing—choose an ADA-approved product."
+    },
+    {
+      "query": "What is enamel erosion and how can I prevent it?",
+      "response": "Enamel erosion is tooth surface loss from acids; prevent it by avoiding acidic foods, using fluoride, and rinsing after eating."
+    },
+    {
+      "query": "How can I care for my teeth after whitening?",
+      "response": "Avoid staining foods (e.g., coffee) for 48 hours, brush gently, and follow your dentist’s post-whitening care instructions."
+    },
+    {
+      "query": "What are the risks of teeth whitening?",
+      "response": "Risks include tooth sensitivity or gum irritation—use dentist-supervised methods to minimize complications."
+    },
+    {
+      "query": "Can poor oral health cause headaches?",
+      "response": "Yes, teeth grinding or jaw issues can cause headaches—see your dentist to address underlying oral problems."
+    },
+    {
+      "query": "What is a partial denture?",
+      "response": "A partial denture replaces one or more missing teeth, attached to existing teeth, improving function and appearance."
+    },
+    {
+      "query": "How can I prevent oral cancer?",
+      "response": "Avoid tobacco and excessive alcohol, eat a healthy diet, and get regular oral cancer screenings at your dentist."
+    },
+    {
+      "query": "What should I do if my child’s tooth is loose?",
+      "response": "If it’s a baby tooth, let it fall out naturally; for a permanent tooth, see a dentist to assess injury or damage."
+    },
+    {
+      "query": "How does vaping affect oral health?",
+      "response": "Vaping can cause gum inflammation, dry mouth, and increase cavity risk—quit and consult your dentist for advice."
+    },
+    {
+      "query": "What is a dental abscess and how is it treated?",
+      "response": "A dental abscess is a pus-filled infection; treatment involves drainage and antibiotics—see a dentist urgently."
+    },
+    {
+      "query": "Can I get dentures if I have gum disease?",
+      "response": "Yes, but gum disease must be treated first to ensure a good fit—consult your dentist for a plan."
+    },
+    {
+      "query": "How can I clean my tongue?",
+      "response": "Use a tongue scraper or brush gently with your toothbrush to remove bacteria and freshen breath."
+    },
+    {
+      "query": "What are the signs of a jaw infection?",
+      "response": "Signs include severe jaw pain, swelling, fever, or difficulty opening your mouth—seek immediate dental care."
+    },
+    {
+      "query": "Can dental problems affect my sleep?",
+      "response": "Yes, teeth grinding or sleep apnea can disrupt sleep—discuss with your dentist for a nightguard or referral."
+    },
+    {
+      "query": "What is cosmetic dentistry?",
+      "response": "Cosmetic dentistry improves smile appearance with treatments like veneers, whitening, or bonding—consult your dentist."
+    },
+    {
+      "query": "How long does a dental bridge last?",
+      "response": "A dental bridge typically lasts 5-15 years with proper care—regular check-ups extend its lifespan."
+    },
+    {
+      "query": "What should I do if my gums bleed?",
+      "response": "Brush gently, floss daily, and see your dentist if bleeding persists, as it may indicate gum disease."
+    },
+    {
+      "query": "Can I get braces as an adult?",
+      "response": "Yes, adults can get braces or aligners to correct alignment—consult an orthodontist for suitability."
+    },
+    {
+      "query": "How can I prevent tooth decay in toddlers?",
+      "response": "Avoid sugary drinks, clean their teeth twice daily with fluoride toothpaste, and limit bottle use at bedtime."
+    },
+    {
+      "query": "What is a gingivectomy?",
+      "response": "A gingivectomy is a surgical procedure to remove excess gum tissue, often for gum disease or cosmetic reasons."
+    },
+    {
+      "query": "How can I care for my teeth during chemotherapy?",
+      "response": "Use a soft brush, avoid irritants, and see your dentist before treatment to manage oral health risks."
+    },
+    {
+      "query": "What are the benefits of dental check-ups for seniors?",
+      "response": "Check-ups prevent gum disease, detect oral cancer, and address dry mouth or denture issues common in seniors."
+    },
+    {
+      "query": "Can I fix a chipped tooth at home?",
+      "response": "No, avoid DIY fixes; see a dentist for bonding, filling, or a crown to repair a chipped tooth safely."
+    },
+    {
+      "query": "What is the best time to brush my teeth?",
+      "response": "Brush twice daily—morning and night—waiting 30 minutes after acidic foods to protect enamel."
+    },
+    {
+      "query": "How does obesity affect oral health?",
+      "response": "Obesity can increase gum disease risk due to inflammation—maintain a healthy diet and see your dentist."
+    },
+    {
+      "query": "What is a sinus lift and when is it needed?",
+      "response": "A sinus lift adds bone to the upper jaw for implants when bone is insufficient—consult your dentist."
+    },
+    {
+      "query": "Can I get dental work while pregnant?",
+      "response": "Yes, with caution—consult your dentist and doctor, ideally in the second trimester for safety."
+    },
+    {
+      "query": "How can I prevent mouth sores?",
+      "response": "Avoid spicy foods, maintain oral hygiene, and see your dentist if sores persist beyond two weeks."
+    },
+    {
+      "query": "What is the role of a dental hygienist?",
+      "response": "A dental hygienist cleans teeth, educates on hygiene, and assists dentists in patient care."
+    }
+  ]
+}
