@@ -5,6 +5,7 @@ from models.db import db, bcrypt, User, ChatMessage, ResetToken, init_app
 from dotenv import load_dotenv
 from flask_mail import Mail, Message
 import os
+import json
 import secrets
 
 load_dotenv()
@@ -36,7 +37,6 @@ app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_FILE_DIR'] = os.path.join(base_dir, 'flask_session')
 Session(app)
 
-# Store a server startup timestamp in the app config
 app.config['SERVER_STARTUP_TIME'] = datetime.now().timestamp()
 
 def login_required(f):
@@ -53,15 +53,13 @@ def landing():
 
 @app.route('/chatbot')
 def chatbot():
-    # Check if the server has restarted by comparing the startup timestamp
     if not session.get('logged_in'):
         current_startup_time = app.config['SERVER_STARTUP_TIME']
         session_startup_time = session.get('server_startup_time', 0)
 
-        # If the server startup time has changed, clear temporary chats
         if session_startup_time != current_startup_time:
-            session['messages'] = []  # Clear temporary chat messages
-            session['server_startup_time'] = current_startup_time  # Update the timestamp in the session
+            session['messages'] = [] 
+            session['server_startup_time'] = current_startup_time 
             session.modified = True
 
     if session.get('logged_in'):
@@ -77,22 +75,53 @@ def chatbot():
         messages = session['messages']
     return render_template('chatbot.html', messages=messages)
 
+
+def normalize(text):
+    return text.lower().strip().rstrip('?.!')
+
 @app.route('/chatbot_ajax', methods=['POST'])
 def chatbot_ajax():
     data = request.get_json()
     user_input = data.get('user_input', '').strip()
+    current_time = datetime.now().strftime("%I:%M %p")
 
     if not user_input:
         if session.get('logged_in'):
             user = User.query.filter_by(email=session.get('email')).first()
-            messages = ChatMessage.query.filter_by(user_id=user.id).order_by(ChatMessage.id.asc()).all()
-            messages = [{'sender': msg.sender, 'text': msg.text, 'time': msg.time} for msg in messages]
+            if not user:
+                return jsonify({'error': 'User not found'}), 400
+            messages_query = ChatMessage.query.filter_by(user_id=user.id).order_by(ChatMessage.id.asc()).all()
+            messages = [{'sender': msg.sender, 'text': msg.text, 'time': msg.time} for msg in messages_query]
         else:
             messages = session.get('messages', [])
         return jsonify({'messages': messages})
 
-    current_time = datetime.now().strftime("%I:%M %p")
-    
+    dentist_keywords = ['dental', 'dentist', 'tooth', 'teeth', 'cavity', 'implant', 'braces', 'whiten']
+    is_dentist_query = any(keyword in user_input.lower() for keyword in dentist_keywords)
+
+    base_dir = os.path.abspath(os.path.dirname(__file__))
+    json_file = os.path.normpath(os.path.join(base_dir,'chat_data', 'dentist_responses.json'))
+
+    def load_dentist_responses(file_path):
+        if os.path.exists(file_path):
+            try:
+                with open(file_path, 'r') as f:
+                    data = json.load(f)
+                    return data.get('dentist_responses', [])
+            except Exception as e:
+                print(f"Error loading JSON: {e}")
+                return []
+        else:
+            print(f"JSON file not found at: {file_path}")
+            return []
+
+    responses = load_dentist_responses(json_file)
+    if not responses:
+        print("Warning: No responses loaded from JSON file")
+
+    default_response = "I'm not sure about that dental query. Please provide more details or consult your dentist."
+
+    # Logged-in user logic
     if session.get('logged_in'):
         user = User.query.filter_by(email=session.get('email')).first()
         if not user:
@@ -106,47 +135,68 @@ def chatbot_ajax():
         )
         db.session.add(user_message)
 
+        # Determine bot response
+        normalized_input = normalize(user_input)
+        selected_response = default_response
+
         if user_input.lower() == 'what is my name?':
-            bot_response = ChatMessage(
-                user_id=user.id,
-                sender='bot',
-                text=user.name,
-                time=current_time
-            )
+            selected_response = user.name
         else:
-            bot_response = ChatMessage(
-                user_id=user.id,
-                sender='bot',
-                text='This is a sample response.',
-                time=current_time
-            )
-        db.session.add(bot_response)
+            for entry in responses:
+                query_key = normalize(entry.get('query', ''))
+                if query_key in normalized_input or normalized_input in query_key:
+                    selected_response = entry.get('response')
+                    print(f"Matched '{user_input}' to '{query_key}' -> '{selected_response}'")
+                    break
+            if selected_response == default_response:
+                print(f"No match for '{user_input}' in dentist responses")
+
+        bot_message = ChatMessage(
+            user_id=user.id,
+            sender='bot',
+            text=selected_response,
+            time=current_time
+        )
+        db.session.add(bot_message)
         db.session.commit()
 
-        messages = ChatMessage.query.filter_by(user_id=user.id).order_by(ChatMessage.id.asc()).all()
-        messages = [{'sender': msg.sender, 'text': msg.text, 'time': msg.time} for msg in messages]
+        messages_query = ChatMessage.query.filter_by(user_id=user.id).order_by(ChatMessage.id.asc()).all()
+        messages = [{'sender': msg.sender, 'text': msg.text, 'time': msg.time} for msg in messages_query]
+
+    # Non-logged-in user logic
     else:
         if 'messages' not in session:
             session['messages'] = []
 
-        session['messages'].append({
+        user_message = {
             'sender': 'user',
             'text': user_input,
             'time': current_time
-        })
+        }
+        session['messages'].append(user_message)
+
+        # Determine bot response
+        normalized_input = normalize(user_input)
+        selected_response = default_response
 
         if user_input.lower() == 'what is my name?':
-            session['messages'].append({
-                'sender': 'bot',
-                'text': 'You’re not logged in, so I don’t know your name!',
-                'time': current_time
-            })
+            selected_response = "You're not logged in, so I don't know your name!"
         else:
-            session['messages'].append({
-                'sender': 'bot',
-                'text': 'This is a sample response.',
-                'time': current_time
-            })
+            for entry in responses:
+                query_key = normalize(entry.get('query', ''))
+                if query_key in normalized_input or normalized_input in query_key:
+                    selected_response = entry.get('response')
+                    print(f"Matched '{user_input}' to '{query_key}' -> '{selected_response}'")
+                    break
+            if selected_response == default_response:
+                print(f"No match for '{user_input}' in dentist responses")
+
+        bot_message = {
+            'sender': 'bot',
+            'text': selected_response,
+            'time': current_time
+        }
+        session['messages'].append(bot_message)
         session.modified = True
         messages = session['messages']
 
@@ -170,22 +220,21 @@ def login():
         return redirect(url_for('dashboard'))
     
     if request.method == 'POST':
-        # Check if the request is coming from password_reset_success.html
         if 'last_email' in request.form:
             last_email = request.form.get('last_email', '')
-            print(f"last_email from form in login (POST): {last_email}")  # Debug print
+            print(f"last_email from form in login (POST): {last_email}")  
             if last_email:
                 session['last_email'] = last_email
-                session.modified = True  # Ensure the session is updated
+                session.modified = True  
             return redirect(url_for('login', email=last_email))
 
         # Handle login form submission
         email = request.form.get('email')
         password = request.form.get('password')
 
-        print(f"Login attempt with email: {email}")  # Debug print
+        print(f"Login attempt with email: {email}")  
         session['last_email'] = email
-        session.modified = True  # Ensure the session is saved
+        session.modified = True  #
 
         user = User.query.filter_by(email=email).first()
         if user and bcrypt.check_password_hash(user.password, password):

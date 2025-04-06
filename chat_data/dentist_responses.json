@@ -1,0 +1,45 @@
+{
+    "dentist_responses": [
+      {
+        "query": "Hi",
+        "response": "It is recommended to get a dental cleaning every six months to maintain optimal oral health."
+      },
+      {
+        "query": "How often should I get a dental cleaning?",
+        "response": "It is recommended to get a dental cleaning every six months to maintain optimal oral health."
+      },
+      {
+        "query": "What are the best ways to whiten my teeth?",
+        "response": "Professional teeth whitening in the dental office and at-home whitening kits are effective options. Consult your dentist for personalized advice."
+      },
+      {
+        "query": "How can I prevent cavities?",
+        "response": "Regular brushing and flossing, reducing sugary foods, and visiting your dentist for routine check-ups can help prevent cavities."
+      },
+      {
+        "query": "Do you offer braces or orthodontic treatment?",
+        "response": "Yes, we offer a range of orthodontic treatments including traditional braces and clear aligners. Please schedule a consultation for more details."
+      },
+      {
+        "query": "What is a dental implant and how does it work?",
+        "response": "A dental implant is a titanium post that replaces the root of a missing tooth, upon which a crown is placed. It offers a durable and natural-looking solution."
+      },
+      {
+        "query": "How do I care for my dental implants?",
+        "response": "Maintain good oral hygiene by brushing, flossing, and regular dental check-ups to ensure the longevity of your dental implants."
+      },
+      {
+        "query": "What should I do about tooth sensitivity?",
+        "response": "Tooth sensitivity can be managed with desensitizing toothpaste and avoiding extremely hot or cold foods. Consult your dentist for further evaluation."
+      },
+      {
+        "query": "Are dental X-rays safe?",
+        "response": "Yes, dental X-rays are generally safe and use very low levels of radiation. They are an important tool in diagnosing dental issues."
+      },
+      {
+        "query": "What you do?",
+        "response": "Answers your dental query."
+      }
+    ]
+  }
+  
