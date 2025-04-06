@@ -6,7 +6,7 @@
 #conversationContainer {
     max-width: 800px !important;
     margin: 0 auto;
-    background-color: #000000;
+    background-color: rgb(41, 41, 41);
 }
 
 #chatInputBar {
@@ -15,7 +15,7 @@
     left: 0;
     width: 100%;
     padding-top: 0 !important;
-    background-color: #000000;
+    background-color: rgb(41, 41, 41);
     padding: 1.4rem 1rem;
 }
 
@@ -25,10 +25,10 @@
 }
 
 .input-container {
-    background: #5a5a5a;
+    background: #3e3e3e;
     border-radius: 1.75rem;
     padding: 0.5rem;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
     border: 1px solid rgba(255, 255, 255, 0.05);
 
 }
@@ -233,49 +233,31 @@
 
 /* Chat Alert Bubbles Styles */
 .alert {
-    border: 1px solid #3A3A5A;
-    /* Subtle premium border */
-    border-radius: 1.5rem;
-    /* Softer, modern border-radius */
+    border-radius: 1.7rem;
     line-height: 1.5;
-    padding: 0.75rem 1rem;
-    font-size: 0.875rem;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-    /* Enhanced shadow for glass effect */
+    padding: 0.8rem 1.3rem;
+    font-size: 1rem;
     backdrop-filter: blur(5px);
-    /* Glass-like effect */
 }
 
 .alert.alert-secondary {
-    background-color: #3A005A;
-    /* Lighter deep purple for better visibility */
+    background-color: #3e3e3e;
     color: #fff;
-}
-
-/* Fallback for browsers that don't support backdrop-filter */
-@supports not (backdrop-filter: blur(5px)) {
-    .alert.alert-secondary {
-        background-color: rgba(58, 0, 90, 0.8);
-        /* Fallback with semi-transparent solid color */
-    }
 }
 
 .alert.alert-info {
-    background-color: #3A005A;
-    /* Lighter deep purple for better visibility */
-    color: #fff;
+    background-color: transparent !important;
+    --bs-alert-bg: transparent !important;
+    --bs-alert-color: #fff;
+    --bs-alert-border-color: transparent;
 }
 
-/* Fallback for browsers that don't support backdrop-filter */
-@supports not (backdrop-filter: blur(5px)) {
-    .alert.alert-info {
-        background-color: rgba(58, 0, 90, 0.8);
-        /* Fallback with semi-transparent solid color */
-    }
+.bot-bubble {
+    padding-left: 0.2rem;
 }
 
 .chat-bubble {
-    max-width: 80%;
+    max-width: 100%;
     word-wrap: break-word;
 }
 
@@ -289,13 +271,15 @@
 
 .user-message .alert {
     text-align: left;
+    margin-bottom: 2rem;
 }
 
 .bot-message {
     margin-right: auto;
     margin-bottom: 1rem;
     text-align: unset;
-    max-width: 80%;
+    max-width: 100%;
+    padding: 0;
 }
 
 .bot-message .alert {

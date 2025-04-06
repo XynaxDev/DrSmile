@@ -17,7 +17,7 @@
 
 @media (max-width: 576px) {
     #conversationContainer {
-        max-width: 100% !important;
+        max-width: 95% !important;
         margin: 0 auto;
     }
 
