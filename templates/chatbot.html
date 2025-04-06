@@ -12,14 +12,12 @@
             {% if message.sender == 'user' %}
             <div class="alert alert-secondary d-inline-block chat-bubble border-0">
                 {{ message.text }}<br>
-                <small>{{ message.time }}</small>
+                <!-- <small>{{ message.time }}</small> -->
             </div>
             {% else %}
             <div class="d-flex align-items-start">
-                <img src="{{ url_for('static', filename='images/bot_avatar.png') }}" alt="Bot Logo"
-                    class="rounded-circle me-2" style="width: 40px; height: 40px;">
-                <div class="alert alert-info d-inline-block chat-bubble mb-0 border-0">
-                    <strong></strong> {{ message.text|escape }}<br>
+                <div class="alert d-inline-block chat-bubble mb-0 border-0 bot-bubble">
+                     {{ message.text|escape }}<br>
                     <small>{{ message.time }}</small>
                 </div>
             </div>
