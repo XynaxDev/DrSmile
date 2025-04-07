@@ -74,7 +74,7 @@
     },
     {
       "query": "What is periodontal disease and its signs?",
-      "response": "Periodontal disease is gum inflammation that can lead to tooth loss. Signs include bleeding gums, swelling, or persistent bad breath—see your dentist."
+      "response": "Periodontal disease is gum inflammation that can lead to tooth loss. Signs include bleeding gums, swelling, or persistent bad breath see your dentist."
     },
     {
       "query": "Can diet affect my oral health?",
@@ -86,7 +86,7 @@
     },
     {
       "query": "What is a root canal and when is it needed?",
-      "response": "A root canal treats infection inside a tooth by removing damaged tissue. It’s needed for severe pain, swelling, or deep decay—consult your dentist."
+      "response": "A root canal treats infection inside a tooth by removing damaged tissue. It’s needed for severe pain, swelling, or deep decay consult your dentist."
     },
     {
       "query": "How can I care for my teeth as I age?",
@@ -94,7 +94,7 @@
     },
     {
       "query": "Is smoking bad for my teeth?",
-      "response": "Yes, smoking increases risks of gum disease, tooth loss, and oral cancer. Quitting can improve your oral health—ask your dentist for support."
+      "response": "Yes, smoking increases risks of gum disease, tooth loss, and oral cancer. Quitting can improve your oral health ask your dentist for support."
     },
     {
       "query": "What are the signs of an oral infection?",
@@ -106,7 +106,7 @@
     },
     {
       "query": "What is dry mouth and how can I treat it?",
-      "response": "Dry mouth, often from medication or dehydration, can be managed with water, sugar-free gum, or saliva substitutes—see your dentist if persistent."
+      "response": "Dry mouth, often from medication or dehydration, can be managed with water, sugar-free gum, or saliva substitutes see your dentist if persistent."
     },
     {
       "query": "Are dental check-ups necessary if I have no pain?",
@@ -118,15 +118,15 @@
     },
     {
       "query": "Can teeth grinding damage my teeth?",
-      "response": "Yes, teeth grinding (bruxism) can wear down enamel or cause cracks. A nightguard and stress management may help—consult your dentist."
+      "response": "Yes, teeth grinding (bruxism) can wear down enamel or cause cracks. A nightguard and stress management may help consult your dentist."
     },
     {
       "query": "How effective are electric toothbrushes?",
-      "response": "Electric toothbrushes can be more effective at removing plaque than manual ones, especially for those with limited mobility—ask your dentist."
+      "response": "Electric toothbrushes can be more effective at removing plaque than manual ones, especially for those with limited mobility ask your dentist."
     },
     {
       "query": "What causes tooth discoloration?",
-      "response": "Tooth discoloration can result from coffee, tea, smoking, or aging. Professional whitening or good hygiene can help—consult your dentist."
+      "response": "Tooth discoloration can result from coffee, tea, smoking, or aging. Professional whitening or good hygiene can help consult your dentist."
     },
     {
       "query": "How can I help my child stop thumb sucking?",
@@ -154,11 +154,11 @@
     },
     {
       "query": "How does stress affect my teeth?",
-      "response": "Stress can lead to teeth grinding or neglect of oral hygiene, increasing damage or disease risk—manage stress and see your dentist."
+      "response": "Stress can lead to teeth grinding or neglect of oral hygiene, increasing damage or disease risk manage stress and see your dentist."
     },
     {
       "query": "What is the role of saliva in oral health?",
-      "response": "Saliva washes away food, neutralizes acids, and helps remineralize teeth. Dry mouth can increase decay risk—stay hydrated."
+      "response": "Saliva washes away food, neutralizes acids, and helps remineralize teeth. Dry mouth can increase decay risk stay hydrated."
     },
     {
       "query": "How can I care for braces?",
@@ -170,7 +170,7 @@
     },
     {
       "query": "Can poor oral health affect my heart?",
-      "response": "Yes, gum disease may be linked to heart issues. Good oral hygiene and regular check-ups can help reduce this risk."
+      "response": "Yes, gum disease may be linked to heart issues. Good oral hygiene and regular check-ups can help reduce this risk.⚡"
     },
     {
       "query": "What is the cost of dental implants?",
@@ -202,7 +202,7 @@
     },
     {
       "query": "How long do dental fillings last?",
-      "response": "Dental fillings typically last 5-15 years depending on material and care—consult your dentist for maintenance tips."
+      "response": "Dental fillings typically last 5-15 years depending on material and care consult your dentist for maintenance tips."
     },
     {
       "query": "Can veneers fix my smile?",
@@ -210,7 +210,7 @@
     },
     {
       "query": "What is a dental emergency?",
-      "response": "A dental emergency includes severe pain, swelling, bleeding, or a knocked-out tooth—seek immediate dental care."
+      "response": "A dental emergency includes severe pain, swelling, bleeding, or a knocked-out tooth seek immediate dental care."
     },
     {
       "query": "How can I reduce dental anxiety?",
@@ -222,15 +222,15 @@
     },
     {
       "query": "Can I whiten teeth with natural remedies?",
-      "response": "Natural remedies like baking soda may help slightly but can damage enamel—opt for dentist-approved whitening for safety."
+      "response": "Natural remedies like baking soda may help slightly but can damage enamel opt for dentist-approved whitening for safety."
     },
     {
       "query": "How does alcohol affect oral health?",
-      "response": "Alcohol can dry the mouth, increasing decay risk, and heavy use is linked to oral cancer—limit intake and consult your dentist."
+      "response": "Alcohol can dry the mouth, increasing decay risk, and heavy use is linked to oral cancer limit intake and consult your dentist."
     },
     {
       "query": "What is a tooth extraction and when is it needed?",
-      "response": "A tooth extraction removes a damaged or impacted tooth, needed for severe decay, crowding, or infection—see your dentist."
+      "response": "A tooth extraction removes a damaged or impacted tooth, needed for severe decay, crowding, or infection see your dentist."
     },
     {
       "query": "How can I care for my gums?",
@@ -238,15 +238,15 @@
     },
     {
       "query": "What are the signs of a cavity?",
-      "response": "Signs include tooth pain, sensitivity, visible holes, or dark spots—visit your dentist for diagnosis and treatment."
+      "response": "Signs include tooth pain, sensitivity, visible holes, or dark spots visit your dentist for diagnosis and treatment."
     },
     {
       "query": "Can orthodontic treatment fix jaw alignment?",
-      "response": "Yes, braces or aligners can improve jaw alignment, but severe cases may need surgery—consult an orthodontist."
+      "response": "Yes, braces or aligners can improve jaw alignment, but severe cases may need surgery consult an orthodontist."
     },
     {
       "query": "How often should I use mouthwash?",
-      "response": "Use mouthwash once or twice daily as a supplement to brushing and flossing—choose an ADA-approved product."
+      "response": "Use mouthwash once or twice daily as a supplement to brushing and flossing choose an ADA-approved product."
     },
     {
       "query": "What is enamel erosion and how can I prevent it?",
@@ -258,11 +258,11 @@
     },
     {
       "query": "What are the risks of teeth whitening?",
-      "response": "Risks include tooth sensitivity or gum irritation—use dentist-supervised methods to minimize complications."
+      "response": "Risks include tooth sensitivity or gum irritation use dentist-supervised methods to minimize complications."
     },
     {
       "query": "Can poor oral health cause headaches?",
-      "response": "Yes, teeth grinding or jaw issues can cause headaches—see your dentist to address underlying oral problems."
+      "response": "Yes, teeth grinding or jaw issues can cause headaches see your dentist to address underlying oral problems."
     },
     {
       "query": "What is a partial denture?",
@@ -278,15 +278,15 @@
     },
     {
       "query": "How does vaping affect oral health?",
-      "response": "Vaping can cause gum inflammation, dry mouth, and increase cavity risk—quit and consult your dentist for advice."
+      "response": "Vaping can cause gum inflammation, dry mouth, and increase cavity risk quit and consult your dentist for advice."
     },
     {
       "query": "What is a dental abscess and how is it treated?",
-      "response": "A dental abscess is a pus-filled infection; treatment involves drainage and antibiotics—see a dentist urgently."
+      "response": "A dental abscess is a pus-filled infection; treatment involves drainage and antibiotics see a dentist urgently."
     },
     {
       "query": "Can I get dentures if I have gum disease?",
-      "response": "Yes, but gum disease must be treated first to ensure a good fit—consult your dentist for a plan."
+      "response": "Yes, but gum disease must be treated first to ensure a good fit consult your dentist for a plan."
     },
     {
       "query": "How can I clean my tongue?",
@@ -294,19 +294,19 @@
     },
     {
       "query": "What are the signs of a jaw infection?",
-      "response": "Signs include severe jaw pain, swelling, fever, or difficulty opening your mouth—seek immediate dental care."
+      "response": "Signs include severe jaw pain, swelling, fever, or difficulty opening your mouth seek immediate dental care."
     },
     {
       "query": "Can dental problems affect my sleep?",
-      "response": "Yes, teeth grinding or sleep apnea can disrupt sleep—discuss with your dentist for a nightguard or referral."
+      "response": "Yes, teeth grinding or sleep apnea can disrupt sleep discuss with your dentist for a nightguard or referral."
     },
     {
       "query": "What is cosmetic dentistry?",
-      "response": "Cosmetic dentistry improves smile appearance with treatments like veneers, whitening, or bonding—consult your dentist."
+      "response": "Cosmetic dentistry improves smile appearance with treatments like veneers, whitening, or bonding consult your dentist."
     },
     {
       "query": "How long does a dental bridge last?",
-      "response": "A dental bridge typically lasts 5-15 years with proper care—regular check-ups extend its lifespan."
+      "response": "A dental bridge typically lasts 5-15 years with proper care regular check-ups extend its lifespan."
     },
     {
       "query": "What should I do if my gums bleed?",
@@ -314,7 +314,7 @@
     },
     {
       "query": "Can I get braces as an adult?",
-      "response": "Yes, adults can get braces or aligners to correct alignment—consult an orthodontist for suitability."
+      "response": "Yes, adults can get braces or aligners to correct alignment consult an orthodontist for suitability."
     },
     {
       "query": "How can I prevent tooth decay in toddlers?",
@@ -338,19 +338,19 @@
     },
     {
       "query": "What is the best time to brush my teeth?",
-      "response": "Brush twice daily—morning and night—waiting 30 minutes after acidic foods to protect enamel."
+      "response": "Brush twice daily morning and night waiting 30 minutes after acidic foods to protect enamel."
     },
     {
       "query": "How does obesity affect oral health?",
-      "response": "Obesity can increase gum disease risk due to inflammation—maintain a healthy diet and see your dentist."
+      "response": "Obesity can increase gum disease risk due to inflammation maintain a healthy diet and see your dentist."
     },
     {
       "query": "What is a sinus lift and when is it needed?",
-      "response": "A sinus lift adds bone to the upper jaw for implants when bone is insufficient—consult your dentist."
+      "response": "A sinus lift adds bone to the upper jaw for implants when bone is insufficient consult your dentist."
     },
     {
       "query": "Can I get dental work while pregnant?",
-      "response": "Yes, with caution—consult your dentist and doctor, ideally in the second trimester for safety."
+      "response": "Yes, with caution consult your dentist and doctor, ideally in the second trimester for safety."
     },
     {
       "query": "How can I prevent mouth sores?",
