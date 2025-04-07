@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Login{% endblock %} - DrSmile</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/responsive.css') }}">
@@ -26,13 +26,13 @@
         <form method="POST" class="login-form">
             <div class="floating-label-group email-group">
                 <input type="email" name="email" id="emailInput" class="floating-input" placeholder=" " required
-                    value="{{ last_email }}" />
+                    value="{{ last_email }}" autocomplete="email" />
                 <label for="emailInput" class="floating-label">Email address*</label>
             </div>
             <div class="password-group">
                 <div class="floating-label-group {% if error %}error{% endif %}">
                     <input type="password" name="password" id="passwordInput" class="floating-input" placeholder=" "
-                        required />
+                        required autocomplete="current-password" />
                     <label for="passwordInput" class="floating-label">Password*</label>
                 </div>
                 {% if error %}
