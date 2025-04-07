@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
         messages.forEach(msg => {
             const safeText = msg.sender === 'user'
                 ? escapeHtml(msg.text)
-                : msg.text;
+                : decodeHtmlEntities(msg.text); // Use decodeHtmlEntities for bot messages
 
             if (msg.sender === 'user') {
                 html += `
@@ -123,6 +123,18 @@ document.addEventListener('DOMContentLoaded', function () {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    // Enhanced function to decode a broader range of HTML entities
+    function decodeHtmlEntities(text) {
+        const textArea = document.createElement('textarea');
+        textArea.innerHTML = text;
+        return textArea.value;
+        // Fallback with he library (optional, uncomment if needed)
+        // if (typeof he !== 'undefined') {
+        //     return he.decode(text);
+        // }
+        // return textArea.value;
     }
 
     function scrollToBottom() {
