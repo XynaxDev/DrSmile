@@ -105,9 +105,15 @@ def chatbot_ajax():
     def load_dentist_responses(file_path):
         if os.path.exists(file_path):
             try:
-                with open(file_path, 'r') as f:
+                with open(file_path, 'r', encoding='utf-8') as f: 
                     data = json.load(f)
+                    if not isinstance(data, dict):
+                        print(f"Invalid JSON format: {data}")
+                        return []
                     return data.get('dentist_responses', [])
+            except UnicodeDecodeError as e:
+                print(f"Unicode decode error in JSON file: {e}")
+                return []
             except Exception as e:
                 print(f"Error loading JSON: {e}")
                 return []
@@ -140,7 +146,7 @@ def chatbot_ajax():
         selected_response = default_response
 
         if user_input.lower() == 'what is my name?':
-            selected_response = user.name
+            selected_response = f" Your name is {user.name}!"
         else:
             for entry in responses:
                 query_key = normalize(entry.get('query', ''))
@@ -200,7 +206,9 @@ def chatbot_ajax():
         session.modified = True
         messages = session['messages']
 
-    return jsonify({'messages': messages})
+    response = jsonify({'messages': messages})
+    response.headers['Content-Type'] = 'application/json; charset=utf-8'
+    return response
 
 @app.route('/new_chat')
 def new_chat():
@@ -228,7 +236,6 @@ def login():
                 session.modified = True  
             return redirect(url_for('login', email=last_email))
 
-        # Handle login form submission
         email = request.form.get('email')
         password = request.form.get('password')
 
@@ -247,10 +254,9 @@ def login():
             error = "Incorrect email or password. Please try again."
             return render_template('auth/login.html', error=error, message_type='error', last_email=email)
 
-    # Handle GET request
     last_email = request.args.get('email', session.get('last_email', ''))
-    print(f"last_email in login (GET, initial): {last_email}")  # Debug print
-    if not last_email:  # Fallback: retrieve the email from the last reset token
+    print(f"last_email in login (GET, initial): {last_email}")
+    if not last_email:
         last_reset_token = ResetToken.query.order_by(ResetToken.id.desc()).first()
         if last_reset_token:
             user = User.query.get(last_reset_token.user_id)
@@ -258,16 +264,14 @@ def login():
                 last_email = user.email
                 session['last_email'] = last_email
                 session.modified = True
-                print(f"Fallback: Retrieved last_email from user in login (GET): {last_email}")  # Debug print
+                print(f"Fallback: Retrieved last_email from user in login (GET): {last_email}")
     if last_email and last_email != session.get('last_email', ''):
         session['last_email'] = last_email
         session.modified = True
     
-    # Ensure last_email is not None
     last_email = last_email if last_email else ''
-    print(f"last_email in login (GET, final): {last_email}")  # Debug print
+    print(f"last_email in login (GET, final): {last_email}")
     
-    # Only pass error and message_type if they exist from a previous failed login
     error = None
     message_type = None
     return render_template('auth/login.html', last_email=last_email, error=error, message_type=message_type)
@@ -352,7 +356,7 @@ def reset_password():
         
         session['last_email'] = email
         session.modified = True  # Ensure the session is saved
-        print(f"Set session['last_email'] in reset_password: {session['last_email']}")  # Debug print
+        print(f"Set session['last_email'] in reset_password: {session['last_email']}")
         user = User.query.filter_by(email=email).first()
 
         if user:
@@ -383,7 +387,7 @@ def reset_password():
             return render_template('auth/reset_password.html', error=error, message_type='error', last_email=email)
 
     last_email = request.args.get('email', session.get('last_email', ''))
-    print(f"last_email in reset_password (GET): {last_email}")  # Debug print
+    print(f"last_email in reset_password (GET): {last_email}")
     return render_template('auth/reset_password.html', last_email=last_email)
 
 @app.route('/check_email')
@@ -444,7 +448,7 @@ def reset_password_confirm(token):
         return render_template('auth/reset_password.html', error=error, message_type='error', last_email='')
 
     user = User.query.get(reset_token.user_id)
-    print(f"session['last_email'] in reset_password_confirm: {session.get('last_email', '')}")  # Debug print
+    print(f"session['last_email'] in reset_password_confirm: {session.get('last_email', '')}")
     if request.method == 'POST':
         password = request.form.get('password')
         confirm_password = request.form.get('confirm_password')
@@ -487,7 +491,7 @@ def reset_password_confirm(token):
 @app.route('/password_reset_success')
 def password_reset_success():
     last_email = session.get('last_email', '')
-    print(f"last_email in password_reset_success (from session): {last_email}")  # Debug print
+    print(f"last_email in password_reset_success (from session): {last_email}")
     if not last_email:  # Fallback: retrieve the email from the last reset token
         last_reset_token = ResetToken.query.order_by(ResetToken.id.desc()).first()
         if last_reset_token:
@@ -496,10 +500,10 @@ def password_reset_success():
                 last_email = user.email
                 session['last_email'] = last_email
                 session.modified = True
-                print(f"Fallback: Retrieved last_email from user: {last_email}")  # Debug print
+                print(f"Fallback: Retrieved last_email from user: {last_email}")
         if not last_email:  # If still empty, set a default for debugging
             last_email = ''
-            print("Warning: Could not retrieve last_email in password_reset_success")  # Debug print
+            print("Warning: Could not retrieve last_email in password_reset_success")
     return render_template('auth/password_reset_success.html', last_email=last_email if last_email else '')
 
 if __name__ == '__main__':
