@@ -30,7 +30,62 @@
     padding: 0.5rem;
     /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
     border: 1px solid rgba(255, 255, 255, 0.05);
+}
 
+.suggestion-container {
+    position: relative;
+    /* padding: 0.5rem 0; */
+}
+
+.suggestion {
+    display: none;
+    position: absolute;
+    top: -15.5rem;
+    /* Position above input bar */
+    left: 0;
+    right: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    /* Light background with transparency */
+    color: #fff;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+    /* Slight curve at top */
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    /* Animation properties */
+    z-index: 1000;
+    border: none;
+    /* No border as requested */
+    overflow: hidden;
+    /* Ensure table fits */
+}
+
+.suggestion-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-top: none;
+    /* No upper border */
+    border-left: none;
+    /* No left border */
+    border-right: none;
+    /* No right border */
+}
+
+.suggestion-row {
+    cursor: pointer;
+}
+
+.suggestion-cell {
+    padding: 0.5rem 0;
+    width: 100%;
+}
+
+.separator td {
+    border-bottom: 1px solid #ffffff33;
+    padding: 0;
+    height: 0.5rem;
 }
 
 .input-wrapper {
