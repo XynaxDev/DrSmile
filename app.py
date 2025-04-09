@@ -94,18 +94,49 @@ def chatbot_ajax():
             messages = [{'sender': msg.sender, 'text': msg.text, 'time': msg.time} for msg in messages_query]
         else:
             messages = session.get('messages', [])
-        return jsonify({'messages': messages})
+        
+        # Load queries from dentist_responses.json
+        base_dir = os.path.abspath(os.path.dirname(__file__))
+        json_file = os.path.normpath(os.path.join(base_dir, 'chat_data', 'dentist_responses.json'))
+        
+        def load_dentist_responses(file_path):
+            if os.path.exists(file_path):
+                try:
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
+                        if not isinstance(data, dict):
+                            print(f"Invalid JSON format: {data}")
+                            return []
+                        return data.get('dentist_responses', [])
+                except UnicodeDecodeError as e:
+                    print(f"Unicode decode error in JSON file: {e}")
+                    return []
+                except Exception as e:
+                    print(f"Error loading JSON: {e}")
+                    return []
+            else:
+                print(f"JSON file not found at: {file_path}")
+                return []
+
+        responses = load_dentist_responses(json_file)
+        if not responses:
+            print("Warning: No responses loaded from JSON file")
+        
+        # Extract queries list
+        queries = [entry['query'] for entry in responses] if responses else []
+
+        return jsonify({'messages': messages, 'queries': queries})
 
     dentist_keywords = ['dental', 'dentist', 'tooth', 'teeth', 'cavity', 'implant', 'braces', 'whiten']
     is_dentist_query = any(keyword in user_input.lower() for keyword in dentist_keywords)
 
     base_dir = os.path.abspath(os.path.dirname(__file__))
-    json_file = os.path.normpath(os.path.join(base_dir,'chat_data', 'dentist_responses.json'))
+    json_file = os.path.normpath(os.path.join(base_dir, 'chat_data', 'dentist_responses.json'))
 
     def load_dentist_responses(file_path):
         if os.path.exists(file_path):
             try:
-                with open(file_path, 'r', encoding='utf-8') as f: 
+                with open(file_path, 'r', encoding='utf-8') as f:
                     data = json.load(f)
                     if not isinstance(data, dict):
                         print(f"Invalid JSON format: {data}")
