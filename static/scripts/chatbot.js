@@ -6,6 +6,25 @@ document.addEventListener('DOMContentLoaded', function () {
     const chatInputBar = document.getElementById('chatInputBar');
     const fileInput = document.getElementById('fileInput');
     const brandIcon = document.querySelector('.navbar-brand');
+    const suggestion = document.getElementById('suggestion');
+
+    let dentistQueries = []; // Will be populated from server
+
+    // Fetch queries from server on page load
+    fetch(chatbotAjaxUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_input: '' }) // Empty input to get queries
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.queries) {
+                dentistQueries = data.queries;
+            } else {
+                console.error('No queries found in response:', data);
+            }
+        })
+        .catch(err => console.error('Error fetching queries:', err));
 
     userInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -18,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
     userInput.addEventListener('input', function () {
         autoResize();
         adjustConversationPadding();
+        showSuggestion(); // Call suggestion function on input
     });
 
     // Send message on click of send icon
@@ -142,6 +162,63 @@ document.addEventListener('DOMContentLoaded', function () {
             window.scrollTo(0, document.body.scrollHeight);
         }, 0);
     }
+
+    // Function to show up to 5 animated suggestions in a table
+    function showSuggestion() {
+        const input = userInput.value.toLowerCase().trim();
+        suggestion.style.opacity = '0'; // Start with hidden state for animation
+        suggestion.style.transform = 'translateY(-10px)'; // Start slightly above
+
+        if (input) {
+            const matchedQueries = dentistQueries
+                .filter(query => query.toLowerCase().includes(input))
+                .slice(0, 5); // Limit to 5 suggestions
+
+            if (matchedQueries.length > 0) {
+                // Create table structure
+                let tableHTML = '<table class="suggestion-table"><tbody>';
+                matchedQueries.forEach((query, index) => {
+                    tableHTML += `
+                        <tr class="suggestion-row" data-query="${query}">
+                            <td class="suggestion-cell">${query}</td>
+                        </tr>
+                        ${index < matchedQueries.length - 1 ? '<tr><td class="separator"></td></tr>' : ''}
+                    `;
+                });
+                tableHTML += '</tbody></table>';
+
+                suggestion.innerHTML = tableHTML;
+                suggestion.style.display = 'block';
+                // Animate in
+                requestAnimationFrame(() => {
+                    suggestion.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    suggestion.style.opacity = '1';
+                    suggestion.style.transform = 'translateY(0)';
+                });
+
+                // Add click event to each row
+                const rows = suggestion.getElementsByClassName('suggestion-row');
+                Array.from(rows).forEach(row => {
+                    row.addEventListener('click', function () {
+                        userInput.value = this.getAttribute('data-query');
+                        autoResize(); // Adjust textarea height
+                        suggestion.style.display = 'none'; // Hide after selection
+                    });
+                });
+            } else {
+                suggestion.style.display = 'none';
+            }
+        } else {
+            suggestion.style.display = 'none';
+        }
+    }
+
+    // Hide suggestion when clicking outside
+    document.addEventListener('click', function (e) {
+        if (!userInput.contains(e.target) && !suggestion.contains(e.target)) {
+            suggestion.style.display = 'none';
+        }
+    });
 
     adjustConversationPadding();
     scrollToBottom();
