@@ -17,7 +17,7 @@
             {% else %}
             <div class="d-flex align-items-start">
                 <div class="alert d-inline-block chat-bubble mb-0 border-0 bot-bubble">
-                     {{ message.text|escape }}<br>
+                    {{ message.text|escape }}<br>
                     <small>{{ message.time }}</small>
                 </div>
             </div>
@@ -35,6 +35,9 @@
 <div id="chatInputBar">
     <div class="container" style="max-width: 900px;">
         <div class="input-container">
+            <div class="suggestion-container">
+                <div id="suggestion" class="suggestion"></div> <!-- Updated to support table -->
+            </div>
             <div class="input-wrapper">
                 <textarea id="userInput" class="form-control chat-input" placeholder="Ask anything"
                     style="max-height: 150px; overflow-y: auto; resize: none;" required></textarea>
