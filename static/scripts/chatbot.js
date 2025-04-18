@@ -8,20 +8,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const brandIcon = document.querySelector('.navbar-brand');
     const suggestion = document.getElementById('suggestion');
 
-    let dentistQueries = []; // Will be populated from server
+    let dentistQueries = [];
+    let selectedIndex = -1;
 
-    // Fetch queries from server on page load
+    // Initial Setup Section
     fetch(chatbotAjaxUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_input: '' }) // Empty input to get queries
+        body: JSON.stringify({ user_input: '' })
     })
         .then(response => response.json())
         .then(data => {
             if (data.queries) {
                 dentistQueries = data.queries;
-            } else {
-                console.error('No queries found in response:', data);
             }
         })
         .catch(err => console.error('Error fetching queries:', err));
@@ -29,58 +28,80 @@ document.addEventListener('DOMContentLoaded', function () {
     userInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
-            sendMessage();
+            if (suggestion.style.display === 'block' && selectedIndex >= 0) {
+                const rows = suggestion.getElementsByClassName('suggestion-row');
+                if (rows[selectedIndex]) {
+                    userInput.value = rows[selectedIndex].getAttribute('data-query');
+                    autoResize();
+                    suggestion.style.display = 'none';
+                    selectedIndex = -1;
+                }
+            } else {
+                sendMessage();
+            }
+        } else if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const rows = suggestion.getElementsByClassName('suggestion-row');
+            if (suggestion.style.display === 'block' && rows.length > 0) {
+                selectedIndex = (selectedIndex + 1) % rows.length;
+                updateSelection(rows);
+            }
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const rows = suggestion.getElementsByClassName('suggestion-row');
+            if (suggestion.style.display === 'block' && rows.length > 0) {
+                selectedIndex = (selectedIndex - 1 + rows.length) % rows.length;
+                updateSelection(rows);
+            }
         }
     });
 
-    // Auto-resize on input
     userInput.addEventListener('input', function () {
         autoResize();
         adjustConversationPadding();
-        showSuggestion(); // Call suggestion function on input
+        showSuggestion();
     });
 
-    // Send message on click of send icon
     sendBtn.addEventListener('click', function (e) {
         e.preventDefault();
         sendMessage();
     });
 
-    // Scroll to bottom when the brand icon is clicked
     if (brandIcon) {
         brandIcon.addEventListener('click', function (e) {
             scrollToBottom();
         });
     }
 
-    // Handle file input (placeholder for future implementation)
     if (fileInput) {
         fileInput.addEventListener('change', function (e) {
             const files = e.target.files;
             if (files.length > 0) {
                 console.log('File selected:', files[0].name);
-                // Future implementation: Upload file to server and display in chat
             }
         });
     }
 
+    // Auto-Resize Section
     function autoResize() {
         userInput.style.height = '55px';
         let neededHeight = userInput.scrollHeight;
         if (neededHeight > 150) {
             neededHeight = 150;
-            userInput.style.overflowY = 'auto'; /* Scrollbar appears */
+            userInput.style.overflowY = 'auto';
         } else {
-            userInput.style.overflowY = 'hidden'; /* Scrollbar hidden, but styles still apply */
+            userInput.style.overflowY = 'hidden';
         }
         userInput.style.height = neededHeight + 'px';
     }
 
+    // Layout Adjustment Section
     function adjustConversationPadding() {
         const barHeight = chatInputBar.offsetHeight;
         conversationContainer.style.paddingBottom = barHeight + 'px';
     }
 
+    // Message Handling Section
     function sendMessage() {
         const message = userInput.value.trim();
         if (!message) return;
@@ -98,8 +119,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     userInput.style.height = '55px';
                     adjustConversationPadding();
                     scrollToBottom();
-                } else {
-                    console.error('No messages found in response:', data);
                 }
             })
             .catch(err => console.error('Error:', err));
@@ -107,33 +126,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderMessages(messages) {
         if (!messages || messages.length === 0) {
-            return `
-                <p class="text-center" style="font-size: 1.2rem; padding-top: 50px; color: #4e4e4e;">
-                    <i>Your conversation will appear here...</i>
-                </p>`;
+            return '<p class="text-center" style="font-size: 1.2rem; padding-top: 50px; color: #4e4e4e;"><i>Your conversation will appear here...</i></p>';
         }
 
         let html = '';
         messages.forEach(msg => {
-            const safeText = msg.sender === 'user'
-                ? escapeHtml(msg.text)
-                : decodeHtmlEntities(msg.text); // Use decodeHtmlEntities for bot messages
+            const safeText = msg.sender === 'user' ? escapeHtml(msg.text) : decodeHtmlEntities(msg.text);
 
             if (msg.sender === 'user') {
-                html += `
-                <div class="chat-message user-message text-end mb-3">
-                    <div class="alert alert-secondary d-inline-block chat-bubble border-0">
-                        ${safeText}<br>
-                    </div>
-                </div>`;
+                html += '<div class="chat-message user-message text-end mb-3"><div class="alert alert-secondary d-inline-block chat-bubble border-0">' + safeText + '<br></div></div>';
             } else {
-                html += `
-                <div class="chat-message bot-message d-flex align-items-start mb-3">
-                    <div class="alert alert-info d-inline-block chat-bubble mb-0 border-0 bot-bubble">
-                        ${safeText}<br>
-                        <small>${msg.time}</small>
-                    </div>
-                </div>`;
+                html += '<div class="chat-message bot-message d-flex align-items-start mb-3"><div class="alert alert-info d-inline-block chat-bubble mb-0 border-0 bot-bubble">' + safeText + '<br><small>' + msg.time + '</small></div></div>';
             }
         });
         return html;
@@ -145,16 +148,10 @@ document.addEventListener('DOMContentLoaded', function () {
         return div.innerHTML;
     }
 
-    // Enhanced function to decode a broader range of HTML entities
     function decodeHtmlEntities(text) {
         const textArea = document.createElement('textarea');
         textArea.innerHTML = text;
         return textArea.value;
-        // Fallback with he library (optional, uncomment if needed)
-        // if (typeof he !== 'undefined') {
-        //     return he.decode(text);
-        // }
-        // return textArea.value;
     }
 
     function scrollToBottom() {
@@ -163,60 +160,65 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 0);
     }
 
-    // Function to show up to 5 animated suggestions in a table
+    // Suggestion Handling Section
     function showSuggestion() {
         const input = userInput.value.toLowerCase().trim();
-        suggestion.style.opacity = '0'; // Start with hidden state for animation
-        suggestion.style.transform = 'translateY(-10px)'; // Start slightly above
+        suggestion.style.opacity = '0';
+        suggestion.style.transform = 'translateY(-100%)';
 
         if (input) {
-            const matchedQueries = dentistQueries
-                .filter(query => query.toLowerCase().includes(input))
-                .slice(0, 5); // Limit to 5 suggestions
+            const matchedQueries = dentistQueries.filter(query => query.toLowerCase().includes(input)).slice(0, 5);
 
             if (matchedQueries.length > 0) {
-                // Create table structure
                 let tableHTML = '<table class="suggestion-table"><tbody>';
                 matchedQueries.forEach((query, index) => {
-                    tableHTML += `
-                        <tr class="suggestion-row" data-query="${query}">
-                            <td class="suggestion-cell">${query}</td>
-                        </tr>
-                        ${index < matchedQueries.length - 1 ? '<tr><td class="separator"></td></tr>' : ''}
-                    `;
+                    tableHTML += '<tr class="suggestion-row" data-query="' + query + '"><td class="suggestion-cell">' + query + '</td></tr>' + (index < matchedQueries.length - 1 ? '<tr><td class="separator"></td></tr>' : '');
                 });
                 tableHTML += '</tbody></table>';
 
                 suggestion.innerHTML = tableHTML;
                 suggestion.style.display = 'block';
-                // Animate in
                 requestAnimationFrame(() => {
-                    suggestion.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    // suggestion.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
                     suggestion.style.opacity = '1';
                     suggestion.style.transform = 'translateY(0)';
                 });
 
-                // Add click event to each row
                 const rows = suggestion.getElementsByClassName('suggestion-row');
                 Array.from(rows).forEach(row => {
                     row.addEventListener('click', function () {
                         userInput.value = this.getAttribute('data-query');
-                        autoResize(); // Adjust textarea height
-                        suggestion.style.display = 'none'; // Hide after selection
+                        autoResize();
+                        suggestion.style.display = 'none';
+                        selectedIndex = -1;
                     });
                 });
             } else {
                 suggestion.style.display = 'none';
+                selectedIndex = -1;
             }
         } else {
             suggestion.style.display = 'none';
+            selectedIndex = -1;
         }
     }
 
-    // Hide suggestion when clicking outside
+    // Selection Update Section
+    function updateSelection(rows) {
+        for (let i = 0; i < rows.length; i++) {
+            rows[i].classList.remove('selected');
+        }
+        if (rows[selectedIndex]) {
+            rows[selectedIndex].classList.add('selected');
+            rows[selectedIndex].scrollIntoView({ block: 'nearest' });
+        }
+    }
+
+    // Click Handling Section
     document.addEventListener('click', function (e) {
         if (!userInput.contains(e.target) && !suggestion.contains(e.target)) {
             suggestion.style.display = 'none';
+            selectedIndex = -1;
         }
     });
 
