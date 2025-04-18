@@ -7,6 +7,9 @@
     max-width: 800px !important;
     margin: 0 auto;
     background-color: rgb(41, 41, 41);
+    position: relative;
+    z-index: 800;
+    /* Below suggestion */
 }
 
 #chatInputBar {
@@ -17,73 +20,87 @@
     padding-top: 0 !important;
     background-color: rgb(41, 41, 41);
     padding: 1.4rem 1rem;
+    z-index: 900;
+    /* Above conversation */
 }
 
 #chatInputBar .container {
     max-width: 840px !important;
     margin: 0 auto !important;
+    position: relative;
+    /* Context for input-container */
 }
 
 .input-container {
     background: #3e3e3e;
     border-radius: 1.75rem;
     padding: 0.5rem;
-    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); */
     border: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    z-index: 910;
+    /* Above chatInputBar */
 }
 
 .suggestion-container {
-    position: relative;
-    /* padding: 0.5rem 0; */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 920;
+    pointer-events: none;
+    transform: translateY(-100%);
 }
 
 .suggestion {
     display: none;
-    position: absolute;
-    top: -15.5rem;
-    /* Position above input bar */
-    left: 0;
-    right: 0;
-    background-color: rgba(255, 255, 255, 0.1);
-    /* Light background with transparency */
+    position: relative;
+    top: 0;
+    background-color: rgba(40, 40, 40, 0.9);
+    backdrop-filter: blur(5px);
     color: #fff;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem 0.5rem 0 0;
-    /* Slight curve at top */
+    padding: 0.75rem 0;
+    border-radius: 0.5rem;
     cursor: pointer;
     text-align: left;
     font-size: 1rem;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    /* Animation properties */
-    z-index: 1000;
+    /* transition: opacity 0.3s ease-in, transform 0.3s ease-in; */
     border: none;
-    /* No border as requested */
     overflow: hidden;
-    /* Ensure table fits */
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); */
+    pointer-events: auto;
+    max-width: 850px;
+    margin-bottom: 0.3rem;
 }
 
 .suggestion-table {
     width: 100%;
     border-collapse: collapse;
     border-top: none;
-    /* No upper border */
     border-left: none;
-    /* No left border */
     border-right: none;
-    /* No right border */
 }
 
 .suggestion-row {
     cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.suggestion-row:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.suggestion-row.selected {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .suggestion-cell {
-    padding: 0.5rem 0;
+    padding: 0.5rem 1rem;
     width: 100%;
 }
 
 .separator td {
-    border-bottom: 1px solid #ffffff33;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 0;
     height: 0.5rem;
 }
@@ -131,7 +148,6 @@
     z-index: 10;
 }
 
-/* Scrollbar styles for the chat input textarea */
 #userInput {
     scrollbar-width: thin;
     scrollbar-color: #4e4e4e transparent;
@@ -181,52 +197,9 @@
     cursor: pointer;
 }
 
-/* old */
-/* .send-icon {
-    background-color: #2a2a2a;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    border: 1px solid gray;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-.send-icon::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    z-index: -1;
-    transition: backgound, transform 0.3s ease;
-    transform: scale(1);
-}
-
-.send-icon:hover::before {
-    transform: scale(1.15);
-}
-
-.send-icon:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, #E6E6FA 0%, #C9A9E8 50%, #A76BFF 100%);
-    box-shadow: 0 4px 12px rgba(167, 107, 255, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-} */
-
-/* new */
 .send-icon {
     background: linear-gradient(135deg, #D8BFD8 0%, #BA55D3 50%, #8A2BE2 100%);
-    /* Enhanced gradient */
     border: none;
-    /* Remove border for a crystal-clear look */
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 50%;
@@ -234,7 +207,6 @@
     align-items: center;
     justify-content: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    /* Smooth transition */
     position: relative;
     overflow: hidden;
 }
@@ -247,26 +219,19 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(135deg, #D8BFD8 0%, #BA55D3 50%, #8A2BE2 100%);
-    /* Match enhanced gradient */
     border-radius: 50%;
     z-index: -1;
-    /* Behind the icon */
     transition: transform 0.3s ease;
-    /* Transition for the animation */
     transform: scale(1);
-    /* Initial scale */
 }
 
 .send-icon:hover::before {
     transform: scale(1.15);
-    /* Subtle growth of the gradient circle */
 }
 
 .send-icon:hover {
     transform: scale(1.05);
-    /* Slight scale up for elegance */
     box-shadow: 0 4px 12px rgba(167, 107, 255, 0.3);
-    /* Soft lavender shadow */
 }
 
 .attach-icon {
@@ -286,7 +251,6 @@
     height: 1.25rem;
 }
 
-/* Chat Alert Bubbles Styles */
 .alert {
     border-radius: 1.7rem;
     line-height: 1.5;
