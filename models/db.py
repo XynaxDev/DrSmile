@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from datetime import datetime, UTC  # Add UTC
+from datetime import datetime, UTC
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -22,7 +22,7 @@ class ChatMessage(db.Model):
     text = db.Column(db.Text, nullable=False)
     time = db.Column(db.String(20), nullable=False)
 
-
+# ResetToken model
 class ResetToken(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -36,8 +36,7 @@ class ResetToken(db.Model):
         self.expires_at = expires_at
 
 def init_app(app):
-    db.init_app(app)
-    bcrypt.init_app(app)
-    
+    db.init_app(app)  # Initialize the db instance with the app
+    bcrypt.init_app(app)  # Initialize bcrypt
     with app.app_context():
-        db.create_all()
+        db.create_all()  # Create tables

@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let dentistQueries = [];
     let selectedIndex = -1;
 
-    // Initial Setup Section
+    const chatbotAjaxUrl = '/chat/chatbot_ajax';
     fetch(chatbotAjaxUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -19,11 +19,13 @@ document.addEventListener('DOMContentLoaded', function () {
     })
         .then(response => response.json())
         .then(data => {
-            if (data.queries) {
-                dentistQueries = data.queries;
+            if (data.messages) {
+                conversationDiv.innerHTML = renderMessages(data.messages);
+                adjustConversationPadding();
+                scrollToBottom();
             }
         })
-        .catch(err => console.error('Error fetching queries:', err));
+        .catch(err => console.error('Error fetching initial data:', err));
 
     userInput.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -35,6 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     autoResize();
                     suggestion.style.display = 'none';
                     selectedIndex = -1;
+                    sendMessage();
                 }
             } else {
                 sendMessage();
@@ -82,7 +85,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Auto-Resize Section
     function autoResize() {
         userInput.style.height = '55px';
         let neededHeight = userInput.scrollHeight;
@@ -95,13 +97,11 @@ document.addEventListener('DOMContentLoaded', function () {
         userInput.style.height = neededHeight + 'px';
     }
 
-    // Layout Adjustment Section
     function adjustConversationPadding() {
         const barHeight = chatInputBar.offsetHeight;
         conversationContainer.style.paddingBottom = barHeight + 'px';
     }
 
-    // Message Handling Section
     function sendMessage() {
         const message = userInput.value.trim();
         if (!message) return;
@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     userInput.style.height = '55px';
                     adjustConversationPadding();
                     scrollToBottom();
+                    suggestion.style.display = 'none';
                 }
             })
             .catch(err => console.error('Error:', err));
@@ -160,40 +161,51 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 0);
     }
 
-    // Suggestion Handling Section
-    function showSuggestion() {
+    async function showSuggestion() {
         const input = userInput.value.toLowerCase().trim();
         suggestion.style.opacity = '0';
         suggestion.style.transform = 'translateY(-100%)';
 
-        if (input) {
-            const matchedQueries = dentistQueries.filter(query => query.toLowerCase().includes(input)).slice(0, 5);
-
-            if (matchedQueries.length > 0) {
-                let tableHTML = '<table class="suggestion-table"><tbody>';
-                matchedQueries.forEach((query, index) => {
-                    tableHTML += '<tr class="suggestion-row" data-query="' + query + '"><td class="suggestion-cell">' + query + '</td></tr>' + (index < matchedQueries.length - 1 ? '<tr><td class="separator"></td></tr>' : '');
+        if (input.length > 0) {
+            const nlpUrl = '/nlp/api/nlp_match';
+            try {
+                const response = await fetch(nlpUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ input: input })
                 });
-                tableHTML += '</tbody></table>';
+                const data = await response.json();
+                const matchedQueries = data.matchedQueries || [];
 
-                suggestion.innerHTML = tableHTML;
-                suggestion.style.display = 'block';
-                requestAnimationFrame(() => {
-                    // suggestion.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
-                    suggestion.style.opacity = '1';
-                    suggestion.style.transform = 'translateY(0)';
-                });
-
-                const rows = suggestion.getElementsByClassName('suggestion-row');
-                Array.from(rows).forEach(row => {
-                    row.addEventListener('click', function () {
-                        userInput.value = this.getAttribute('data-query');
-                        autoResize();
-                        suggestion.style.display = 'none';
-                        selectedIndex = -1;
+                if (matchedQueries.length > 0) {
+                    let tableHTML = '<table class="suggestion-table"><tbody>';
+                    matchedQueries.forEach((query, index) => {
+                        tableHTML += '<tr class="suggestion-row" data-query="' + query + '"><td class="suggestion-cell">' + query + '</td></tr>' + (index < matchedQueries.length - 1 ? '<tr><td class="separator"></td></tr>' : '');
                     });
-                });
-            } else {
+                    tableHTML += '</tbody></table>';
+
+                    suggestion.innerHTML = tableHTML;
+                    suggestion.style.display = 'block';
+                    requestAnimationFrame(() => {
+                        suggestion.style.opacity = '1';
+                        suggestion.style.transform = 'translateY(0)';
+                    });
+
+                    const rows = suggestion.getElementsByClassName('suggestion-row');
+                    Array.from(rows).forEach(row => {
+                        row.addEventListener('click', function () {
+                            userInput.value = this.getAttribute('data-query');
+                            autoResize();
+                            suggestion.style.display = 'none';
+                            selectedIndex = -1;
+                        });
+                    });
+                } else {
+                    suggestion.style.display = 'none';
+                    selectedIndex = -1;
+                }
+            } catch (err) {
+                console.error('Error fetching NLP suggestions:', err);
                 suggestion.style.display = 'none';
                 selectedIndex = -1;
             }
@@ -203,7 +215,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Selection Update Section
     function updateSelection(rows) {
         for (let i = 0; i < rows.length; i++) {
             rows[i].classList.remove('selected');
@@ -214,7 +225,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Click Handling Section
     document.addEventListener('click', function (e) {
         if (!userInput.contains(e.target) && !suggestion.contains(e.target)) {
             suggestion.style.display = 'none';

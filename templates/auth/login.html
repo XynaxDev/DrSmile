@@ -48,12 +48,12 @@
             </div>
         </form>
         <div class="register-line">
-            Don't have an account? <a href="{{ url_for('register') }}">Register</a>
+            Don't have an account? <a href="{{ url_for('auth.register') }}">Register</a>
         </div>
         {% endblock %}
     </div>
     <footer class="footer-terms">
-        <a href="{{ url_for('terms') }}">Terms of Use</a>  |  <a href="{{ url_for('privacy') }}">Privacy Policy</a>
+        <a href="{{ url_for('auth.terms') }}">Terms of Use</a>  |  <a href="{{ url_for('auth.privacy') }}">Privacy Policy</a>
     </footer>
 
     <script>
@@ -63,7 +63,7 @@
                 alert("Please enter an email to reset password.");
                 return;
             }
-            window.location.href = "{{ url_for('reset_password') }}?email=" + encodeURIComponent(email);
+            window.location.href = "{{ url_for('auth.reset_password') }}?email=" + encodeURIComponent(email);
         }
     </script>
 </body>

@@ -24,15 +24,15 @@
             <div class="content-wrapper">
                 <h2 class="get-started-text">Get Started</h2>
                 <div class="action-buttons">
-                    <a href="{{ url_for('login') }}" class="action-btn">Log in</a>
-                    <a href="{{ url_for('register') }}" class="action-btn">Register</a>
+                    <a href="{{ url_for('auth.login') }}" class="action-btn">Log in</a>
+                    <a href="{{ url_for('auth.register') }}" class="action-btn">Register</a>
                 </div>
-                <a href="{{ url_for('chatbot') }}" class="try-it-link">Try it first</a>
+                <a href="{{ url_for('chat.chatbot') }}" class="try-it-link">Try it first</a>
             </div>
             <div class="footer-links">
-                <a href="{{ url_for('terms') }}" class="footer-link">Terms of Use</a>
+                <a href="{{ url_for('auth.terms') }}" class="footer-link">Terms of Use</a>
                 <span class="text-white">|</span>
-                <a href="{{ url_for('privacy') }}" class="footer-link">Privacy Policy</a>
+                <a href="{{ url_for('auth.privacy') }}" class="footer-link">Privacy Policy</a>
             </div>
         </div>
     </div>

@@ -5,12 +5,12 @@
     <div class="container-fluid custom-spacing">
         <div class="d-flex w-100 align-items-center justify-content-between">
             <div class="d-flex align-items-center">
-                <a href="{{ url_for('new_chat') }}" class="drs-new-chat me-2" data-bs-toggle="tooltip"
+                <a href="{{ url_for('chat.new_chat') }}" class="drs-new-chat me-2" data-bs-toggle="tooltip"
                     data-bs-placement="bottom" title="New Chat">
                     <img src="{{ url_for('static', filename='images/new-chat.png') }}" alt="New Chat"
                         class="new-chat-icon" />
                 </a>
-                <a class="navbar-brand mb-0" style="font-weight: 750; color: #9a9a9a;" href="{{ url_for('chatbot') }}">
+                <a class="navbar-brand mb-0" style="font-weight: 750; color: #9a9a9a;" href="{{ url_for('chat.chatbot') }}">
                     DrSmile
                 </a>
             </div>
@@ -27,23 +27,23 @@
             <ul class="navbar-nav align-items-center">
                 {% if session.get('logged_in') %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('dashboard') }}">
+                    <a class="nav-link" href="{{ url_for('auth.dashboard') }}">
                         Dashboard
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('logout') }}">
+                    <a class="nav-link" href="{{ url_for('auth.logout') }}">
                         Logout
                     </a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link lgin" href="{{ url_for('login') }}">
+                    <a class="nav-link lgin" href="{{ url_for('auth.login') }}">
                         Login
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('register') }}">
+                    <a class="nav-link" href="{{ url_for('auth.register') }}">
                         Register
                     </a>
                 </li>
@@ -64,23 +64,23 @@
         <ul class="drs-sidebar-nav">
             {% if session.get('logged_in') %}
             <li class="drs-sidebar-item">
-                <a class="drs-sidebar-link" href="{{ url_for('dashboard') }}">
+                <a class="drs-sidebar-link" href="{{ url_for('auth.dashboard') }}">
                     Dashboard
                 </a>
             </li>
             <li class="drs-sidebar-item">
-                <a class="drs-sidebar-link" href="{{ url_for('logout') }}">
+                <a class="drs-sidebar-link" href="{{ url_for('auth.logout') }}">
                     Logout
                 </a>
             </li>
             {% else %}
             <li class="drs-sidebar-item">
-                <a class="drs-sidebar-link lgin" href="{{ url_for('login') }}">
+                <a class="drs-sidebar-link lgin" href="{{ url_for('auth.login') }}">
                     Login
                 </a>
             </li>
             <li class="drs-sidebar-item">
-                <a class="drs-sidebar-link" href="{{ url_for('register') }}">
+                <a class="drs-sidebar-link" href="{{ url_for('auth.register') }}">
                     Register
                 </a>
             </li>
