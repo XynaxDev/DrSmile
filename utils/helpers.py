@@ -31,16 +31,16 @@ dentist_queries, dentist_responses = load_chat_data(json_file)
 
 def match_queries(input_text, queries):
     if not input_text or not queries:
-        return queries[:5]
+        return queries[:5] if queries else []
 
-    input_text = input_text.lower().strip()
+    input_text = normalize(input_text)
     # Exact or substring match
-    exact_match = next((q for q in queries if normalize(input_text) in normalize(q) or normalize(q) in normalize(input_text)), None)
+    exact_match = next((q for q in queries if input_text in normalize(q) or normalize(q) in input_text), None)
     if exact_match:
         return [exact_match] + [q for q in queries if q != exact_match][:4]
 
     doc_input = nlp(input_text)
-    query_docs = [nlp(q.lower().strip()) for q in queries]
+    query_docs = [nlp(normalize(q)) for q in queries]
     similarities = [doc_input.similarity(query_doc) for query_doc in query_docs]
     top_indices = np.argsort(similarities)[-5:][::-1]
     return [queries[i] for i in top_indices]

@@ -2,9 +2,15 @@ from flask import Blueprint, render_template, request, redirect, url_for, sessio
 from models.db import db, User, ChatMessage
 from datetime import datetime
 from utils.helpers import normalize, match_queries, dentist_queries, dentist_responses, nlp
-from views.nlp import is_meaningful_input
 
 chat_bp = Blueprint('chat', __name__)
+
+def is_meaningful_input(text):
+    if not text or not isinstance(text, str):
+        return False
+    text = normalize(text)
+    return any(text in normalize(q) or normalize(q) in text for q in dentist_queries) or \
+           any(kw in text for kw in ['dental', 'dentist', 'tooth', 'teeth', 'cavity', 'implant', 'braces', 'whiten', 'oral', 'gum', 'hygiene'])
 
 @chat_bp.route('/chatbot')
 def chatbot():
@@ -43,6 +49,7 @@ def chatbot_ajax():
         messages = ChatMessage.query.filter_by(user_id=user.id).order_by(ChatMessage.id.asc()).all()
         messages = [{'sender': msg.sender, 'text': msg.text, 'time': msg.time} for msg in messages]
 
+    suggestions = []
     if user_input:
         user_message = {'sender': 'user', 'text': user_input, 'time': current_time}
 
@@ -58,25 +65,16 @@ def chatbot_ajax():
                 db.session.commit()
             messages.append(user_message)
 
-        if not is_meaningful_input(user_input) or not any(kw in user_input.lower() for kw in ['dental', 'dentist', 'tooth', 'teeth', 'cavity', 'implant', 'braces', 'whiten', 'oral', 'gum', 'hygiene']):
+        if not is_meaningful_input(user_input):
             bot_response = {'sender': 'bot', 'text': 'The input does not appear to be a dental-related query. Please provide a question related to dental care.', 'time': current_time}
         else:
-            default_response = 'I could not find a specific match. Please provide a more detailed dental-related question.'
-            matched_queries = match_queries(user_input, dentist_queries)
-            matched_query = next((q for q in matched_queries if normalize(q) in normalize(user_input) or normalize(user_input) in normalize(q)), None)
-            if not matched_query and matched_queries:
-                similarity_threshold = 0.8
-                doc_input = nlp(user_input.lower())
-                query_docs = [nlp(q.lower()) for q in matched_queries]
-                similarities = [doc_input.similarity(q) for q in query_docs]
-                max_similarity = max(similarities) if similarities else 0
-                matched_query = matched_queries[0] if max_similarity >= similarity_threshold and matched_queries[0] in dentist_responses else None
-            selected_response = dentist_responses.get(matched_query, default_response)
-            if matched_query:
-                print(f"Matched '{user_input}' to '{matched_query}' -> '{selected_response}'")
-            else:
-                print(f"No precise match for '{user_input}' in dentist responses")
-            bot_response = {'sender': 'bot', 'text': selected_response, 'time': current_time}
+            print(f"Processing input: {user_input}")
+            suggestions = match_queries(user_input, dentist_queries)
+            print(f"Suggestions: {suggestions}")
+            matched_query = next((q for q in suggestions if normalize(q) in normalize(user_input) or normalize(user_input) in normalize(q)), suggestions[0] if suggestions else None)
+            response = dentist_responses.get(matched_query, "I could not find a specific match. Please provide a more detailed dental-related question.")
+            print(f"Matched query: {matched_query}, Response: {response}")
+            bot_response = {'sender': 'bot', 'text': response, 'time': current_time}
 
         if not session.get('logged_in'):
             if not any(msg['text'] == bot_response['text'] and msg['time'] == current_time for msg in session['messages']):
@@ -90,7 +88,7 @@ def chatbot_ajax():
                 db.session.commit()
             messages.append(bot_response)
 
-    return jsonify({'messages': messages})
+    return jsonify({'messages': messages, 'suggestions': suggestions})
 
 @chat_bp.route('/new_chat')
 def new_chat():

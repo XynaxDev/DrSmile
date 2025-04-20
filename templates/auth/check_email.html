@@ -23,7 +23,7 @@
             {% endif %}
         </p>
         <div class="btn-resend-group">
-            <form method="POST" action="{{ url_for('resend_email') }}">
+            <form method="POST" action="{{ url_for('auth.resend_email') }}">
                 <input type="hidden" name="email" value="{{ email }}">
                 <button type="submit" class="btn-resend">Resend email</button>
             </form>

@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function renderMessages(messages) {
         if (!messages || messages.length === 0) {
-            return '<p class="text-center" style="font-size: 1.2rem; padding-top: 50px; color: #4e4e4e;"><i>Your conversation will appear here...</i></p>';
+            return '<p class="fixed-message" style="font-size: 1.2rem; color: #4e4e4e;"><i>Your conversation will appear here...</i></p>';
         }
 
         let html = '';

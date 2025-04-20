@@ -11,7 +11,7 @@
                     <div class="p-3 text-center border-bottom">
                         <div class="avatar avatar-xl mb-2">
                             <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center"
-                                 style="width: 60px; height: 60px; margin: 0 auto;">
+                                style="width: 60px; height: 60px; margin: 0 auto;">
                                 <i class="bi bi-person fs-2"></i>
                             </div>
                         </div>
@@ -19,23 +19,19 @@
                     </div>
                     <nav class="nav flex-column">
                         <a href="{{ url_for('auth.dashboard') }}"
-                           class="nav-link px-4 py-3 fw-medium text-white active">
+                            class="nav-link px-4 py-3 fw-medium text-white active">
                             <i class="bi bi-house-fill me-2"></i>Dashboard
                         </a>
-                        <a href="{{ url_for('auth.profile') }}"
-                           class="nav-link px-4 py-3 fw-medium text-white">
+                        <a href="{{ url_for('auth.profile') }}" class="nav-link px-4 py-3 fw-medium text-white">
                             <i class="bi bi-person-lines-fill me-2"></i>Profile
                         </a>
-                        <a href="{{ url_for('chat.chatbot') }}"
-                           class="nav-link px-4 py-3 fw-medium text-white">
+                        <a href="{{ url_for('chat.chatbot') }}" class="nav-link px-4 py-3 fw-medium text-white">
                             <i class="bi bi-chat-dots-fill me-2"></i>Chat
                         </a>
-                        <a href="#"
-                           class="nav-link px-4 py-3 fw-medium text-white">
+                        <a href="#" class="nav-link px-4 py-3 fw-medium text-white">
                             <i class="bi bi-gear-fill me-2"></i>Settings
                         </a>
-                        <a href="{{ url_for('auth.logout') }}"
-                           class="nav-link px-4 py-3 fw-medium text-danger">
+                        <a href="{{ url_for('auth.logout') }}" class="nav-link px-4 py-3 fw-medium text-danger">
                             <i class="bi bi-box-arrow-right me-2"></i>Logout
                         </a>
                     </nav>
@@ -47,11 +43,11 @@
         <div class="col-lg-9">
             <div class="card border-0 shadow-lg" style="border-radius: 15px; overflow: hidden;">
                 <div class="card-header py-4 px-5"
-                     style="background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%);">
+                    style="background: linear-gradient(135deg, #6e8efb 0%, #a777e3 100%);">
                     <div class="d-flex justify-content-between align-items-center">
                         <h4 class="mb-0 text-white fw-bold">Welcome back, {{ username or 'User' }}!</h4>
                         <span class="badge bg-white text-primary px-3 py-2 fw-medium"
-                              style="border-radius: 20px;">Online</span>
+                            style="border-radius: 20px;">Online</span>
                     </div>
                 </div>
                 <div class="card-body p-5">
@@ -62,13 +58,13 @@
                             </p>
                             <div class="d-flex gap-3">
                                 <a href="{{ url_for('chat.chatbot') }}"
-                                   class="btn btn-primary btn-lg px-5 py-3 fw-medium shadow-sm"
-                                   style="border-radius: 30px; background: linear-gradient(45deg, #6e8efb, #a777e3);">
+                                    class="btn btn-primary btn-lg px-5 py-3 fw-medium shadow-sm"
+                                    style="border-radius: 30px; background: linear-gradient(45deg, #6e8efb, #a777e3);">
                                     <i class="bi bi-chat-fill me-2"></i>Start Chatting
                                 </a>
                                 <a href="{{ url_for('auth.profile') }}"
-                                   class="btn btn-outline-primary btn-lg px-5 py-3 fw-medium shadow-sm"
-                                   style="border-radius: 30px;">
+                                    class="btn btn-outline-primary btn-lg px-5 py-3 fw-medium shadow-sm"
+                                    style="border-radius: 30px;">
                                     <i class="bi bi-person-gear me-2"></i>Edit Profile
                                 </a>
                             </div>
@@ -87,27 +83,33 @@
     .bg-gradient-dark {
         background: linear-gradient(180deg, #2c3e50 0%, #1a252f 100%);
     }
+
     .nav-link {
         transition: all 0.3s ease;
     }
+
     .nav-link:hover {
         background-color: rgba(255, 255, 255, 0.1);
         padding-left: 2rem;
         color: #fff !important;
     }
+
     .nav-link.active {
         background-color: rgba(255, 255, 255, 0.15);
         color: #fff !important;
         border-left: 4px solid #6e8efb;
     }
+
     .btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2) !important;
         transition: all 0.3s ease;
     }
+
     .card {
         transition: transform 0.3s ease;
     }
+
     .card:hover {
         transform: translateY(-5px);
     }

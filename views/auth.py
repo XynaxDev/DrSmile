@@ -46,23 +46,24 @@ def login():
         password = request.form.get('password')
 
         print(f"Login attempt with email: {email}")  
-        session['last_email'] = email
-        session.modified = True  
-
         user = User.query.filter_by(email=email).first()
         if user and bcrypt.check_password_hash(user.password, password):
             session['logged_in'] = True
             session['username'] = user.name
             session['email'] = user.email
+            session['last_email'] = email  # Set last_email only on successful login
+            session.modified = True
             session.pop('messages', None)
             return redirect(url_for('auth.dashboard'))
         else:
             error = "Incorrect email or password. Please try again."
-            return render_template('auth/login.html', error=error, message_type='error', last_email=email)
+            # Use the attempted email for the form on failure, not session['last_email']
+            return render_template('auth/login.html', error=error, message_type='error', last_email=email if email else '')
 
-    last_email = request.args.get('email', session.get('last_email', ''))
-    print(f"last_email in login (GET, initial): {last_email}")
-    if not last_email:
+    # Use session['last_email'] as the default, only if no other input
+    last_email = session.get('last_email', '')
+    print(f"last_email in login (GET, initial from session): {last_email}")
+    if not last_email:  # Fallback only if session is empty
         last_reset_token = ResetToken.query.order_by(ResetToken.id.desc()).first()
         if last_reset_token:
             user = User.query.get(last_reset_token.user_id)
@@ -71,11 +72,6 @@ def login():
                 session['last_email'] = last_email
                 session.modified = True
                 print(f"Fallback: Retrieved last_email from user in login (GET): {last_email}")
-    if last_email and last_email != session.get('last_email', ''):
-        session['last_email'] = last_email
-        session.modified = True
-    
-    last_email = last_email if last_email else ''
     print(f"last_email in login (GET, final): {last_email}")
     
     error = None
@@ -138,7 +134,7 @@ def logout():
     session.pop('logged_in', None)
     session.pop('username', None)
     session.pop('email', None)
-    session.pop('last_email', None)
+    session.pop('last_email', None)  # Clear last_email on logout
     return redirect(url_for('chat.chatbot'))
 
 @auth_bp.route('/terms')

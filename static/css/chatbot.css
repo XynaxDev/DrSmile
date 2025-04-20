@@ -9,7 +9,6 @@
     background-color: rgb(41, 41, 41);
     position: relative;
     z-index: 800;
-    /* Below suggestion */
 }
 
 #chatInputBar {
@@ -21,14 +20,12 @@
     background-color: rgb(41, 41, 41);
     padding: 1.4rem 1rem;
     z-index: 900;
-    /* Above conversation */
 }
 
 #chatInputBar .container {
     max-width: 840px !important;
     margin: 0 auto !important;
     position: relative;
-    /* Context for input-container */
 }
 
 .input-container {
@@ -38,7 +35,6 @@
     border: 1px solid rgba(255, 255, 255, 0.05);
     position: relative;
     z-index: 910;
-    /* Above chatInputBar */
 }
 
 .suggestion-container {
