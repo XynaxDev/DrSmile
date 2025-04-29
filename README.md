@@ -59,7 +59,10 @@ Contributions to **DrSmile** are welcome. To contribute:
    git push origin feature-branch
    ```
 5. Open a Pull Request detailing your changes.
-   
+
+## Video, PPT and Report
+[All Links](https://drive.google.com/drive/folders/1qjxof0sshq7CpJF6Dabkyji2JJueUNrR?usp=sharing)
+
 ## Contact
 
 For questions or suggestions, please contact the project maintainer through the GitHub repository or you can [Email Me](mailto:akashkumar.cs27@gmail.com) for any query, Happy coding👋
