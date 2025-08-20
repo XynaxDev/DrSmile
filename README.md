@@ -60,8 +60,6 @@ Contributions to **DrSmile** are welcome. To contribute:
    ```
 5. Open a Pull Request detailing your changes.
 
-## Video, PPT and Report
-[Google Drive](https://drive.google.com/drive/folders/1qjxof0sshq7CpJF6Dabkyji2JJueUNrR?usp=sharing)
 
 ## Contact
 
